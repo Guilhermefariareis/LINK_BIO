@@ -115,14 +115,28 @@
         const container = document.getElementById('login-container');
         const errorMsg = document.getElementById('error-msg');
 
-        form.addEventListener('submit', (e) => {
+        // Função para gerar Hash SHA-256 (Padrão de Segurança)
+        async function sha256(message) {
+            const msgBuffer = new TextEncoder().encode(message);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        form.addEventListener('submit', async (e) => {
             e.preventDefault();
             
             const user = document.getElementById('username').value;
             const pass = document.getElementById('password').value;
 
-            // Credenciais Definidas pelo Usuário
-            if (user === 'admin_jessica' && pass === 'JV2026!#') {
+            // Hashes das Credenciais (Ocultas)
+            const uHash = await sha256(user);
+            const pHash = await sha256(pass);
+
+            // Comparação Segura
+            if (uHash === '6c13c2c635f66318dab4bc3669a726e15068076bea88818a4162010b2' && 
+                pHash === '81ec7db29db052b84be7cf13db095811c750567f1394589d89280e5572620a2e') {
+                
                 // Simulação de Token (LocalStorage)
                 localStorage.setItem('jv_auth_token', 'session_' + Date.now());
                 
@@ -132,7 +146,7 @@
                 container.style.transition = 'all 0.5s ease';
                 
                 setTimeout(() => {
-                    window.location.href = 'admin.html';
+                    window.location.href = 'painel_gestao_vitoria.html';
                 }, 500);
             } else {
                 // Feedback de Erro
