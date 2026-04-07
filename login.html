@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acesso Restrito | Jéssica Vitória</title>
+    <!-- Fonte: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-gold': '#D4AF37',
+                        'brand-black': '#0A0A0A',
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #F8F9FA;
+            color: #1A1A1A;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .login-card {
+            background: #FFFFFF;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.1);
+            animation: slideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .input-pro {
+            background: #F1F3F5;
+            border: 1px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .input-pro:focus {
+            background: #FFFFFF;
+            border-color: #D4AF37;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
+        }
+
+        .shake {
+            animation: shake 0.4s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="login-container" class="w-full max-w-md p-10 login-card rounded-[3rem] text-center">
+        <!-- Logo/Icon -->
+        <div class="w-16 h-16 bg-brand-gold rounded-2xl flex items-center justify-center font-black text-2xl text-black mx-auto mb-8 shadow-xl shadow-brand-gold/20">JV</div>
+
+        <h1 class="text-2xl font-black uppercase tracking-tighter mb-2">Painel de Gestão</h1>
+        <p class="text-zinc-400 text-xs font-bold uppercase tracking-widest mb-10">Acesso Restrito Administradora</p>
+
+        <form id="login-form" class="space-y-6">
+            <div class="space-y-2 text-left">
+                <label class="text-[10px] font-black uppercase text-zinc-500 tracking-widest ml-4">Usuário</label>
+                <input type="text" id="username" placeholder="Seu usuário" required
+                    class="w-full input-pro rounded-2xl px-6 py-4 text-sm font-bold">
+            </div>
+
+            <div class="space-y-2 text-left">
+                <label class="text-[10px] font-black uppercase text-zinc-500 tracking-widest ml-4">Senha</label>
+                <input type="password" id="password" placeholder="••••••••" required
+                    class="w-full input-pro rounded-2xl px-6 py-4 text-sm font-bold">
+            </div>
+
+            <div id="error-msg" class="hidden text-red-500 text-[10px] font-black uppercase tracking-widest mt-4">Login ou Senha Incorretos</div>
+
+            <button type="submit"
+                class="w-full bg-brand-black text-white font-black uppercase tracking-[0.2em] text-xs py-5 rounded-2xl shadow-2xl hover:bg-brand-gold hover:text-brand-black transition-all duration-300 mt-6 active:scale-95">
+                Entrar no Painel
+            </button>
+        </form>
+
+        <footer class="mt-12 opacity-30">
+            <p class="text-[8px] font-bold uppercase tracking-widest">© 2026 • JV Management System</p>
+        </footer>
+    </div>
+
+    <script>
+        const form = document.getElementById('login-form');
+        const container = document.getElementById('login-container');
+        const errorMsg = document.getElementById('error-msg');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const user = document.getElementById('username').value;
+            const pass = document.getElementById('password').value;
+
+            // Credenciais Definidas pelo Usuário
+            if (user === 'admin_jessica' && pass === 'JV2026!#') {
+                // Simulação de Token (LocalStorage)
+                localStorage.setItem('jv_auth_token', 'session_' + Date.now());
+                
+                // Feedback de Sucesso e Redirecionamento
+                container.style.opacity = '0';
+                container.style.transform = 'scale(0.95)';
+                container.style.transition = 'all 0.5s ease';
+                
+                setTimeout(() => {
+                    window.location.href = 'admin.html';
+                }, 500);
+            } else {
+                // Feedback de Erro
+                container.classList.add('shake');
+                errorMsg.classList.remove('hidden');
+                setTimeout(() => container.classList.remove('shake'), 400);
+            }
+        });
+
+        // Limpar msg de erro ao digitar
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', () => errorMsg.classList.add('hidden'));
+        });
+    </script>
+
+</body>
+
+</html>
