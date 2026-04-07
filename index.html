@@ -6,6 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Link na Bio | @eujessicavitoria</title>
 
+    <!-- GEOBLOCKING SCRIPT (BR ONLY) -->
+    <script>
+        // Oculta a página inicialmente para evitar "piscar" conteúdo proibido
+        document.documentElement.style.display = 'none';
+
+        fetch('https://ipapi.co/json/')
+            .then(response => response.json())
+            .then(data => {
+                if (data.country_code !== 'BR') {
+                    // BLOQUEADO: Exibe tela de erro e não carrega o resto
+                    document.documentElement.style.display = 'block';
+                    document.write(`
+                        <div style="background:#0A0A0A; color:#D4AF37; height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; font-family:sans-serif; text-align:center; padding:20px;">
+                            <div style="width:80px; height:80px; background:#D4AF37; border-radius:20px; display:flex; align-items:center; justify-content:center; color:black; font-weight:900; font-size:32px; margin-bottom:30px; box-shadow: 0 20px 40px rgba(212,175,55,0.2);">JV</div>
+                            <h1 style="text-transform:uppercase; letter-spacing:-1px; font-weight:900; font-size:24px; margin-bottom:10px;">Acesso Não Disponível</h1>
+                            <p style="color:#71717A; font-weight:500; font-size:14px; max-width:300px; line-height:1.6;">Desculpe, este conteúdo é exclusivo para o território brasileiro. 🇧🇷</p>
+                            <div style="margin-top:40px; font-size:10px; font-weight:900; opacity:0.3; letter-spacing:2px; text-transform:uppercase;">© 2026 • Jéssica Vitória</div>
+                        </div>
+                    `);
+                    // Interrompe qualquer outro carregamento (GA4, etc)
+                    window.stop();
+                } else {
+                    // BRASIL: Mostra o site normalmente
+                    document.documentElement.style.display = 'block';
+                }
+            })
+            .catch(() => {
+                // Em caso de erro na API, permite o acesso por segurança (UX)
+                document.documentElement.style.display = 'block';
+            });
+    </script>
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-NBKJ64C3H2"></script>
     <script>
