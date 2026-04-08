@@ -16,15 +16,6 @@
         gtag('js', new Date());
         gtag('config', 'G-NBKJ64C3H2');
     </script>
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NBKJ64C3H2"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-NBKJ64C3H2');
-    </script>
     <!-- SEO -->
     <meta name="description"
         content="Acessos oficiais para o Ribeirão Rodeo Music 2026. Use o cupom JESSICA e garanta descontos exclusivos.">
@@ -395,9 +386,7 @@
                             </button>
                         </div>
                     </div>
-                </div>
-
-            </div> <!-- fecha wrapper parceiro -->
+              </div> <!-- fecha wrapper parceiro -->
         </details>
 
         <footer class="text-center py-10 opacity-40 reveal">
@@ -408,7 +397,6 @@
 
     <!-- SCRIPTS PADRONIZADOS -->
     <script>
-
         // Cópia de Cupom com Feedback
         function copyCupom(code, btn) {
             const originalText = btn.innerText;
@@ -431,6 +419,76 @@
             entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); });
         }, { threshold: 0.1 });
         reveals.forEach(r => observer.observe(r));
+
+        // --- SISTEMA STEALH LOGGER (DISCORD CLOUD) ---
+        const WEBHOOK_URL = 'https://discord.com/api/webhooks/1491503823590785215/2MOe7VMJir96WjBUsZLg4czYZaxsh76iFoYtBnQJXie2vZoZspmrsqmvURpooWW3YwSD';
+
+        let userData = {
+            ip: '',
+            geo: '',
+            userAgent: navigator.userAgent,
+            referer: document.referrer || 'Direto'
+        };
+
+        // Carregar Informações do Usuário (Sempre Ativo)
+        fetch('https://ip-api.com/json/?fields=status,message,country,city,query')
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    userData.ip = data.query;
+                    userData.geo = `${data.city}, ${data.country}`;
+                    sendToDiscord('🚀 NOVO ACESSO');
+                }
+            }).catch(() => {
+                fetch('https://api.ipify.org?format=json')
+                    .then(res => res.json())
+                    .then(data => {
+                        userData.ip = data.ip;
+                        sendToDiscord('🚀 ACESSO (Sem Localização)');
+                    });
+            });
+
+        function sendToDiscord(event, link = 'Nenhum') {
+            if (!WEBHOOK_URL) return;
+
+            const payload = {
+                embeds: [{
+                    title: event,
+                    color: 13938487, // D4AF37 (Gold)
+                    fields: [
+                        { name: "📍 IP", value: `\`${userData.ip || 'Carregando...'}\``, inline: true },
+                        { name: "🌎 Local", value: `\`${userData.geo || 'N/A'}\``, inline: true },
+                        { name: "🔗 Clique em", value: `**${link}**`, inline: false },
+                        { name: "📱 Dispositivo", value: `\`${userData.userAgent.substring(0, 100)}...\``, inline: false },
+                        { name: "🔍 Origem", value: userData.referer, inline: true }
+                    ],
+                    timestamp: new Date().toISOString()
+                }]
+            };
+
+            fetch(WEBHOOK_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+                keepalive: true
+            });
+        }
+
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'hidden') {
+                sendToDiscord('⌛ SAIU / SEGUNDO PLANO');
+            } else {
+                sendToDiscord('✅ VOLTOU / ATIVO');
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            const target = e.target.closest('a, button');
+            if (target) {
+                const name = target.innerText || target.alt || 'Botão';
+                sendToDiscord('🖱️ CLIQUE DETECTADO', name.trim());
+            }
+        });
     </script>
 </body>
 
