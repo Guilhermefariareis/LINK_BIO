@@ -1,31 +1,35 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mídia Kit | Jéssica Vitória</title>
-    
-    <!-- SEO -->
-    <meta name="description" content="Mídia Kit oficial da Jéssica Vitória. Confira os números, formatos e parcerias.">
+    <meta name="description" content="Mídia Kit oficial da Jéssica Vitória. Criadora de Conteúdo e Influenciadora Digital.">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&display=swap" rel="stylesheet">
 
-    <!-- Tailwind CSS CDN -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        'brand-gold': '#D4AF37',
-                        'brand-black': '#0a0a0a',
+                        brand: {
+                            gold: '#D4AF37',
+                            lightgold: '#F3E5AB',
+                            dark: '#050505',
+                            gray: '#111111',
+                            text: '#EAEAEA'
+                        }
                     },
-                    fontFamily: {
-                        sans: ['Outfit', 'sans-serif'],
+                    fontFamily: { sans: ['Outfit', 'sans-serif'] },
+                    transitionTimingFunction: {
+                        'expo': 'cubic-bezier(0.16, 1, 0.3, 1)',
                     }
                 }
             }
@@ -34,178 +38,255 @@
 
     <style>
         body {
-            background-color: #0a0a0a;
-            color: white;
+            background-color: #050505;
+            color: #EAEAEA;
             font-family: 'Outfit', sans-serif;
+            overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
-            margin: 0;
-            padding: 0;
         }
 
-        .scroll-container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: #000;
-            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+        /* Lenis-inspired smooth reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(60px) skewY(2deg);
+            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) skewY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050505;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D4AF37;
+            border-radius: 10px;
+        }
+
+        /* Gold Gradient Text */
+        .text-gradient-gold {
+            background: linear-gradient(to right, #D4AF37, #FFF2CD, #D4AF37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: shineText 4s linear infinite;
+        }
+
+        @keyframes shineText {
+            to { background-position: 200% center; }
+        }
+
+        /* Noise Texture Overlay */
+        .noise-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.03;
+            background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+        }
+
+        /* Marquee */
+        .marquee-wrapper {
+            overflow: hidden;
+            white-space: nowrap;
             position: relative;
         }
-
-        .page-img {
-            width: 100%;
-            height: auto;
-            display: block;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
 
-        .page-img.revealed {
-            opacity: 1;
-            transform: translateY(0);
+        .hero-bg {
+            background-image: radial-gradient(circle at center, rgba(212,175,55,0.1) 0%, rgba(5,5,5,1) 60%);
         }
 
-        /* Loading Overlay */
-        #loader {
-            position: fixed;
-            inset: 0;
-            background: #0a0a0a;
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.6s ease-out;
-        }
-
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 3px solid rgba(212, 175, 55, 0.2);
-            border-top-color: #D4AF37;
-            border-radius: 50%;
-            animation: spin 1s infinite linear;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Floating Contact Button */
-        .floating-action {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 50;
-            background: rgba(10, 10, 10, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 99px;
-            padding: 12px 24px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-
-        .floating-action:hover {
-            transform: translateX(-50%) translateY(-5px);
-            border-color: rgba(212, 175, 55, 0.8);
-            box-shadow: 0 25px 50px rgba(212, 175, 55, 0.15);
-        }
-
-        /* Scrollbar Invisível */
-        ::-webkit-scrollbar {
-            width: 0px;
-            background: transparent; 
+        /* Metric Image Masking for Aesthetics */
+        .metric-image-wrapper img {
+            mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
         }
     </style>
 </head>
 
 <body>
 
-    <!-- Initial Loader -->
-    <div id="loader">
-        <div class="flex flex-col items-center gap-4">
-            <div class="spinner"></div>
-            <p class="text-brand-gold text-xs font-bold uppercase tracking-[0.2em] animate-pulse">Carregando Mídia Kit...</p>
-        </div>
-    </div>
+    <div class="noise-overlay"></div>
 
-    <!-- Main Container -->
-    <main class="scroll-container" id="kit-container">
-        <!-- JS will inject images here -->
-    </main>
-
-    <!-- Floating Action CTA -->
-    <a href="mailto:eujessicacontato@gmail.com" class="floating-action group">
-        <div class="w-8 h-8 rounded-full bg-brand-gold flex items-center justify-center group-hover:scale-110 transition-transform">
-            <svg class="w-4 h-4 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 w-full z-50 px-6 py-6 border-b border-white/5 backdrop-blur-md bg-brand-dark/50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <span class="font-bold text-sm tracking-[0.3em] text-white">JV</span>
+            <a href="mailto:eujessicacontato@gmail.com" class="text-xs font-bold uppercase tracking-widest text-brand-gold border border-brand-gold/30 px-5 py-2 rounded-full hover:bg-brand-gold hover:text-black transition-all">
+                Contato
+            </a>
         </div>
-        <div>
-            <span class="block text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-0.5">Vamos Trabalhar Juntos?</span>
-            <span class="block text-sm font-bold text-white">Entrar em Contato</span>
-        </div>
-    </a>
+    </nav>
 
+    <!-- Hero Section -->
+    <section class="relative min-h-[90vh] flex flex-col justify-center items-center text-center px-6 hero-bg pt-20">
+        <div class="max-w-4xl w-full mx-auto relative z-10">
+            <p class="reveal text-brand-gold font-semibold tracking-[0.3em] uppercase text-xs sm:text-sm mb-6">Mídia Kit Oficial</p>
+            <h1 class="reveal reveal-delay-1 text-5xl sm:text-7xl md:text-8xl font-black uppercase tracking-tighter leading-[0.9] mb-6">
+                Jéssica <br>
+                <span class="text-gradient-gold">Vitória</span>
+            </h1>
+            <p class="reveal reveal-delay-2 text-xl md:text-2xl font-light text-brand-text/70 max-w-2xl mx-auto">
+                CRIADORA DE CONTEÚDO E INFLUENCIADORA DIGITAL
+            </p>
+            <div class="reveal reveal-delay-3 mt-16 animate-bounce opacity-50">
+                <svg class="w-6 h-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre Mim -->
+    <section class="py-24 px-6 relative bg-brand-gray/50 border-t border-white/5">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row gap-16 items-center">
+            <div class="md:w-1/2 reveal">
+                <!-- Using the existing profile image wrapped elegantly -->
+                <div class="relative w-64 h-64 md:w-80 md:h-80 mx-auto rounded-full p-2 border border-brand-gold/20">
+                    <img src="541223042_18406490818112904_3375123075707619995_n.jpg" alt="Jéssica Vitória" class="w-full h-full object-cover rounded-full mix-blend-luminosity hover:mix-blend-normal transition-all duration-700">
+                    <div class="absolute inset-0 border border-brand-gold rounded-full scale-105 opacity-20"></div>
+                </div>
+            </div>
+            <div class="md:w-1/2">
+                <h2 class="reveal text-sm font-bold tracking-[0.4em] text-brand-gold uppercase mb-6">Sobre Mim</h2>
+                <h3 class="reveal reveal-delay-1 text-3xl md:text-4xl font-semibold leading-tight mb-8">
+                    Conectando marcas ao público de forma leve, natural e autêntica.
+                </h3>
+                <div class="reveal reveal-delay-2 text-brand-text/70 space-y-6 text-lg font-light leading-relaxed">
+                    <p>Tenho 23 anos, sou publicitária formada pela Universidade de Ribeirão Preto (UNAERP) e atuo como criadora de conteúdo, influenciadora digital e profissional de relações públicas.</p>
+                    <p>Meu conteúdo é voltado para lifestyle, experiências, rotina e entretenimento, com foco em vídeos dinâmicos no Instagram e TikTok.</p>
+                    <p>Busco estar presente nos principais eventos e experiências, criando conteúdos que vão além da divulgação, gerando identificação real com a audiência.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nichos / Marquee -->
+    <section class="py-20 border-y border-brand-gold/10 bg-brand-gold/5 flex items-center">
+        <div class="marquee-wrapper w-full">
+            <div class="marquee-content text-5xl md:text-8xl font-black uppercase text-transparent tracking-widest" style="-webkit-text-stroke: 1px rgba(212,175,55,0.4);">
+                ROTINA REAL • REVIEWS • TURISMO • EVENTOS • ENTRETENIMENTO • BELEZA • LIFESTYLE • 
+                ROTINA REAL • REVIEWS • TURISMO • EVENTOS • ENTRETENIMENTO • BELEZA • LIFESTYLE •
+            </div>
+        </div>
+    </section>
+
+    <!-- Métricas (Usando imagens originais do PDF para precisão) -->
+    <section class="py-32 px-6 bg-brand-dark">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-20 reveal">
+                <h2 class="text-sm font-bold tracking-[0.4em] text-brand-gold uppercase mb-4">Minhas Métricas</h2>
+                <h3 class="text-4xl md:text-6xl font-black uppercase">Instagram & TikTok</h3>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-16">
+                <div class="reveal metric-image-wrapper p-1 rounded-[2.5rem] bg-gradient-to-br from-brand-gray to-brand-dark border border-white/5 shadow-2xl relative group overflow-hidden">
+                    <div class="absolute inset-0 bg-brand-gold/5 group-hover:bg-brand-gold/10 transition-colors duration-500 z-10 pointer-events-none"></div>
+                    <img src="midia_kit_assets/page_05.jpg" alt="Métricas Instagram" class="w-full h-auto rounded-[2rem] opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
+                </div>
+                
+                <div class="reveal reveal-delay-2 metric-image-wrapper p-1 rounded-[2.5rem] bg-gradient-to-br from-brand-gray to-brand-dark border border-white/5 shadow-2xl relative group overflow-hidden md:mt-20">
+                    <div class="absolute inset-0 bg-brand-gold/5 group-hover:bg-brand-gold/10 transition-colors duration-500 z-10 pointer-events-none"></div>
+                    <img src="midia_kit_assets/page_06.jpg" alt="Métricas TikTok" class="w-full h-auto rounded-[2rem] opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Diferenciais -->
+    <section class="py-32 px-6 bg-brand-gray">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="reveal text-sm font-bold tracking-[0.4em] text-brand-gold uppercase mb-8 border-l-2 border-brand-gold pl-4">Diferenciais Estratégicos</h2>
+            <h3 class="reveal reveal-delay-1 text-4xl md:text-5xl font-semibold mb-16">Por que trabalhar comigo?</h3>
+            
+            <div class="grid gap-6">
+                <!-- List Items -->
+                <div class="reveal p-8 rounded-2xl bg-brand-dark/50 border border-white/5 hover:border-brand-gold/40 transition-colors duration-300">
+                    <p class="text-xl font-light text-brand-text">Formação em Publicidade e Propaganda + atuação em Relações Públicas.</p>
+                </div>
+                <div class="reveal p-8 rounded-2xl bg-brand-dark/50 border border-white/5 hover:border-brand-gold/40 transition-colors duration-300">
+                    <p class="text-xl font-light text-brand-text">Visão estratégica de conteúdo e posicionamento de marca.</p>
+                </div>
+                <div class="reveal p-8 rounded-2xl bg-brand-dark/50 border border-white/5 hover:border-brand-gold/40 transition-colors duration-300">
+                    <p class="text-xl font-light text-brand-text">Integração natural da marca na rotina (sem parecer publicidade forçada).</p>
+                </div>
+                <div class="reveal p-8 rounded-2xl bg-brand-dark/50 border border-white/5 hover:border-brand-gold/40 transition-colors duration-300">
+                    <p class="text-xl font-light text-brand-text">Desenvolvimento de ideias e roteiros estratégicos para cada parceria.</p>
+                </div>
+                <div class="reveal p-8 rounded-2xl bg-brand-dark/50 border border-white/5 hover:border-brand-gold/40 transition-colors duration-300">
+                    <p class="text-xl font-light text-brand-text">Estrutura própria para produção de conteúdo com equipamentos profissionais.</p>
+                </div>
+                <div class="reveal p-8 rounded-2xl bg-brand-dark/50 border border-white/5 hover:border-brand-gold/40 transition-colors duration-300">
+                    <p class="text-xl font-light text-brand-text">Atuação multiplataforma: Instagram + TikTok e presença ativa no cenário de eventos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer CTA -->
+    <section class="py-32 px-6 bg-brand-dark text-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-brand-gold/5"></div>
+        <div class="max-w-4xl mx-auto relative z-10 reveal">
+            <h2 class="text-5xl md:text-7xl font-black uppercase mb-6 tracking-tight">Vamos trabalhar <span class="text-gradient-gold">juntos?</span></h2>
+            <p class="text-xl md:text-2xl font-light text-brand-text/80 mb-12 uppercase tracking-widest font-semibold text-brand-gold">Conteúdos reais, estratégicos e conectados com o público.</p>
+            
+            <div class="flex flex-col sm:flex-row justify-center gap-6 items-center">
+                <a href="mailto:eujessicacontato@gmail.com" class="w-full sm:w-auto px-10 py-5 rounded-full bg-brand-gold text-black font-bold uppercase tracking-widest hover:scale-105 transition-transform shadow-[0_0_30px_rgba(212,175,55,0.4)]">
+                    Solicitar Orçamento
+                </a>
+                <div class="flex gap-4">
+                    <a href="https://www.instagram.com/eujessicavitoria/" target="_blank" class="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-brand-gold hover:text-black transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </a>
+                    <a href="https://www.tiktok.com/@jessvitr" target="_blank" class="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-brand-gold hover:text-black transition-colors">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-16 text-xs font-bold uppercase tracking-[0.4em] text-white/30">
+                © 2026 Agência Dógui
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts for Scroll Reveal -->
     <script>
-        // Total of pages generated
-        const totalPages = 10;
-        const container = document.getElementById('kit-container');
-        
-        // Load images dynamically
-        for (let i = 1; i <= totalPages; i++) {
-            const imgNum = i.toString().padStart(2, '0');
-            const img = document.createElement('img');
-            img.src = `midia_kit_assets/page_${imgNum}.jpg`;
-            img.className = 'page-img';
-            img.alt = `Mídia Kit Jéssica Vitória Página ${i}`;
-            img.loading = i <= 2 ? 'eager' : 'lazy'; // Eager load first 2 pages
-            container.appendChild(img);
-        }
-
-        // Hide Loader when first image is loaded
-        const firstImg = container.querySelector('img');
-        if (firstImg.complete) {
-            removeLoader();
-        } else {
-            firstImg.addEventListener('load', removeLoader);
-        }
-
-        function removeLoader() {
-            setTimeout(() => {
-                const loader = document.getElementById('loader');
-                loader.style.opacity = '0';
-                setTimeout(() => loader.remove(), 600);
-            }, 300);
-        }
-
-        // Scroll Reveal Logic (Intersection Observer)
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px 0px 50px 0px',
-            threshold: 0.1
-        };
-
-        const observer = new IntersectionObserver((entries, obs) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('revealed');
-                    // Stop watching once revealed
-                    obs.unobserve(entry.target);
-                }
+        document.addEventListener("DOMContentLoaded", () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("active");
+                    }
+                });
+            }, {
+                threshold: 0.15,
+                rootMargin: "0px 0px -50px 0px"
             });
-        }, observerOptions);
 
-        setTimeout(() => {
-            const images = document.querySelectorAll('.page-img');
-            images.forEach(img => observer.observe(img));
-        }, 100);
+            document.querySelectorAll(".reveal").forEach((el) => {
+                observer.observe(el);
+            });
+        });
     </script>
-
 </body>
 </html>
