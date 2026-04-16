@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="scroll-smooth">
+<html lang="pt-BR" class="scroll-smooth bg-brand-cream">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Mídia Kit | Jéssica Vitória</title>
     <meta name="description" content="Mídia Kit oficial da Jéssica Vitória. Criadora de Conteúdo e Influenciadora Digital.">
 
@@ -31,21 +31,26 @@
                     fontFamily: { sans: ['Outfit', 'sans-serif'] },
                     transitionTimingFunction: {
                         'expo': 'cubic-bezier(0.16, 1, 0.3, 1)',
-                        'bounce-smooth': 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+                        'spring': 'cubic-bezier(0.34, 1.56, 0.64, 1)',
                     },
                     animation: {
                         'float': 'float 6s ease-in-out infinite',
-                        'spin-slow': 'spin 15s linear infinite',
+                        'spin-slow': 'spin 20s linear infinite',
                         'pulse-glow': 'pulseGlow 2s ease-in-out infinite',
+                        'reveal-curtain': 'curtain 1.5s cubic-bezier(0.77, 0, 0.175, 1) forwards',
                     },
                     keyframes: {
                         float: {
                             '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-20px)' },
+                            '50%': { transform: 'translateY(-15px)' },
+                        },
+                        curtain: {
+                            '0%': { transform: 'translateY(0%)' },
+                            '100%': { transform: 'translateY(-100%)' }
                         },
                         pulseGlow: {
-                            '0%, 100%': { boxShadow: '0 0 15px rgba(212,175,55,0.2)' },
-                            '50%': { boxShadow: '0 0 35px rgba(212,175,55,0.6)' },
+                            '0%, 100%': { boxShadow: '0 0 10px rgba(197,157,42,0.1)' },
+                            '50%': { boxShadow: '0 0 25px rgba(197,157,42,0.5)' },
                         }
                     }
                 }
@@ -60,13 +65,18 @@
             font-family: 'Outfit', sans-serif;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
+            -webkit-tap-highlight-color: transparent; /* Remove blue highlight on mobile */
         }
 
-        /* Smooth Reveal Stagger Matrix */
+        /* --------------------------
+           MOBILE-FIRST ANIMATIONS
+           -------------------------- */
+        
+        /* Spring Reveal Matrix */
         .reveal {
             opacity: 0;
-            transform: translateY(40px) scale(0.98);
-            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(50px) scale(0.95);
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.34, 1.56, 0.64, 1);
             will-change: opacity, transform;
         }
 
@@ -75,360 +85,365 @@
             transform: translateY(0) scale(1);
         }
 
-        .reveal-delay-1 { transition-delay: 0.15s; }
-        .reveal-delay-2 { transition-delay: 0.30s; }
-        .reveal-delay-3 { transition-delay: 0.45s; }
-
-        /* Custom Scrollbar Luxo */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #FAFAF7; }
-        ::-webkit-scrollbar-thumb { background: #E0E0D9; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #C59D2A; }
+        /* Stagger Delays */
+        .delay-100 { transition-delay: 0.1s; }
+        .delay-200 { transition-delay: 0.2s; }
+        .delay-300 { transition-delay: 0.3s; }
+        .delay-400 { transition-delay: 0.4s; }
 
         /* Liquid Gold Gradient Effect */
         .text-gradient-gold {
-            background: linear-gradient(to right, #B3881B, #EAD07C, #B3881B);
+            background: linear-gradient(135deg, #A47A15 0%, #D8BE72 50%, #A47A15 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-size: 200% auto;
-            animation: shineText 5s ease infinite alternate;
+            animation: shineText 4s linear infinite;
         }
 
         @keyframes shineText {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
+            to { background-position: 200% center; }
         }
 
         /* Glassmorphism Classes Premium */
         .glass-card {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.03);
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .glass-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 30px 60px rgba(197, 157, 42, 0.08);
-            border-color: rgba(197, 157, 42, 0.2);
+        
+        /* Mobile Horizontal Snap Core */
+        .snap-carousel {
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
         }
-
-        /* Noise Texture Soft */
-        .noise-overlay {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 9999;
-            opacity: 0.04;
-            background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+        .snap-carousel::-webkit-scrollbar { display: none; }
+        .snap-card {
+            scroll-snap-align: center;
         }
 
         /* Infinite Marquee */
-        .marquee-wrapper { overflow: hidden; white-space: nowrap; position: relative; }
-        .marquee-content { display: inline-block; animation: marquee 25s linear infinite; }
-        @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        /* Subte Parallax Background Overlay */
-        .parallax-bg {
-            background-image: radial-gradient(circle at top right, rgba(197, 157, 42, 0.05) 0%, transparent 60%),
-                              radial-gradient(circle at bottom left, rgba(197, 157, 42, 0.05) 0%, transparent 60%);
-        }
+        .marquee-wrapper { overflow: hidden; white-space: nowrap; position: relative; width: 100vw; margin-left: calc(-50vw + 50%); margin-right: calc(-50vw + 50%); }
+        .marquee-content { display: inline-block; animation: marquee 20s linear infinite; }
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
         /* Animated Highlight Background */
-        .text-highlight {
-            position: relative;
-            display: inline-block;
-            z-index: 1;
-        }
+        .text-highlight { position: relative; display: inline-block; z-index: 1; }
         .text-highlight::after {
             content: '';
-            position: absolute;
-            left: 0; bottom: 8px;
-            width: 100%; height: 25%;
-            background-color: rgba(197, 157, 42, 0.15);
-            z-index: -1;
-            transform: scaleX(0);
-            transform-origin: left;
+            position: absolute; left: 0; bottom: 6px;
+            width: 100%; height: 35%;
+            background-color: rgba(197, 157, 42, 0.2);
+            z-index: -1; transform: scaleX(0); transform-origin: left;
             transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .active .text-highlight::after { transform: scaleX(1); transition-delay: 0.4s; }
+        .active .text-highlight::after { transform: scaleX(1); transition-delay: 0.3s; }
 
-        /* Aesthetic Image Filter */
-        .metric-img {
-            filter: drop-shadow(0 25px 35px rgba(0,0,0,0.06));
-            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+        /* Typography Clamps for Mobile Perfection */
+        .clamp-title { font-size: clamp(3.5rem, 18vw, 10rem); }
+        .clamp-heading { font-size: clamp(2rem, 8vw, 4rem); }
 
-        /* Decorative Grid Background */
-        .grid-bg {
-            background-size: 40px 40px;
-            background-image: linear-gradient(to right, rgba(0,0,0,0.02) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(0,0,0,0.02) 1px, transparent 1px);
+        /* Interactive Haptic Feedback */
+        .btn-active:active { transform: scale(0.92); transition: transform 0.1s; }
+
+        /* Scroll Progress Bar */
+        #progress-bar {
+            position: fixed; top: 0; left: 0; height: 3px; background: #C59D2A;
+            width: 0%; z-index: 9999;
+            transition: width 0.1s ease-out;
+            box-shadow: 0 0 10px rgba(197, 157, 42, 0.5);
         }
     </style>
 </head>
 
-<body class="grid-bg">
+<body>
 
-    <div class="noise-overlay"></div>
+    <!-- Curtain Loader (Mobile VIP Feel) -->
+    <div class="fixed inset-0 z-[100] bg-brand-dark flex flex-col items-center justify-center animate-reveal-curtain pointer-events-none" style="animation-delay: 0.8s;">
+        <span class="text-brand-gold font-black tracking-[0.5em] text-sm animate-pulse">CARREGANDO</span>
+        <div class="mt-4 w-12 h-[1px] bg-brand-gold overflow-hidden relative">
+            <div class="absolute top-0 left-0 h-full bg-white w-full animate-[marquee_0.8s_ease-in-out_infinite_alternate]"></div>
+        </div>
+    </div>
 
-    <!-- Navigation Elegante -->
-    <nav class="fixed top-0 left-0 w-full z-50 px-6 py-6 border-b border-black/5 bg-white/60 backdrop-blur-xl">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
+    <!-- Scroll Progress -->
+    <div id="progress-bar"></div>
+
+    <!-- Navigation Elegante - Minimalista Mobile -->
+    <nav class="fixed top-0 left-0 w-full z-40 px-6 py-5 border-b border-black/5 bg-white/70 backdrop-blur-2xl">
+        <div class="max-w-7xl mx-auto flex justify-between items-center hidden md:flex">
             <span class="font-black text-sm tracking-[0.4em] text-brand-dark">JV<span class="text-brand-gold">.</span></span>
-            <a href="mailto:eujessicacontato@gmail.com" class="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-dark border border-brand-dark/20 px-6 py-2.5 rounded-full hover:bg-brand-dark hover:text-white hover:border-brand-dark transition-all duration-500 shadow-sm">
+            <a href="mailto:eujessicacontato@gmail.com" class="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-dark border border-brand-dark/20 px-6 py-2.5 rounded-full hover:bg-brand-dark hover:text-white transition-all shadow-sm">
                 Falar com Jessica
             </a>
         </div>
+        <!-- Mobile Header -->
+        <div class="flex justify-center items-center md:hidden w-full">
+            <span class="font-black text-xs tracking-[0.6em] text-brand-dark">JÉSSICA VITÓRIA</span>
+        </div>
     </nav>
 
-    <!-- Floating Graphic Elements (Animation) -->
-    <div class="absolute top-20 left-10 w-64 h-64 bg-brand-gold/5 rounded-full blur-[80px] animate-float pointer-events-none"></div>
-    <div class="absolute top-40 right-20 w-96 h-96 bg-brand-gold/10 rounded-full blur-[100px] animate-float pointer-events-none" style="animation-delay: -2s;"></div>
+    <!-- Floating Graphic Elements -->
+    <div class="absolute top-1/4 left-0 w-48 h-48 bg-brand-gold/10 rounded-full blur-[60px] animate-float pointer-events-none"></div>
 
-    <!-- Hero Section Light/Cream -->
-    <section class="relative min-h-[95vh] flex flex-col justify-center items-center text-center px-6 parallax-bg pt-20">
-        <div class="max-w-4xl w-full mx-auto relative z-10">
-            <div class="reveal inline-block px-4 py-1.5 rounded-full border border-brand-gold/30 bg-brand-lightgold/30 text-brand-gold font-black tracking-[0.4em] uppercase text-[10px] mb-8 shadow-sm">
+    <!-- Hero Section -->
+    <section class="relative min-h-[100svh] flex flex-col justify-center items-center text-center px-4 overflow-hidden pt-10">
+        <!-- Giant Background Watermark -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[45vw] font-black text-black/5 select-none pointer-events-none leading-none z-0">JV</div>
+
+        <div class="max-w-4xl w-full mx-auto relative z-10 flex flex-col items-center">
+            <div class="reveal inline-block px-5 py-2 rounded-full bg-brand-gold/10 text-brand-gold font-black tracking-[0.3em] uppercase text-[9px] mb-8 shadow-sm">
                 Apresentação Comercial
             </div>
             
-            <h1 class="reveal reveal-delay-1 text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] font-black uppercase tracking-tighter leading-[0.8] mb-8 text-brand-dark">
+            <h1 class="reveal delay-100 clamp-title font-black uppercase tracking-tighter leading-[0.8] mb-6 text-brand-dark w-full">
                 Jéssica 
-                <span class="block text-gradient-gold mt-2">Vitória</span>
+                <span class="block text-gradient-gold">Vitória</span>
             </h1>
             
-            <p class="reveal reveal-delay-2 text-lg md:text-2xl font-light text-brand-neutral max-w-2xl mx-auto tracking-wide">
-                CRIADORA DE <b class="font-bold">CONTEÚDO</b> E INFLUENCIADORA DIGITAL
+            <p class="reveal delay-200 text-sm md:text-xl font-medium text-brand-neutral max-w-2xl mx-auto tracking-widest px-4">
+                CRIADORA DE <b class="font-black text-brand-dark">CONTEÚDO</b> E INFLUENCIADORA DIGITAL
             </p>
             
-            <div class="reveal reveal-delay-3 mt-20 animate-bounce opacity-40">
-                <p class="text-[9px] uppercase tracking-widest font-bold mb-2">Deslize para descobrir</p>
-                <div class="w-[1px] h-12 bg-gradient-to-b from-brand-dark to-transparent mx-auto"></div>
+            <div class="reveal delay-300 mt-20 animate-bounce opacity-40">
+                <p class="text-[8px] uppercase tracking-[0.3em] font-bold mb-2">Deslize para baixo</p>
+                <div class="w-[1px] h-16 bg-gradient-to-b from-brand-dark to-transparent mx-auto"></div>
             </div>
         </div>
     </section>
 
-    <!-- Sobre Mim - Editorial Image Split -->
-    <section class="py-28 px-6 relative bg-white border-y border-black/5">
-        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-20 items-center">
-            <div class="lg:w-5/12 reveal relative">
-                <!-- Floating geometric decorative behind image -->
-                <div class="absolute -top-6 -left-6 w-32 h-32 border border-brand-gold rounded-full opacity-20 animate-spin-slow"></div>
+    <!-- Sobre Mim - Edge-to-Edge Image on Mobile -->
+    <section class="py-20 md:py-32 relative bg-white border-y border-black/5 z-20">
+        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12 md:gap-20 items-center">
+            
+            <!-- Mobile: Edge to Edge Image. Desktop: Framed -->
+            <div class="w-full lg:w-5/12 reveal relative px-0 md:px-6"> 
+                <div class="absolute -top-10 right-4 w-24 h-24 border-2 border-brand-gold rounded-full opacity-30 animate-spin-slow hidden md:block"></div>
                 
-                <div class="relative w-full aspect-[4/5] mx-auto rounded-3xl p-3 bg-white shadow-2xl border border-black/5 z-10 hover:scale-[1.02] transition-transform duration-700">
-                    <img src="541223042_18406490818112904_3375123075707619995_n.jpg" alt="Jéssica Vitória" class="w-full h-full object-cover rounded-[1.2rem] grayscale hover:grayscale-0 transition-all duration-[1.5s]">
-                    <!-- Golden accent badge overlay -->
-                    <div class="absolute -bottom-5 -right-5 bg-brand-dark text-brand-lightgold w-28 h-28 rounded-full flex flex-col items-center justify-center shadow-2xl animate-float" style="animation-delay: -1s;">
-                        <span class="text-3xl font-black">23</span>
-                        <span class="text-[9px] font-bold uppercase tracking-widest">Anos</span>
+                <div class="relative w-full md:w-[90%] aspect-[4/5] mx-auto md:rounded-3xl bg-brand-cream md:border border-black/5 overflow-hidden shadow-2xl group">
+                    <img src="541223042_18406490818112904_3375123075707619995_n.jpg" alt="Jéssica Vitória" class="w-full h-full object-cover scale-100 group-hover:scale-110 transition-transform duration-[2s] md:grayscale group-hover:grayscale-0">
+                    
+                    <!-- Glass Badge -->
+                    <div class="absolute bottom-6 right-6 md:-bottom-5 md:-right-5 bg-brand-dark/90 backdrop-blur-md text-brand-lightgold w-24 h-24 rounded-full flex flex-col items-center justify-center shadow-2xl animate-float">
+                        <span class="text-3xl font-black leading-none">23</span>
+                        <span class="text-[8px] font-bold uppercase tracking-widest mt-1">Anos</span>
                     </div>
                 </div>
             </div>
             
-            <div class="lg:w-7/12">
-                <h2 class="reveal text-[11px] font-black tracking-[0.4em] text-brand-gold uppercase mb-6 flex items-center gap-4">
-                    <span class="w-8 h-[1px] bg-brand-gold"></span> A Protagonista
+            <div class="lg:w-7/12 px-6">
+                <h2 class="reveal text-[10px] md:text-[11px] font-black tracking-[0.4em] text-brand-gold uppercase mb-6 flex items-center gap-4">
+                    <span class="w-8 h-[2px] bg-brand-gold"></span> A Protagonista
                 </h2>
-                <h3 class="reveal reveal-delay-1 text-3xl md:text-5xl font-black leading-[1.1] mb-10 text-brand-dark">
+                <h3 class="reveal delay-100 clamp-heading font-black leading-[1.05] mb-8 text-brand-dark">
                     Conectando marcas ao público de forma leve, natural e <span class="text-highlight">autêntica</span>.
                 </h3>
-                <div class="reveal reveal-delay-2 text-brand-neutral space-y-6 text-lg font-light leading-relaxed">
+                <div class="reveal delay-200 text-brand-neutral space-y-6 text-base md:text-lg font-light leading-relaxed">
                     <p>Meu nome é Jéssica, sou publicitária formada pela UNAERP e atuo como criadora de conteúdo, influenciadora digital e profissional de relações públicas.</p>
-                    <p>Meu conteúdo é voltado para lifestyle, experiências, rotina e entretenimento. Meu foco? Produzir <strong class="font-bold text-brand-dark">vídeos hiper-dinâmicos</strong> no Instagram e TikTok que não parecem publicidade engessada.</p>
-                    <p>Busco estar presente nos melhores eventos e experiências, criando uma ponte e gerando <strong class="font-bold text-brand-dark">identificação real</strong> com a audiência.</p>
+                    <p>Meu conteúdo é voltado para lifestyle, experiências e rotina. Meu foco? Produzir <strong class="font-black text-brand-dark">vídeos hiper-dinâmicos</strong> no Instagram e TikTok que geram retenção, sem parecer publicidade engessada.</p>
+                    <p>Busco estar nos melhores espaços e eventos, construindo uma narrativa que beneficia tanto a minha audiência quanto a <strong class="font-black text-brand-dark border-b-2 border-brand-gold/30 pb-0.5">marca parceira</strong>.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Nichos / Ultra Parallax Marquee -->
-    <section class="py-24 border-b border-black/5 bg-brand-paper flex items-center relative overflow-hidden">
-        <!-- Background floating letters -->
-        <div class="absolute -right-20 top-0 text-[300px] font-black text-black/5 select-none pointer-events-none leading-none pt-10">JV</div>
-        
-        <div class="marquee-wrapper w-full z-10">
-            <div class="marquee-content text-5xl md:text-8xl font-black uppercase text-brand-dark tracking-widest" style="-webkit-text-stroke: 1px rgba(0,0,0,0.1); color: transparent; background: linear-gradient(90deg, #111, transparent 1px) 0 0 / 20px 100%;">
-                ROTINA REAL <span class="text-brand-gold">•</span> REVIEWS <span class="text-brand-gold">•</span> TURISMO <span class="text-brand-gold">•</span> EVENTOS <span class="text-brand-gold">•</span> ENTRETENIMENTO <span class="text-brand-gold">•</span> BELEZA <span class="text-brand-gold">•</span> LIFESTYLE <span class="text-brand-gold">•</span> 
-                ROTINA REAL <span class="text-brand-gold">•</span> REVIEWS <span class="text-brand-gold">•</span> TURISMO <span class="text-brand-gold">•</span> EVENTOS <span class="text-brand-gold">•</span> ENTRETENIMENTO <span class="text-brand-gold">•</span> BELEZA <span class="text-brand-gold">•</span> LIFESTYLE <span class="text-brand-gold">•</span>
+    <section class="py-16 md:py-24 border-b border-black/5 bg-brand-paper flex items-center relative overflow-hidden">
+        <div class="marquee-wrapper z-10 w-full">
+            <div class="marquee-content text-6xl md:text-8xl font-black uppercase text-brand-dark tracking-widest whitespace-nowrap" style="-webkit-text-stroke: 1px rgba(0,0,0,0.1); color: transparent; background: linear-gradient(90deg, #111, transparent 1px) 0 0 / 15px 100%;">
+                ROTINA REAL <span class="text-brand-gold text-4xl align-middle mx-4">✦</span> REVIEWS <span class="text-brand-gold text-4xl align-middle mx-4">✦</span> TURISMO <span class="text-brand-gold text-4xl align-middle mx-4">✦</span> EVENTOS <span class="text-brand-gold text-4xl align-middle mx-4">✦</span> BELEZA <span class="text-brand-gold text-4xl align-middle mx-4">✦</span> LIFESTYLE <span class="text-brand-gold text-4xl align-middle mx-4">✦</span> 
+                ROTINA REAL <span class="text-brand-gold text-4xl align-middle mx-4">✦</span> REVIEWS <span class="text-brand-gold text-4xl align-middle mx-4">✦</span> TURISMO <span class="text-brand-gold text-4xl align-middle mx-4">✦</span> EVENTOS <span class="text-brand-gold text-4xl align-middle mx-4">✦</span> BELEZA <span class="text-brand-gold text-4xl align-middle mx-4">✦</span> LIFESTYLE <span class="text-brand-gold text-4xl align-middle mx-4">✦</span> 
             </div>
         </div>
     </section>
 
-    <!-- Métricas (Hover Scale Images Premium) -->
-    <section class="py-32 px-6 bg-white relative">
+    <!-- Métricas - Edge to Edge impact on mobile -->
+    <section class="pt-24 pb-16 md:py-32 bg-white relative">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-24 reveal">
-                <h2 class="inline-block border border-brand-gold/30 rounded-full px-5 py-2 text-[10px] font-black tracking-[0.4em] text-brand-gold uppercase mb-6 shadow-sm">Números que Impactam</h2>
-                <h3 class="text-4xl md:text-6xl font-black uppercase text-brand-dark tracking-tight">Estatísticas Oficiais</h3>
+            <div class="text-center mb-16 md:mb-24 px-6 reveal">
+                <h2 class="inline-block bg-brand-gold/10 rounded-full px-6 py-2 text-[10px] font-black tracking-[0.4em] text-brand-gold uppercase mb-6 shadow-sm">Números que Impactam</h2>
+                <h3 class="clamp-heading font-black uppercase text-brand-dark tracking-tight">Análise de Audiência</h3>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-16 lg:gap-24 items-center">
-                <div class="reveal group perspective-1000 relative">
-                    <!-- Decorator Line -->
-                    <div class="absolute -left-6 top-1/2 -translate-y-1/2 w-[2px] h-1/2 bg-brand-gold/30"></div>
-                    
-                    <h4 class="text-2xl font-black tracking-widest uppercase mb-6 ml-4 group-hover:text-brand-gold transition-colors">Instagram</h4>
-                    <div class="p-2 rounded-[2rem] bg-white border border-black/5 shadow-[0_30px_60px_rgba(0,0,0,0.05)] metric-img group-hover:scale-[1.03] duration-700 ease-bounce-smooth">
-                        <img src="midia_kit_assets/page_05.jpg" alt="Métricas Instagram" class="w-full h-auto rounded-[1.5rem] mix-blend-multiply">
+            <!-- Mobile Breakout Grids -->
+            <div class="grid md:grid-cols-2 gap-10 md:gap-24 items-center">
+                
+                <div class="reveal delay-100 group px-4 md:px-12 relative w-full overflow-hidden">
+                    <h4 class="text-3xl font-black tracking-widest uppercase mb-4 ml-2 group-hover:text-brand-gold transition-colors text-brand-dark flex items-center gap-3">
+                        <svg class="w-8 h-8 text-[#E1306C]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        Instagram
+                    </h4>
+                    <div class="bg-white rounded-[2rem] md:rounded-[3rem] shadow-[0_20px_50px_rgba(0,0,0,0.06)] border border-black/5 overflow-hidden md:p-2 p-0">
+                        <img src="midia_kit_assets/page_05.jpg" alt="Métricas Instagram" class="w-full h-auto scale-[1.02] mix-blend-multiply md:rounded-[2.5rem]">
                     </div>
                 </div>
                 
-                <div class="reveal reveal-delay-2 group perspective-1000 relative md:mt-32">
-                    <div class="absolute -right-6 top-1/2 -translate-y-1/2 w-[2px] h-1/2 bg-brand-gold/30 md:block hidden"></div>
-                    <div class="absolute -left-6 top-1/2 -translate-y-1/2 w-[2px] h-1/2 bg-brand-gold/30 md:hidden block"></div>
-
-                    <h4 class="text-2xl font-black tracking-widest uppercase mb-6 text-right md:-ml-0 ml-4 group-hover:text-brand-gold transition-colors">TikTok</h4>
-                    <div class="p-2 rounded-[2rem] bg-white border border-black/5 shadow-[0_30px_60px_rgba(0,0,0,0.05)] metric-img group-hover:scale-[1.03] duration-700 ease-bounce-smooth">
-                        <img src="midia_kit_assets/page_06.jpg" alt="Métricas TikTok" class="w-full h-auto rounded-[1.5rem] mix-blend-multiply">
+                <div class="reveal delay-200 group px-4 md:px-12 relative w-full overflow-hidden md:mt-24">
+                    <h4 class="text-3xl font-black tracking-widest uppercase mb-4 ml-2 md:text-right group-hover:text-brand-gold transition-colors text-brand-dark flex items-center md:justify-end gap-3">
+                        <svg class="w-8 h-8 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+                        TikTok
+                    </h4>
+                    <div class="bg-white rounded-[2rem] md:rounded-[3rem] shadow-[0_20px_50px_rgba(0,0,0,0.06)] border border-black/5 overflow-hidden md:p-2 p-0">
+                        <img src="midia_kit_assets/page_06.jpg" alt="Métricas TikTok" class="w-full h-auto scale-[1.02] mix-blend-multiply md:rounded-[2.5rem]">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Diferenciais Elegantes (Staggered UI) -->
-    <section class="py-32 px-6 bg-brand-paper border-t border-black/5 relative overflow-hidden">
-        <!-- Giant Background Watermark -->
-        <div class="absolute top-10 left-0 w-full text-center text-[18vw] font-black text-black/5 select-none pointer-events-none opacity-50 whitespace-nowrap">DIFERENCIAIS</div>
+    <!-- Diferenciais - Mobile App Style Horizontal Carousel -->
+    <section class="py-24 md:py-32 bg-[#F6F4EF] border-t border-black/5 relative overflow-hidden">
         
-        <div class="max-w-6xl mx-auto relative z-10">
-            <h2 class="reveal text-sm font-black tracking-[0.4em] text-brand-gold uppercase mb-4 text-center">A Escolha Certa</h2>
-            <h3 class="reveal reveal-delay-1 text-4xl md:text-5xl lg:text-6xl font-black mb-20 text-center text-brand-dark tracking-tighter">
+        <div class="max-w-7xl mx-auto relative z-10 w-full mb-10 px-6 text-center md:text-left">
+            <h2 class="reveal text-[10px] font-black tracking-[0.4em] text-brand-gold uppercase mb-3 text-center md:text-left">A Escolha Certa</h2>
+            <h3 class="reveal delay-100 text-4xl md:text-5xl lg:text-6xl font-black text-brand-dark tracking-tighter">
                 Por que <span class="italic font-light">trabalhar comigo?</span>
             </h3>
+        </div>
             
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Bento / Glass Cards -->
-                <div class="glass-card p-10 rounded-3xl reveal reveal-delay-1 relative overflow-hidden group">
-                    <div class="absolute top-0 right-0 p-5 opacity-10 group-hover:opacity-30 group-hover:scale-125 transition-all text-brand-gold">
-                        <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2zm0 6l5 12H7l5-12z"/></svg>
-                    </div>
-                    <span class="text-4xl font-black text-brand-gold mb-4 block">01.</span>
-                    <h4 class="text-xl font-bold text-brand-dark mb-3 leading-tight">Visão 360º de Marca</h4>
-                    <p class="text-sm font-light text-brand-neutral">Formação em Publicidade + Relações Públicas, entregando uma visão estratégica do seu negócio.</p>
-                </div>
-
-                <div class="glass-card p-10 rounded-3xl reveal reveal-delay-2 relative overflow-hidden group hover:-translate-y-4">
-                    <div class="absolute top-0 right-0 p-5 opacity-10 group-hover:opacity-30 group-hover:scale-125 transition-all text-brand-gold">
-                        <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
-                    </div>
-                    <span class="text-4xl font-black text-brand-gold mb-4 block">02.</span>
-                    <h4 class="text-xl font-bold text-brand-dark mb-3 leading-tight">Integração Orgânica</h4>
-                    <p class="text-sm font-light text-brand-neutral">Apresentação natural da marca na rotina diária (sem o aspecto forçado de publicidade padrão).</p>
-                </div>
-
-                <div class="glass-card p-10 rounded-3xl reveal reveal-delay-3 relative overflow-hidden group">
-                    <div class="absolute top-0 right-0 p-5 opacity-10 group-hover:opacity-30 group-hover:scale-125 transition-all text-brand-gold">
-                        <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
-                    </div>
-                    <span class="text-4xl font-black text-brand-gold mb-4 block">03.</span>
-                    <h4 class="text-xl font-bold text-brand-dark mb-3 leading-tight">Qualidade Extrema</h4>
-                    <p class="text-sm font-light text-brand-neutral">Estrutura própria, equipamentos de ponta, roteiros desenhados exclusivamente para a parceria.</p>
-                </div>
-
-                <div class="glass-card p-10 rounded-3xl reveal reveal-delay-1 relative overflow-hidden group hover:-translate-y-4">
-                    <span class="text-4xl font-black text-brand-gold mb-4 block">04.</span>
-                    <h4 class="text-xl font-bold text-brand-dark mb-3 leading-tight">Multiplataforma</h4>
-                    <p class="text-sm font-light text-brand-neutral">Atuação de alto nível simultânea no Instagram + TikTok com conteúdos adaptados ao algoritmo de cada uma.</p>
-                </div>
-
-                <div class="glass-card p-10 rounded-3xl reveal md:col-span-2 relative overflow-hidden group bg-gradient-to-br from-white to-brand-paper hover:from-white hover:to-brand-lightgold/20">
-                    <span class="text-4xl font-black text-brand-gold mb-4 block">05.</span>
-                    <div class="md:flex gap-6 items-center">
-                        <div>
-                            <h4 class="text-2xl font-black text-brand-dark mb-3 leading-tight">Experiências Vivas</h4>
-                            <p class="text-md font-light text-brand-neutral">
-                                Presença ultra-ativa no cenário de eventos e turismo. Criação estruturada que beneficia simultaneamente o meu público fiel e a marca patrocinadora, com narrativas reais que constroem desejo.
-                            </p>
-                        </div>
-                        <div class="min-w-20 hidden md:block">
-                            <svg class="w-16 h-16 text-brand-gold opacity-50 outline-none" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L1 21h22L12 2zm0 3.83L19.17 19H4.83L12 5.83z"/></svg>
-                        </div>
+        <!-- Mobile: Horizontal Snap. Desktop: Grid -->
+        <div class="w-full relative px-0 md:px-6 max-w-7xl mx-auto">
+            <div class="flex overflow-x-auto md:grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8 snap-carousel px-6 md:px-0 pb-12 pt-4">
+                
+                <!-- Cards -->
+                <div class="glass-card w-[85vw] md:w-auto snap-card shrink-0 p-8 md:p-10 rounded-[2rem] flex flex-col justify-between reveal group">
+                    <div>
+                        <span class="text-4xl md:text-5xl font-black text-brand-gold/30 group-hover:text-brand-gold transition-colors block mb-4">01.</span>
+                        <h4 class="text-2xl font-black text-brand-dark mb-4 leading-tight">Visão 360º de Marca</h4>
+                        <p class="text-[15px] font-medium text-brand-neutral/80">Formação em Publicidade + Relações Públicas, entregando uma visão estratégica incomparável do seu negócio.</p>
                     </div>
                 </div>
+
+                <div class="glass-card w-[85vw] md:w-auto snap-card shrink-0 p-8 md:p-10 rounded-[2rem] flex flex-col justify-between reveal delay-100 group">
+                    <div>
+                        <span class="text-4xl md:text-5xl font-black text-brand-gold/30 group-hover:text-brand-gold transition-colors block mb-4">02.</span>
+                        <h4 class="text-2xl font-black text-brand-dark mb-4 leading-tight">Integração Orgânica</h4>
+                        <p class="text-[15px] font-medium text-brand-neutral/80">Apresentação natural da marca na minha rotina diária. O segredo é gerar engajamento natural e não pular o vídeo.</p>
+                    </div>
+                </div>
+
+                <div class="glass-card w-[85vw] md:w-auto snap-card shrink-0 p-8 md:p-10 rounded-[2rem] flex flex-col justify-between reveal delay-200 group">
+                    <div>
+                        <span class="text-4xl md:text-5xl font-black text-brand-gold/30 group-hover:text-brand-gold transition-colors block mb-4">03.</span>
+                        <h4 class="text-2xl font-black text-brand-dark mb-4 leading-tight">Qualidade Extrema</h4>
+                        <p class="text-[15px] font-medium text-brand-neutral/80">Possuo estrutura própria para produção: equipamentos de ponta, pautas e roteiros desenhados exclusivamente.</p>
+                    </div>
+                </div>
+
+                <div class="glass-card w-[85vw] md:w-auto snap-card shrink-0 p-8 md:p-10 rounded-[2rem] flex flex-col justify-between reveal group">
+                    <div>
+                        <span class="text-4xl md:text-5xl font-black text-brand-gold/30 group-hover:text-brand-gold transition-colors block mb-4">04.</span>
+                        <h4 class="text-2xl font-black text-brand-dark mb-4 leading-tight">Multiplataforma</h4>
+                        <p class="text-[15px] font-medium text-brand-neutral/80">Atuação forte no Instagram + TikTok com conteúdos adaptados milimetricamente ao algoritmo de cada rede social.</p>
+                    </div>
+                </div>
+
+                <!-- Featured Wide Card (Span 2 on Desktop) -->
+                <div class="glass-card w-[85vw] md:w-auto snap-card shrink-0 p-8 md:p-10 rounded-[2rem] md:col-span-2 group bg-gradient-to-br from-white to-brand-cream border shadow-xl relative overflow-hidden reveal delay-100">
+                    <div class="absolute right-0 bottom-0 pointer-events-none opacity-10">
+                        <svg class="w-48 h-48 text-brand-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L1 21h22L12 2zm0 3.83L19.17 19H4.83L12 5.83z"/></svg>
+                    </div>
+                    <div class="relative z-10 h-full flex flex-col justify-between">
+                        <span class="text-4xl md:text-5xl font-black text-brand-gold block mb-4">05.</span>
+                        <h4 class="text-3xl font-black text-brand-dark mb-4 leading-tight">Experiências Vivas</h4>
+                        <p class="text-lg font-medium text-brand-neutral max-w-lg">
+                            Presença ultra-ativa no cenário de eventos e turismo. Criação estruturada que beneficia o público fiel e a marca patrocinadora, construindo desejo autêntico.
+                        </p>
+                    </div>
+                </div>
+
             </div>
+            
+            <!-- Mobile scroll instruction -->
+            <p class="text-center text-[10px] uppercase font-bold text-brand-gold/60 mt-2 block md:hidden animate-pulse">
+                Deslize para o lado ➔
+            </p>
         </div>
     </section>
 
     <!-- Footer Master CTA -->
-    <section class="py-40 px-6 text-center relative overflow-hidden bg-[#FAFAF7]">
-        <!-- Top decorative gradient fade -->
-        <div class="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-brand-paper to-transparent"></div>
-
-        <div class="max-w-4xl mx-auto relative z-10 reveal">
-            <h2 class="text-[12vw] sm:text-7xl md:text-8xl font-black uppercase mb-4 tracking-tighter text-brand-dark leading-none">
+    <section class="pt-32 pb-48 md:pb-32 px-6 text-center relative overflow-hidden bg-brand-cream border-t border-black/5">
+        <div class="max-w-4xl mx-auto relative z-10">
+            <h2 class="reveal clamp-title font-black uppercase mb-2 tracking-tighter text-brand-dark leading-none">
                 Vamos <br>
                 <span class="text-gradient-gold">trabalhar</span>
             </h2>
-            <h2 class="text-4xl md:text-6xl font-black uppercase mb-10 tracking-tight text-brand-dark italic">Juntos?</h2>
+            <h2 class="reveal delay-100 text-4xl md:text-6xl font-black uppercase mb-10 tracking-tight text-brand-dark italic">Juntos?</h2>
             
-            <p class="text-sm md:text-md font-bold text-brand-neutral mb-16 uppercase tracking-[0.3em] bg-white border border-black/5 inline-block px-6 py-3 rounded-full shadow-sm">Conteúdos reais, estratégicos e <b class="text-brand-gold">conectados</b>.</p>
-            
-            <div class="flex flex-col sm:flex-row justify-center gap-8 items-center mt-4">
-                <!-- Glowing Premium Button -->
-                <a href="mailto:eujessicacontato@gmail.com" class="relative group w-full sm:w-auto">
-                    <!-- Glow effect under button -->
-                    <div class="absolute -inset-2 bg-gradient-to-r from-brand-gold to-yellow-600 rounded-full blur-md opacity-40 group-hover:opacity-75 transition duration-500 animate-pulse-glow"></div>
-                    
-                    <div class="relative w-full sm:w-auto px-12 py-6 rounded-full bg-brand-dark text-white font-black uppercase tracking-[0.2em] hover:scale-[1.03] transition-all duration-500 shadow-2xl overflow-hidden">
-                        <!-- Shing glass across button -->
-                        <div class="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-[1.5s] ease-in-out"></div>
+            <p class="reveal delay-200 text-xs md:text-sm font-bold text-brand-neutral mb-16 uppercase tracking-[0.2em] md:tracking-[0.3em] bg-white border border-black/5 inline-block px-5 py-3 rounded-full shadow-sm">
+                Conteúdos reais e <b class="text-brand-gold">conectados</b>.
+            </p>
+
+            <div class="reveal delay-300 flex justify-center gap-6 md:gap-8 mt-4 hidden md:flex">
+                <a href="mailto:eujessicacontato@gmail.com" class="relative group w-full sm:w-auto btn-active">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-brand-gold to-yellow-600 rounded-full blur opacity-60 group-hover:opacity-100 transition duration-500 animate-pulse-glow"></div>
+                    <div class="relative w-full sm:w-auto px-12 py-5 rounded-full bg-brand-dark text-white font-black uppercase tracking-[0.2em] shadow-xl text-lg hover:scale-[1.02] transition-transform">
                         Solicitar Orçamento
                     </div>
                 </a>
-                
-                <div class="flex gap-5">
-                    <a href="https://www.instagram.com/eujessicavitoria/" target="_blank" class="w-16 h-16 rounded-full bg-white border border-black/5 shadow-lg flex items-center justify-center hover:-translate-y-2 hover:border-brand-gold hover:text-brand-gold transition-all duration-300 text-brand-dark">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </div>
+            
+            <!-- Midia Social Desktop -->
+            <div class="hidden md:flex justify-center gap-5 mt-10">
+                <a href="https://www.instagram.com/eujessicavitoria/" target="_blank" class="w-16 h-16 rounded-full bg-white border border-black/5 shadow-md flex items-center justify-center hover:-translate-y-2 hover:border-brand-gold hover:text-brand-gold transition-all duration-300 text-brand-dark btn-active">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
                     </a>
-                    <a href="https://www.tiktok.com/@jessvitr" target="_blank" class="w-16 h-16 rounded-full bg-white border border-black/5 shadow-lg flex items-center justify-center hover:-translate-y-2 hover:border-brand-gold hover:text-brand-gold transition-all duration-300 text-brand-dark">
+                    <a href="https://www.tiktok.com/@jessvitr" target="_blank" class="w-16 h-16 rounded-full bg-white border border-black/5 shadow-md flex items-center justify-center hover:-translate-y-2 hover:border-brand-gold hover:text-brand-gold transition-all duration-300 text-brand-dark btn-active">
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
                     </a>
                 </div>
             </div>
             
-            <div class="mt-24 text-[10px] font-black uppercase tracking-[0.5em] text-brand-dark/20 relative z-10 select-none">
+            <div class="mt-16 text-[10px] font-black uppercase tracking-[0.5em] text-brand-dark/20 mix-blend-multiply">
                 © 2026 Agência Dógui Mídia
             </div>
         </div>
         
-        <!-- Big JV Background Text -->
-        <div class="absolute bottom-[-100px] right-0 text-[35vw] font-black text-brand-gold/5 select-none pointer-events-none leading-none z-0 overflow-hidden">
-            VITÓRIA
-        </div>
     </section>
 
-    <!-- Script de Animação e Interação Otimizada -->
+    <!-- MOBILE STICKY BOTTOM BAR (iOS APP FEEL) -->
+    <div class="md:hidden fixed bottom-0 left-0 w-full z-50 p-4 pb-6 bg-white/70 backdrop-blur-2xl border-t border-black/10 shadow-[0_-10px_30px_rgba(0,0,0,0.05)] transform translate-y-full transition-transform duration-700 ease-out" id="mobile-bottom-bar">
+        <a href="mailto:eujessicacontato@gmail.com" class="w-full flex justify-center items-center py-4 bg-brand-dark text-white rounded-full font-black uppercase tracking-widest text-sm shadow-[0_0_20px_rgba(197,157,42,0.3)] btn-active overflow-hidden relative group">
+            <div class="absolute inset-0 bg-gradient-to-r from-brand-gold/0 via-brand-gold/30 to-brand-gold/0 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+            Solicitar Orçamento
+        </a>
+    </div>
+
+    <!-- Script de Interações Avançadas Mobile -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            // Intersection Observer Reveal (Smooth Scroll Loading)
+            
+            // 1. Smooth Reveal Observer
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add("active");
                     }
                 });
-            }, { threshold: 0.1, rootMargin: "0px 0px -60px 0px" });
+            }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
+            document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
 
-            document.querySelectorAll(".reveal").forEach((el) => {
-                observer.observe(el);
-            });
+            // 2. Mobile Sticky Bottom Bar Auto-Show
+            const bottomBar = document.getElementById('mobile-bottom-bar');
+            setTimeout(() => {
+                // Show floating bar after 2 seconds
+                if(window.innerWidth < 768) {
+                    bottomBar.style.transform = 'translateY(0)';
+                }
+            }, 2500);
 
-            // Parallax Subtil para Imagens de Métrica (Opcional premium touch)
+            // 3. Scroll Progress Ring/Bar
+            const progressBar = document.getElementById('progress-bar');
             window.addEventListener('scroll', () => {
-                const scrolled = window.scrollY;
-                document.querySelectorAll('.metric-img img').forEach((img, index) => {
-                    // Move slightly down based on scroll
-                    const val = (scrolled * (index + 1) * 0.05);
-                    // Prevent pushing it out of bounds
-                    if(val < 30) img.style.transform = `translateY(${val}px)`;
-                });
+                const totalScroll = document.documentElement.scrollTop;
+                const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scroll = `${(totalScroll / windowHeight) * 100}%`;
+                progressBar.style.width = scroll;
             }, { passive: true });
+            
         });
     </script>
 </body>
