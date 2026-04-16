@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Mídia Kit | Jéssica Vitória</title>
     <meta name="description" content="Mídia Kit oficial da Jéssica Vitória. Criadora de Conteúdo e Influenciadora Digital.">
 
@@ -37,7 +37,7 @@
                         'float': 'float 6s ease-in-out infinite',
                         'spin-slow': 'spin 20s linear infinite',
                         'pulse-glow': 'pulseGlow 2s ease-in-out infinite',
-                        'reveal-curtain': 'curtain 1.5s cubic-bezier(0.77, 0, 0.175, 1) forwards',
+                        'reveal-curtain': 'curtain 1s cubic-bezier(0.77, 0, 0.175, 1) forwards',
                     },
                     keyframes: {
                         float: {
@@ -68,13 +68,14 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* --------------------------
-           MOBILE-FIRST ANIMATIONS
-           -------------------------- */
-        
+        /* Responsive Utilities */
+        .safe-pb { padding-bottom: env(safe-area-inset-bottom, 20px); }
+        .safe-pt { padding-top: env(safe-area-inset-top, 20px); }
+
+        /* Smooth Reveal Stagger Matrix */
         .reveal {
             opacity: 0;
-            transform: translateY(50px) scale(0.95);
+            transform: translateY(40px) scale(0.97);
             transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.34, 1.56, 0.64, 1);
             will-change: opacity, transform;
         }
@@ -98,6 +99,7 @@
 
         @keyframes shineText { to { background-position: 200% center; } }
 
+        /* Glassmorphism Classes */
         .glass-card {
             background: rgba(255, 255, 255, 0.65);
             backdrop-filter: blur(24px);
@@ -107,15 +109,17 @@
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
         
+        /* Snap Carousel Core */
         .snap-carousel {
             scroll-snap-type: x mandatory;
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
         }
         .snap-carousel::-webkit-scrollbar { display: none; }
+        .snap-carousel { -ms-overflow-style: none; scrollbar-width: none; }
         .snap-card { scroll-snap-align: center; }
 
-        /* Multi-Track Infinite Marquees */
+        /* Multi-Track Marquees */
         .marquee-wrapper { overflow: hidden; white-space: nowrap; position: relative; width: 100vw; margin-left: calc(-50vw + 50%); margin-right: calc(-50vw + 50%); }
         .marquee-content { display: inline-flex; align-items: center; gap: 2rem; animation: marquee 35s linear infinite; padding-right: 2rem;}
         .marquee-content.reverse { animation: marquee-reverse 45s linear infinite; }
@@ -125,9 +129,9 @@
 
         /* Animated Tags */
         .pop-tag {
-            background: #111; color: white; border-radius: 999px; padding: 4px 16px; 
-            font-size: 0.8rem; font-weight: 900; letter-spacing: 0.1em;
-            display: inline-flex; align-items: center; gap: 8px;
+            background: #111; color: white; border-radius: 999px; padding: 6px 18px; 
+            font-size: 0.75rem; font-weight: 900; letter-spacing: 0.15em;
+            display: inline-flex; align-items: center; gap: 8px; justify-content: center;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
         .pop-tag.gold { background: #D4AF37; color: #111; }
@@ -143,11 +147,13 @@
         }
         .active .text-highlight::after { transform: scaleX(1); transition-delay: 0.3s; }
 
-        .clamp-title { font-size: clamp(3.5rem, 18vw, 10rem); }
-        .clamp-heading { font-size: clamp(2rem, 8vw, 4rem); }
+        /* Perfect Fluid Typography */
+        .clamp-title { font-size: clamp(3rem, 16vw, 10rem); }
+        .clamp-heading { font-size: clamp(1.8rem, 8vw, 4rem); }
 
         .btn-active:active { transform: scale(0.92); transition: transform 0.1s; }
 
+        /* Scroll Progress Bar */
         #progress-bar {
             position: fixed; top: 0; left: 0; height: 3px; background: #C59D2A;
             width: 0%; z-index: 9999; transition: width 0.1s ease-out;
@@ -156,82 +162,83 @@
     </style>
 </head>
 
-<body>
+<body class="flex flex-col min-h-screen">
 
-    <div class="fixed inset-0 z-[100] bg-brand-dark flex flex-col items-center justify-center animate-reveal-curtain pointer-events-none" style="animation-delay: 0.8s;">
+    <!-- Curtain Loader -->
+    <div class="fixed inset-0 z-[100] bg-brand-dark flex flex-col items-center justify-center animate-reveal-curtain pointer-events-none" style="animation-delay: 0.5s;">
         <span class="text-brand-gold font-black tracking-[0.5em] text-sm animate-pulse">CARREGANDO</span>
         <div class="mt-4 w-12 h-[1px] bg-brand-gold overflow-hidden relative">
             <div class="absolute top-0 left-0 h-full bg-white w-full animate-[marquee_0.8s_ease-in-out_infinite_alternate]"></div>
         </div>
     </div>
 
+    <!-- Scroll Progress -->
     <div id="progress-bar"></div>
 
-    <nav class="fixed top-0 left-0 w-full z-40 px-6 py-5 border-b border-black/5 bg-white/70 backdrop-blur-2xl">
-        <div class="max-w-7xl mx-auto flex justify-between items-center hidden md:flex">
-            <span class="font-black text-sm tracking-[0.4em] text-brand-dark">JV<span class="text-brand-gold">.</span></span>
-            <a href="mailto:eujessicacontato@gmail.com" class="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-dark border border-brand-dark/20 px-6 py-2.5 rounded-full hover:bg-brand-dark hover:text-white transition-all shadow-sm">
+    <!-- Navigation Elegante - Setup para safe-areas -->
+    <nav class="fixed top-0 left-0 w-full z-40 px-6 safe-pt py-4 border-b border-black/5 bg-white/80 backdrop-blur-3xl">
+        <div class="max-w-7xl mx-auto flex justify-center md:justify-between items-center w-full">
+            <span class="font-black text-xs md:text-sm tracking-[0.4em] md:tracking-[0.6em] text-brand-dark text-center">JÉSSICA VITÓRIA<span class="text-brand-gold hidden md:inline">.</span></span>
+            <a href="mailto:eujessicacontato@gmail.com" class="hidden md:inline-block text-[10px] font-bold uppercase tracking-[0.3em] text-brand-dark border border-brand-dark/20 px-6 py-2.5 rounded-full hover:bg-brand-dark hover:text-white transition-all shadow-sm">
                 Falar com Jessica
             </a>
         </div>
-        <div class="flex justify-center items-center md:hidden w-full">
-            <span class="font-black text-xs tracking-[0.6em] text-brand-dark">JÉSSICA VITÓRIA</span>
-        </div>
     </nav>
 
-    <div class="absolute top-1/4 left-0 w-48 h-48 bg-brand-gold/10 rounded-full blur-[60px] animate-float pointer-events-none"></div>
+    <div class="absolute top-1/4 left-0 w-64 h-64 bg-brand-gold/10 rounded-full blur-[80px] animate-float pointer-events-none"></div>
 
-    <!-- HERO -->
-    <section class="relative min-h-[100svh] flex flex-col justify-center items-center text-center px-4 overflow-hidden pt-10">
+    <!-- HERO: Perfectly Centered -->
+    <section class="relative min-h-[100svh] flex flex-col justify-center items-center text-center px-6 overflow-hidden pt-10">
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[45vw] font-black text-black/5 select-none pointer-events-none leading-none z-0">JV</div>
 
         <div class="max-w-4xl w-full mx-auto relative z-10 flex flex-col items-center">
-            <div class="reveal inline-block px-5 py-2 rounded-full bg-brand-gold/10 text-brand-gold font-black tracking-[0.3em] uppercase text-[9px] mb-8 shadow-sm">
+            <div class="reveal inline-flex items-center justify-center px-5 py-2 rounded-full bg-brand-gold/10 text-brand-gold font-black tracking-[0.3em] uppercase text-[9px] mb-8 shadow-sm">
                 Apresentação Comercial
             </div>
             
-            <h1 class="reveal delay-100 clamp-title font-black uppercase tracking-tighter leading-[0.8] mb-6 text-brand-dark w-full">
+            <h1 class="reveal delay-100 clamp-title font-black uppercase tracking-tighter leading-[0.8] mb-6 text-brand-dark w-full text-center">
                 Jéssica 
                 <span class="block text-gradient-gold">Vitória</span>
             </h1>
             
-            <p class="reveal delay-200 text-sm md:text-xl font-medium text-brand-neutral max-w-2xl mx-auto tracking-widest px-4">
+            <p class="reveal delay-200 text-sm md:text-xl font-medium text-brand-neutral max-w-2xl mx-auto tracking-widest px-4 text-center">
                 CRIADORA DE <b class="font-black text-brand-dark">CONTEÚDO</b> E INFLUENCIADORA DIGITAL
             </p>
             
-            <div class="reveal delay-300 mt-20 animate-bounce opacity-40">
-                <p class="text-[8px] uppercase tracking-[0.3em] font-bold mb-2">Deslize para descobrir</p>
-                <div class="w-[1px] h-16 bg-gradient-to-b from-brand-dark to-transparent mx-auto"></div>
+            <div class="reveal delay-300 mt-16 md:mt-24 animate-bounce opacity-40 flex flex-col items-center">
+                <p class="text-[8px] uppercase tracking-[0.4em] font-bold mb-3 text-center">Deslize para descobrir</p>
+                <div class="w-[2px] h-16 bg-gradient-to-b from-brand-dark to-transparent"></div>
             </div>
         </div>
     </section>
 
-    <!-- SOBRE A PROTAGONISTA -->
+    <!-- SOBRE A PROTAGONISTA: Perfeitamente Responsivo e Centralizado no Mobile -->
     <section class="py-20 md:py-32 relative bg-white border-y border-black/5 z-20">
-        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12 md:gap-20 items-center">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-16 md:gap-20 items-center px-0 md:px-6">
             
-            <div class="w-full lg:w-5/12 reveal relative px-0 md:px-6"> 
-                <div class="absolute -top-10 right-4 w-24 h-24 border-2 border-brand-gold rounded-full opacity-30 animate-spin-slow hidden md:block"></div>
+            <!-- Imagem: 100% largura no Mobile para impacto, com moldura no Desktop -->
+            <div class="w-full md:w-5/12 reveal relative px-4 md:px-0 flex justify-center"> 
+                <div class="absolute -top-10 right-0 w-24 h-24 border-2 border-brand-gold rounded-full opacity-30 animate-spin-slow hidden md:block"></div>
                 
-                <div class="relative w-full md:w-[90%] aspect-[4/5] mx-auto md:rounded-3xl bg-brand-cream md:border border-black/5 overflow-hidden shadow-2xl group">
+                <div class="relative w-[95%] md:w-[90%] max-w-md aspect-[4/5] rounded-[2.5rem] bg-brand-cream md:border border-black/5 overflow-hidden shadow-2xl group flex-shrink-0">
                     <img src="541223042_18406490818112904_3375123075707619995_n.jpg" alt="Jéssica Vitória" class="w-full h-full object-cover scale-100 group-hover:scale-110 transition-transform duration-[2s] md:grayscale group-hover:grayscale-0">
                     
-                    <div class="absolute bottom-6 right-6 md:-bottom-5 md:-right-5 bg-brand-dark/90 backdrop-blur-md text-brand-lightgold w-24 h-24 rounded-full flex flex-col items-center justify-center shadow-2xl animate-float">
+                    <div class="absolute bottom-6 right-6 md:-bottom-4 md:-right-4 bg-brand-dark/90 backdrop-blur-md text-brand-lightgold w-24 h-24 rounded-full flex flex-col items-center justify-center shadow-2xl animate-float group-hover:bg-brand-gold group-hover:text-black transition-colors">
                         <span class="text-3xl font-black leading-none">23</span>
                         <span class="text-[8px] font-bold uppercase tracking-widest mt-1">Anos</span>
                     </div>
                 </div>
             </div>
             
-            <div class="lg:w-7/12 px-6">
-                <h2 class="reveal text-[10px] md:text-[11px] font-black tracking-[0.4em] text-brand-gold uppercase mb-6 flex items-center gap-4">
+            <div class="w-full md:w-7/12 px-6 flex flex-col items-center text-center md:items-start md:text-left">
+                <h2 class="reveal text-[10px] md:text-[11px] font-black tracking-[0.4em] text-brand-gold uppercase mb-8 flex items-center justify-center md:justify-start gap-4 w-full">
                     <span class="w-8 h-[2px] bg-brand-gold"></span> A Protagonista
                 </h2>
                 
-                <!-- Improved Tags to highlight niche right away -->
-                <div class="reveal delay-100 flex flex-wrap gap-2 mb-6">
-                    <span class="pop-tag"><div class="w-2 h-2 rounded-full bg-brand-gold"></div> LIFESTYLE</span>
-                    <span class="pop-tag gold flex items-center gap-1">ROTINA REAL <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></span>
+                <!-- Tags Centralizadas no Mobile -->
+                <div class="reveal delay-100 flex flex-wrap justify-center md:justify-start gap-3 mb-8 w-full">
+                    <span class="pop-tag"><div class="w-1.5 h-1.5 rounded-full bg-brand-gold"></div> LIFESTYLE</span>
+                    <span class="pop-tag gold flex items-center gap-1.5">ROTINA REAL <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></span>
                     <span class="pop-tag outline">TURISMO</span>
                 </div>
 
@@ -239,165 +246,169 @@
                     Conectando marcas ao seu público de forma <span class="text-highlight">autêntica</span> e <span class="text-highlight">poderosa</span>.
                 </h3>
                 
-                <div class="reveal delay-300 text-brand-neutral space-y-6 text-base md:text-lg font-medium leading-relaxed">
+                <div class="reveal delay-300 text-brand-neutral space-y-6 text-base md:text-lg font-medium leading-relaxed max-w-2xl">
                     <p>Meu nome é Jéssica, sou publicitária e profissional de relações públicas. A minha vida online gira em torno de <strong class="font-black text-brand-dark">Lifestyle</strong> e <strong class="font-black text-brand-dark">Rotina Diária</strong>.</p>
-                    <p>No Instagram e TikTok, a mágica acontece. Eu crio rotinas visuais (GRWM, Reviews, Entregas) onde a marca não entra como um panfleto chato, e sim como a <b class="bg-brand-gold/20 px-2 py-0.5 rounded text-brand-dark">estrela orgânica do meu dia</b>.</p>
+                    <p>No Instagram e TikTok, a mágica acontece. Eu crio rotinas visuais onde a marca não entra como um panfleto chato, e sim como a <b class="bg-brand-gold/20 px-2 py-0.5 rounded text-brand-dark whitespace-nowrap">estrela orgânica do meu dia</b>.</p>
                     <p>Eu levo as marcas a eventos sensacionais e mostro como elas resolvem problemas reais dentro da rotina, gerando retenção alta e o mais importante: <b class="font-black text-brand-dark border-b-2 border-brand-gold/30">Desejo de compra natural</b>.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- NICHOS: ULTRA VISUAL ROTINA & LIFESTYLE MARQUEE (DUAL TRACK) -->
-    <section class="py-16 bg-brand-dark relative overflow-hidden flex flex-col gap-6 transform -skew-y-2 my-10 md:my-20">
-        <!-- Track 1 - Giant Outline Letters Right to Left -->
+    <!-- NICHOS: ULTRA VISUAL DUAL TRACK -->
+    <section class="py-16 md:py-24 bg-brand-dark relative overflow-hidden flex flex-col gap-6 md:gap-10 transform -skew-y-2 my-12 md:my-28">
         <div class="marquee-wrapper">
-            <div class="marquee-content text-5xl md:text-[7rem] font-black uppercase tracking-widest whitespace-nowrap" style="-webkit-text-stroke: 1.5px rgba(212,175,55,0.4); color: transparent;">
+            <div class="marquee-content text-5xl md:text-[8rem] font-black uppercase tracking-widest whitespace-nowrap" style="-webkit-text-stroke: 1.5px rgba(212,175,55,0.4); color: transparent;">
                 ROTINA REAL ✦ LIFESTYLE DIÁRIO ✦ COMPRAS & REVIEWS ✦ ENTRETENIMENTO ✦
                 ROTINA REAL ✦ LIFESTYLE DIÁRIO ✦ COMPRAS & REVIEWS ✦ ENTRETENIMENTO ✦
             </div>
         </div>
         
-        <!-- Track 2 - Solid Gold Bar Left to Right -->
         <div class="marquee-wrapper">
-            <div class="marquee-content reverse text-4xl md:text-6xl font-black uppercase text-brand-dark tracking-tighter whitespace-nowrap bg-gradient-to-r from-brand-gold via-[#FFF2CD] to-brand-gold px-10 py-3 md:py-6 shadow-[0_0_50px_rgba(212,175,55,0.4)]">
+            <div class="marquee-content reverse text-3xl md:text-6xl font-black uppercase text-brand-dark tracking-tighter whitespace-nowrap bg-gradient-to-r from-brand-gold via-[#FFF2CD] to-brand-gold px-10 py-4 md:py-8 shadow-[0_0_50px_rgba(212,175,55,0.4)]">
                 <span class="flex items-center gap-6 md:gap-14">
-                    BELEZA <div class="w-4 h-4 md:w-8 md:h-8 rounded-full bg-brand-dark animate-pulse"></div> 
-                    EVENTOS & TURISMO <div class="w-4 h-4 md:w-8 md:h-8 rounded-full bg-brand-dark animate-pulse"></div> 
-                    DAILY VLOG <div class="w-4 h-4 md:w-8 md:h-8 rounded-full bg-brand-dark animate-pulse"></div> 
-                    VIVÊNCIA <div class="w-4 h-4 md:w-8 md:h-8 rounded-full bg-brand-dark animate-pulse"></div>
-                    BELEZA <div class="w-4 h-4 md:w-8 md:h-8 rounded-full bg-brand-dark animate-pulse"></div> 
-                    EVENTOS & TURISMO <div class="w-4 h-4 md:w-8 md:h-8 rounded-full bg-brand-dark animate-pulse"></div> 
-                    DAILY VLOG <div class="w-4 h-4 md:w-8 md:h-8 rounded-full bg-brand-dark animate-pulse"></div> 
+                    BELEZA <div class="w-3 h-3 md:w-8 md:h-8 rounded-full bg-brand-dark animate-pulse"></div> 
+                    EVENTOS & TURISMO <div class="w-3 h-3 md:w-8 md:h-8 rounded-full bg-brand-dark animate-pulse"></div> 
+                    DAILY VLOG <div class="w-3 h-3 md:w-8 md:h-8 rounded-full bg-brand-dark animate-pulse"></div> 
+                    VIVÊNCIA <div class="w-3 h-3 md:w-8 md:h-8 rounded-full bg-brand-dark animate-pulse"></div>
+                    BELEZA <div class="w-3 h-3 md:w-8 md:h-8 rounded-full bg-brand-dark animate-pulse"></div> 
+                    EVENTOS & TURISMO <div class="w-3 h-3 md:w-8 md:h-8 rounded-full bg-brand-dark animate-pulse"></div> 
+                    DAILY VLOG <div class="w-3 h-3 md:w-8 md:h-8 rounded-full bg-brand-dark animate-pulse"></div> 
                     VIVÊNCIA
                 </span>
             </div>
         </div>
     </section>
 
-    <!-- Metrics -->
-    <section class="pt-16 pb-16 md:pb-24 bg-brand-cream relative">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16 md:mb-24 px-6 reveal">
-                <h2 class="inline-block bg-brand-gold/10 rounded-full px-6 py-2 text-[10px] font-black tracking-[0.4em] text-brand-gold uppercase mb-6 shadow-sm">Números que Impactam</h2>
-                <h3 class="clamp-heading font-black uppercase text-brand-dark tracking-tight">Análise de Audiência</h3>
+    <!-- METRICS: Alignment perfectly responsive -->
+    <section class="pt-16 pb-20 md:pb-32 bg-brand-cream relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 md:mb-28 reveal flex flex-col items-center">
+                <h2 class="inline-block bg-brand-gold/10 rounded-full px-6 py-2.5 text-[10px] font-black tracking-[0.4em] text-brand-gold uppercase mb-6 shadow-sm">Números que Impactam</h2>
+                <h3 class="clamp-heading font-black uppercase text-brand-dark tracking-tight leading-none">Análise de Audiência</h3>
+                <div class="w-24 h-1 bg-brand-gold mt-6 rounded-full mx-auto hidden md:block"></div>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-10 md:gap-24 items-center">
-                <div class="reveal delay-100 group px-4 md:px-12 relative w-full overflow-hidden">
-                    <h4 class="text-3xl font-black tracking-widest uppercase mb-4 ml-2 group-hover:text-brand-gold transition-colors text-brand-dark flex items-center gap-3">
-                        <svg class="w-8 h-8 text-[#E1306C]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            <div class="grid md:grid-cols-2 gap-12 md:gap-24 items-center max-w-6xl mx-auto">
+                
+                <div class="reveal delay-100 group relative w-full overflow-hidden flex flex-col items-center md:items-start text-center md:text-left">
+                    <h4 class="text-3xl lg:text-4xl font-black tracking-widest uppercase mb-6 group-hover:text-brand-gold transition-colors text-brand-dark flex items-center justify-center md:justify-start gap-3 w-full">
+                        <svg class="w-8 h-8 md:w-10 md:h-10 text-[#E1306C]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
                         Instagram
                     </h4>
-                    <div class="bg-white rounded-[2rem] md:rounded-[3rem] shadow-[0_20px_50px_rgba(0,0,0,0.06)] border border-black/5 overflow-hidden md:p-2 p-0">
-                        <img src="midia_kit_assets/page_05.jpg" alt="Métricas Instagram" class="w-full h-auto scale-[1.02] mix-blend-multiply md:rounded-[2.5rem]">
+                    <div class="bg-white rounded-[2rem] md:rounded-[3rem] shadow-[0_20px_50px_rgba(0,0,0,0.06)] border border-black/5 p-1 w-full max-w-[500px]">
+                        <img src="midia_kit_assets/page_05.jpg" alt="Métricas Instagram" class="w-full h-auto mix-blend-multiply md:rounded-[2.5rem] rounded-[1.8rem] hover:scale-105 transition-transform duration-700">
                     </div>
                 </div>
                 
-                <div class="reveal delay-200 group px-4 md:px-12 relative w-full overflow-hidden md:mt-24 mt-10">
-                    <h4 class="text-3xl font-black tracking-widest uppercase mb-4 ml-2 md:text-right group-hover:text-brand-gold transition-colors text-brand-dark flex items-center md:justify-end gap-3">
-                        <svg class="w-8 h-8 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+                <div class="reveal delay-200 group relative w-full overflow-hidden md:mt-24 flex flex-col items-center md:items-end text-center md:text-right mt-4">
+                    <h4 class="text-3xl lg:text-4xl font-black tracking-widest uppercase mb-6 group-hover:text-brand-gold transition-colors text-brand-dark flex items-center justify-center md:justify-end gap-3 w-full">
+                        <svg class="w-8 h-8 md:w-10 md:h-10 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
                         TikTok
                     </h4>
-                    <div class="bg-white rounded-[2rem] md:rounded-[3rem] shadow-[0_20px_50px_rgba(0,0,0,0.06)] border border-black/5 overflow-hidden md:p-2 p-0">
-                        <img src="midia_kit_assets/page_06.jpg" alt="Métricas TikTok" class="w-full h-auto scale-[1.02] mix-blend-multiply md:rounded-[2.5rem]">
+                    <div class="bg-white rounded-[2rem] md:rounded-[3rem] shadow-[0_20px_50px_rgba(0,0,0,0.06)] border border-black/5 p-1 w-full max-w-[500px]">
+                        <img src="midia_kit_assets/page_06.jpg" alt="Métricas TikTok" class="w-full h-auto mix-blend-multiply md:rounded-[2.5rem] rounded-[1.8rem] hover:scale-105 transition-transform duration-700">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Carousel Estratégico -->
-    <section class="py-24 md:py-32 bg-white border-t border-black/5 relative overflow-hidden">
-        <div class="max-w-7xl mx-auto relative z-10 w-full mb-10 px-6 text-center md:text-left">
-            <h2 class="reveal text-[10px] font-black tracking-[0.4em] text-brand-gold uppercase mb-3 md:text-left">A Escolha Certa</h2>
-            <h3 class="reveal delay-100 text-4xl md:text-5xl lg:text-5xl font-black text-brand-dark tracking-tighter">
+    <!-- CAROUSEL DE DIFERENCIAIS: Perfect Snapping Alignment -->
+    <section class="py-24 md:py-32 bg-white border-t border-black/5 relative overflow-hidden flex flex-col items-center">
+        <div class="max-w-7xl mx-auto relative z-10 w-full mb-12 px-6 flex flex-col items-center">
+            <h2 class="reveal text-[10px] font-black tracking-[0.4em] text-brand-gold uppercase mb-4 text-center">A Escolha Certa</h2>
+            <h3 class="reveal delay-100 text-4xl md:text-5xl lg:text-6xl font-black text-brand-dark tracking-tighter text-center">
                 Por que <span class="italic font-light">trabalhar comigo?</span>
             </h3>
         </div>
             
-        <div class="w-full relative px-0 md:px-6 max-w-7xl mx-auto">
-            <div class="flex overflow-x-auto md:grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8 snap-carousel px-6 md:px-0 pb-12 pt-4">
+        <div class="w-full relative max-w-7xl mx-auto">
+            <div class="flex overflow-x-auto md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 snap-carousel px-6 md:px-6 pb-12 pt-4">
                 
-                <div class="glass-card w-[85vw] md:w-auto snap-card shrink-0 p-8 md:p-10 rounded-[2rem] flex flex-col justify-between reveal group bg-brand-cream">
-                    <div>
-                        <span class="text-4xl md:text-5xl font-black text-brand-gold/30 group-hover:text-brand-gold transition-colors block mb-4">01.</span>
-                        <h4 class="text-2xl font-black text-brand-dark mb-4 leading-tight">Visão de Marca</h4>
-                        <p class="text-[15px] font-medium text-brand-neutral/80">Com minha Formação em Publicidade + RP, não sou apenas uma criadora; eu penso como estrategista para a sua empresa.</p>
-                    </div>
+                <div class="glass-card w-[85vw] max-w-sm md:max-w-none md:w-auto snap-card shrink-0 p-8 md:p-10 rounded-[2rem] flex flex-col justify-center text-center md:text-left reveal group bg-brand-cream border shadow-sm">
+                    <span class="text-4xl md:text-5xl font-black text-brand-gold/30 group-hover:text-brand-gold transition-colors block mb-4 mx-auto md:mx-0">01.</span>
+                    <h4 class="text-2xl font-black text-brand-dark mb-4 leading-tight">Visão de Marca</h4>
+                    <p class="text-[15px] font-medium text-brand-neutral/80">Com minha Formação em Publicidade + RP, não sou apenas uma criadora; eu penso como estrategista para a sua empresa.</p>
                 </div>
 
-                <div class="glass-card w-[85vw] md:w-auto snap-card shrink-0 p-8 md:p-10 rounded-[2rem] flex flex-col justify-between reveal delay-100 group border-brand-gold shadow-[0_0_20px_rgba(212,175,55,0.1)]">
-                    <div>
-                        <span class="text-4xl md:text-5xl font-black text-brand-gold block mb-4 animate-pulse">✦</span>
-                        <h4 class="text-2xl font-black text-brand-dark mb-4 leading-tight">Poder do Lifestyle</h4>
-                        <p class="text-[15px] font-medium text-brand-neutral">Apresentação da marca dentro da minha rotina. O espectador absorve o anúncio de maneira lúdica e imperceptível.</p>
-                    </div>
+                <div class="glass-card w-[85vw] max-w-sm md:max-w-none md:w-auto snap-card shrink-0 p-8 md:p-10 rounded-[2rem] flex flex-col justify-center text-center md:text-left reveal delay-100 group border-brand-gold shadow-[0_0_20px_rgba(212,175,55,0.15)] bg-white relative overflow-hidden">
+                    <span class="text-4xl md:text-5xl font-black text-brand-gold block mb-4 mx-auto md:mx-0 animate-pulse">✦</span>
+                    <h4 class="text-2xl font-black text-brand-dark mb-4 leading-tight">Poder do Lifestyle</h4>
+                    <p class="text-[15px] font-medium text-brand-neutral">Apresentação da marca dentro da minha rotina. O espectador absorve o anúncio de maneira lúdica e imperceptível.</p>
                 </div>
 
-                <div class="glass-card w-[85vw] md:w-auto snap-card shrink-0 p-8 md:p-10 rounded-[2rem] flex flex-col justify-between reveal delay-200 group bg-brand-cream">
-                    <div>
-                        <span class="text-4xl md:text-5xl font-black text-brand-gold/30 group-hover:text-brand-gold transition-colors block mb-4">02.</span>
-                        <h4 class="text-2xl font-black text-brand-dark mb-4 leading-tight">Alto Padrão</h4>
-                        <p class="text-[15px] font-medium text-brand-neutral/80">Estética Premium, gravação HD, roteiros estudados e equipamentos profissionais para os seus Reels e TikToks.</p>
-                    </div>
+                <div class="glass-card w-[85vw] max-w-sm md:max-w-none md:w-auto snap-card shrink-0 p-8 md:p-10 rounded-[2rem] flex flex-col justify-center text-center md:text-left reveal delay-200 group bg-brand-cream border shadow-sm">
+                    <span class="text-4xl md:text-5xl font-black text-brand-gold/30 group-hover:text-brand-gold transition-colors block mb-4 mx-auto md:mx-0">02.</span>
+                    <h4 class="text-2xl font-black text-brand-dark mb-4 leading-tight">Alto Padrão</h4>
+                    <p class="text-[15px] font-medium text-brand-neutral/80">Estética Premium, gravação HD, roteiros estudados e equipamentos profissionais para os seus Reels e TikToks.</p>
                 </div>
 
-                <div class="glass-card w-[85vw] md:w-auto snap-card shrink-0 p-8 md:p-10 rounded-[2rem] md:col-span-3 group bg-gradient-to-br from-brand-dark to-[#222] text-white relative overflow-hidden reveal delay-100">
+                <div class="glass-card w-[85vw] max-w-sm md:max-w-none md:w-auto snap-card shrink-0 p-8 md:p-12 rounded-[2rem] md:col-span-3 group bg-gradient-to-br from-brand-dark to-[#222] text-white relative overflow-hidden reveal delay-100 flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-6 md:gap-12">
                     <div class="absolute right-0 bottom-0 pointer-events-none opacity-20">
-                        <svg class="w-48 h-48 text-brand-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L1 21h22L12 2zm0 3.83L19.17 19H4.83L12 5.83z"/></svg>
+                        <svg class="w-64 h-64 text-brand-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L1 21h22L12 2zm0 3.83L19.17 19H4.83L12 5.83z"/></svg>
                     </div>
-                    <div class="relative z-10 font-medium">
-                        <span class="text-brand-gold text-[10px] tracking-widest font-bold uppercase block mb-2 border border-brand-gold/30 w-max px-3 py-1 rounded-full">Destaque Exclusivo</span>
-                        <h4 class="text-3xl font-black text-white mb-4 leading-tight">Multicanal Dinâmico</h4>
-                        <p class="text-lg font-light text-white/80 max-w-2xl">
-                            A sua marca ganha força em dobro! Crio conteúdos pensados de maneira específica para os algoritmos hiperativos tanto do Instagram quanto do TikTok, garantindo máxima relevância e retenção.
+                    <div class="md:w-1/3 flex flex-col items-center md:items-start justify-center h-full z-10">
+                        <span class="text-brand-gold text-[10px] tracking-widest font-bold uppercase block mb-4 border border-brand-gold/30 px-4 py-1.5 rounded-full">Destaque Exclusivo</span>
+                        <h4 class="text-3xl md:text-4xl font-black text-white leading-tight">Multicanal Dinâmico</h4>
+                    </div>
+                    <div class="md:w-2/3 z-10 flex items-center">
+                        <p class="text-lg md:text-xl font-light text-white/90 leading-relaxed">
+                            A sua marca ganha visibilidade <strong class="text-brand-gold font-bold">em dobro</strong>! Crio conteúdos pensados especificamente para os algoritmos hiperativos tanto do Instagram quanto do TikTok simultaneamente, garantindo retenção massiva.
                         </p>
                     </div>
                 </div>
 
             </div>
             
-            <p class="text-center text-[10px] uppercase font-bold text-brand-gold/60 mt-2 block md:hidden animate-pulse">
-                Deslize para o lado ➔
-            </p>
+            <div class="flex justify-center w-full mt-4 md:hidden">
+                <p class="text-[10px] uppercase font-bold text-brand-gold/60 animate-pulse bg-brand-gold/5 px-4 py-1 rounded-full w-max">
+                    ← Deslize para o lado →
+                </p>
+            </div>
         </div>
     </section>
 
-    <!-- Footer Master CTA -->
-    <section class="pt-32 pb-40 md:pb-32 px-6 text-center relative overflow-hidden bg-brand-cream border-t border-black/5">
-        <div class="max-w-4xl mx-auto relative z-10">
-            <h2 class="reveal clamp-title font-black uppercase mb-2 tracking-tighter text-brand-dark leading-none">
+    <!-- FOOTER CTA Centrado Perfeitamente -->
+    <section class="pt-32 pb-44 px-6 text-center relative overflow-hidden bg-brand-cream border-t border-black/5 flex flex-col items-center justify-center">
+        <div class="max-w-4xl w-full mx-auto relative z-10 flex flex-col items-center">
+            
+            <h2 class="reveal clamp-title font-black uppercase mb-1 tracking-tighter text-brand-dark leading-none text-center">
                 Vamos <br>
                 <span class="text-gradient-gold">trabalhar</span>
             </h2>
-            <h2 class="reveal delay-100 text-4xl md:text-6xl font-black uppercase mb-10 tracking-tight text-brand-dark italic">Juntos?</h2>
+            <h2 class="reveal delay-100 text-4xl md:text-6xl font-black uppercase mb-10 tracking-tight text-brand-dark italic text-center">Juntos?</h2>
             
-            <div class="reveal delay-300 flex justify-center gap-6 md:gap-8 mt-12 hidden md:flex">
-                <a href="mailto:eujessicacontato@gmail.com" class="relative group w-full sm:w-auto btn-active">
+            <p class="reveal delay-200 text-xs md:text-sm font-bold text-brand-neutral mb-16 uppercase tracking-[0.2em] md:tracking-[0.3em] bg-white border border-black/5 inline-block px-6 py-4 rounded-full shadow-sm text-center">
+                Conteúdos reais e <b class="text-brand-gold">conectados</b>.
+            </p>
+
+            <div class="reveal delay-300 hidden md:flex flex-col items-center justify-center gap-6 md:gap-8 mt-4 w-full">
+                <a href="mailto:eujessicacontato@gmail.com" class="relative group btn-active inline-block">
                     <div class="absolute -inset-1 bg-gradient-to-r from-brand-gold to-yellow-600 rounded-full blur opacity-60 group-hover:opacity-100 transition duration-500 animate-pulse-glow"></div>
-                    <div class="relative w-full sm:w-auto px-12 py-5 rounded-full bg-brand-dark text-white font-black uppercase tracking-[0.2em] shadow-xl text-lg hover:scale-[1.02] transition-transform">
+                    <div class="relative px-16 py-6 rounded-full bg-brand-dark text-white font-black uppercase tracking-[0.2em] shadow-xl text-lg hover:scale-[1.02] transition-transform text-center flex justify-center items-center">
                         Solicitar Orçamento
                     </div>
                 </a>
+                
+                <div class="flex justify-center gap-6 mt-8">
+                    <a href="https://www.instagram.com/eujessicavitoria/" target="_blank" class="w-16 h-16 rounded-full bg-white border border-black/5 shadow-md flex items-center justify-center hover:-translate-y-2 hover:border-brand-gold hover:text-brand-gold transition-all duration-300 text-brand-dark btn-active">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </a>
+                    <a href="https://www.tiktok.com/@jessvitr" target="_blank" class="w-16 h-16 rounded-full bg-white border border-black/5 shadow-md flex items-center justify-center hover:-translate-y-2 hover:border-brand-gold hover:text-brand-gold transition-all duration-300 text-brand-dark btn-active">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+                    </a>
+                </div>
             </div>
             
-            <div class="hidden md:flex justify-center gap-5 mt-10">
-                <a href="https://www.instagram.com/eujessicavitoria/" target="_blank" class="w-16 h-16 rounded-full bg-white border border-black/5 shadow-md flex items-center justify-center hover:-translate-y-2 hover:border-brand-gold hover:text-brand-gold transition-all duration-300 text-brand-dark btn-active">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                </a>
-                <a href="https://www.tiktok.com/@jessvitr" target="_blank" class="w-16 h-16 rounded-full bg-white border border-black/5 shadow-md flex items-center justify-center hover:-translate-y-2 hover:border-brand-gold hover:text-brand-gold transition-all duration-300 text-brand-dark btn-active">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
-                </a>
-            </div>
-            
-            <div class="mt-16 text-[10px] font-black uppercase tracking-[0.5em] text-brand-dark/20 mix-blend-multiply pb-10 md:pb-0">
+            <div class="mt-20 text-[10px] font-black uppercase tracking-[0.5em] text-brand-dark/20 mix-blend-multiply pb-10 md:pb-0 safe-pb text-center w-full flex justify-center">
                 © 2026 Agência Dógui Mídia
             </div>
         </div>
     </section>
 
-    <div class="md:hidden fixed bottom-0 left-0 w-full z-50 p-4 pb-6 bg-white/70 backdrop-blur-2xl border-t border-black/10 shadow-[0_-10px_30px_rgba(0,0,0,0.05)] transform translate-y-full transition-transform duration-700 ease-out" id="mobile-bottom-bar">
+    <!-- MOBILE STICKY BOTTOM BAR -->
+    <div class="md:hidden fixed bottom-0 left-0 w-full z-50 p-4 safe-pb bg-white/80 backdrop-blur-3xl border-t border-black/10 shadow-[0_-10px_30px_rgba(0,0,0,0.05)] transform translate-y-[120%] transition-transform duration-700 ease-out" id="mobile-bottom-bar">
         <a href="mailto:eujessicacontato@gmail.com" class="w-full flex justify-center items-center py-4 bg-brand-dark text-white rounded-full font-black uppercase tracking-widest text-[13px] shadow-[0_0_20px_rgba(197,157,42,0.3)] btn-active overflow-hidden relative group">
             <div class="absolute inset-0 bg-gradient-to-r from-brand-gold/0 via-brand-gold/30 to-brand-gold/0 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
             Solicitar Orçamento
