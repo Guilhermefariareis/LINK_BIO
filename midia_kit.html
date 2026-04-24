@@ -19,9 +19,10 @@
                 extend: {
                     colors: {
                         brand: {
-                            red: '#E60023', // O vermelho vibrante das referências
+                            gold: '#D4AF37', // Dourado luxo
                             dark: '#111111',
-                            light: '#F8F8F8'
+                            light: '#F8F8F8',
+                            black: '#0a0a0a'
                         }
                     },
                     fontFamily: { 
@@ -38,29 +39,21 @@
             color: theme('colors.brand.dark');
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
-            /* Textura de ruído sutil para sensação premium de revista */
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
         }
 
-        /* --------------------------
-           FORMAS ORGÂNICAS & PROFUNDIDADE
-        -------------------------- */
-        .shape-red {
-            background-color: theme('colors.brand.red');
+        .shape-gold {
+            background-color: theme('colors.brand.gold');
             border-radius: 100vw;
             position: absolute;
             z-index: 0;
-            box-shadow: 0 50px 100px -20px rgba(230, 0, 35, 0.2);
+            box-shadow: 0 50px 100px -20px rgba(212, 175, 55, 0.2);
         }
         
-        /* Gradiente sutil para dar volume (refinamento) */
         .shape-gradient {
-            background: linear-gradient(135deg, #E60023 0%, #D0001D 100%);
+            background: linear-gradient(135deg, #D4AF37 0%, #B8860B 100%);
         }
 
-        /* --------------------------
-           ANIMAÇÕES REFINADAS
-        -------------------------- */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -81,7 +74,6 @@
             transform: scale(1);
         }
 
-        /* Mobiles & Mockups */
         .iphone-container {
             width: 260px;
             height: 540px;
@@ -105,7 +97,6 @@
             z-index: 30;
         }
 
-        /* Floating buttons 'Clique Aqui' */
         .btn-floating {
             background: white;
             border: 1px solid rgba(0,0,0,0.1);
@@ -121,7 +112,7 @@
             transition: all 0.3s;
         }
         .btn-floating:hover {
-            background: theme('colors.brand.red');
+            background: theme('colors.brand.gold');
             color: white;
             transform: scale(1.1);
         }
@@ -131,7 +122,6 @@
             50% { transform: translateY(-10px); }
         }
 
-        /* Sparkles Custom */
         .sparkle {
             position: absolute;
             color: #111;
@@ -142,7 +132,6 @@
             100% { transform: scale(1.1) rotate(10deg); opacity: 1; }
         }
 
-        /* Progress Bars */
         .bar-bg {
             background: #EBEBEB;
             border-radius: 100px;
@@ -150,20 +139,18 @@
             overflow: hidden;
         }
         .bar-fill {
-            background: theme('colors.brand.red');
+            background: theme('colors.brand.gold');
             height: 100%;
             width: 0%;
             transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.5s;
             border-radius: 100px;
         }
 
-        /* Typography spacing */
         .text-outline {
-            -webkit-text-stroke: 1.5px theme('colors.brand.red');
+            -webkit-text-stroke: 1.5px theme('colors.brand.gold');
             color: transparent;
         }
 
-        /* CAPSULE STYLE (ANA MOSCONI) */
         .bg-grain {
             background-color: #f4f4f4;
             position: relative;
@@ -187,6 +174,7 @@
             mask-image: linear-gradient(to bottom, black 70%, transparent 95%);
             -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 95%);
         }
+    </style>
 
     </style>
 </head>
@@ -198,25 +186,25 @@
         <path id="sparkle-path" d="M12 0C12 6.627 17.373 12 24 12C17.373 12 12 17.373 12 24C12 17.373 6.627 12 0 12C6.627 12 12 6.627 12 0Z"/>
     </svg>
 
-    <!-- 1. HERO - ESTILO CAPSULE (REF. ANA MOSCONI) -->
+    <!-- 1. HERO - ESTILO CAPSULE BUSINESS (REF. ANA MOSCONI) -->
     <section id="hero" class="min-h-screen w-full relative flex items-center justify-center overflow-hidden py-10 bg-grain">
         
-        <!-- Pílula Superior Direita (Vermelho Profundo) -->
-        <div class="pill-shape w-[200px] md:w-[350px] h-[400px] md:h-[600px] bg-brand-red -top-20 -right-20 md:-right-32 blur-sm opacity-90 reveal" style="transform: rotate(-10deg);"></div>
+        <!-- Pílula Superior Direita (Dourado Luxo) -->
+        <div class="pill-shape w-[200px] md:w-[350px] h-[400px] md:h-[600px] bg-brand-gold -top-20 -right-20 md:-right-32 blur-sm opacity-90 reveal" style="transform: rotate(-10deg);"></div>
         
-        <!-- Pílula Inferior Esquerda (Cereja) -->
-        <div class="pill-shape w-[150px] md:w-[280px] h-[300px] md:h-[500px] bg-brand-red bottom-[-100px] left-[-50px] md:left-[5%] reveal-scale delay-300" style="transform: rotate(5deg);"></div>
+        <!-- Pílula Inferior Esquerda (Preto Rich) -->
+        <div class="pill-shape w-[150px] md:w-[280px] h-[300px] md:h-[500px] bg-brand-dark bottom-[-100px] left-[-50px] md:left-[5%] reveal-scale delay-300" style="transform: rotate(5deg);"></div>
         
-        <!-- Pílula Pequena (Clara) -->
-        <div class="pill-shape w-[100px] h-[200px] bg-white opacity-40 top-[20%] left-[10%] reveal delay-500"></div>
+        <!-- Pílula Pequena (Dourada Clara) -->
+        <div class="pill-shape w-[100px] h-[200px] bg-brand-gold opacity-20 top-[20%] left-[10%] reveal delay-500"></div>
 
         <div class="w-full max-w-[1500px] mx-auto px-6 grid grid-cols-1 md:grid-cols-12 items-center relative z-10">
             
             <!-- LATERAL ESQUERDA: NOME -->
             <div class="md:col-span-4 flex flex-col items-center md:items-start order-2 md:order-1 mt-10 md:mt-0">
                 <div class="flex flex-col reveal">
-                    <span class="text-4xl md:text-5xl font-light text-brand-red tracking-tight leading-none">JÉSSICA</span>
-                    <span class="text-6xl md:text-8xl font-black text-brand-red tracking-tighter leading-[0.85] gs-split-text" data-delay="300">VITÓRIA</span>
+                    <span class="text-4xl md:text-5xl font-light text-brand-gold tracking-tight leading-none">JÉSSICA</span>
+                    <span class="text-6xl md:text-8xl font-black text-brand-gold tracking-tighter leading-[0.85] gs-split-text" data-delay="300">VITÓRIA</span>
                 </div>
                 <svg class="w-10 h-10 sparkle text-brand-dark mt-6 opacity-30 reveal delay-700"><use href="#sparkle-path"/></svg>
             </div>
@@ -224,16 +212,15 @@
             <!-- CENTRO: FOTO INTEGRADA -->
             <div class="md:col-span-4 flex justify-center order-1 md:order-2">
                 <div class="relative w-full max-w-[500px] aspect-[3/4.5] reveal-scale">
-                    <!-- Pill de fundo da foto -->
-                    <div class="absolute inset-x-[-10%] bottom-[-15%] top-[20%] bg-brand-red rounded-full opacity-100 z-0"></div>
+                    <!-- Pill de fundo da foto (Dourado) -->
+                    <div class="absolute inset-x-[-10%] bottom-[-15%] top-[20%] bg-brand-gold rounded-full opacity-100 z-0"></div>
                     
                     <!-- Foto Jéssica -->
                     <div class="relative z-10 w-full h-full photo-mask overflow-hidden flex items-end">
-                        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=800&auto=format&fit=crop" 
+                        <img src="modelo_capa.png" 
                              alt="Jéssica Vitória" 
                              id="hero-photo"
-                             class="w-full h-[120%] object-cover object-top scale-105"
-                             onerror="this.src='https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=800&auto=format&fit=crop';">
+                             class="w-full h-[110%] object-cover object-top scale-100 transition-transform duration-700 hover:scale-105">
                     </div>
                 </div>
             </div>
@@ -243,18 +230,18 @@
                 <div class="flex flex-col items-end reveal delay-500">
                     <div class="flex items-center gap-4">
                         <span class="text-sm md:text-xl font-bold tracking-[0.5em] text-brand-dark uppercase">Midiakit</span>
-                        <div class="w-12 h-[2px] bg-brand-red"></div>
+                        <div class="w-12 h-[2px] bg-brand-gold"></div>
                     </div>
-                    <span class="text-5xl md:text-7xl font-black text-brand-dark leading-none">20<span class="text-brand-red">26</span></span>
+                    <span class="text-5xl md:text-7xl font-black text-brand-dark leading-none">20<span class="text-brand-gold">26</span></span>
                 </div>
-                <svg class="w-8 h-8 sparkle text-brand-red mt-6 reveal delay-900"><use href="#sparkle-path"/></svg>
+                <svg class="w-8 h-8 sparkle text-brand-gold mt-6 reveal delay-900"><use href="#sparkle-path"/></svg>
             </div>
 
         </div>
 
         <!-- Scroll Indicator -->
         <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center reveal delay-1000">
-            <div class="w-[2px] h-10 bg-gradient-to-b from-brand-red to-transparent"></div>
+            <div class="w-[2px] h-10 bg-gradient-to-b from-brand-gold to-transparent"></div>
         </div>
 
     </section>
@@ -264,16 +251,16 @@
     <section id="sobre" class="py-32 w-full bg-brand-light relative overflow-hidden">
         <div class="max-w-[1200px] mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
             <div class="reveal">
-                <span class="text-brand-red font-bold tracking-widest uppercase text-sm">Página 01 — Sobre Mim</span>
+                <span class="text-brand-gold font-bold tracking-widest uppercase text-sm">Página 01 — Sobre Mim</span>
                 <h2 class="text-5xl md:text-7xl font-black uppercase mt-4 leading-none tracking-tighter">
-                    Olá, eu sou a <br><span class="text-brand-red">Jéssica</span>
+                    Olá, eu sou a <br><span class="text-brand-gold">Jéssica</span>
                 </h2>
                 <div class="mt-8 space-y-6 text-xl text-brand-dark/80 font-medium leading-relaxed">
                     <p>
-                        Tenho 23 anos, sou <span class="text-brand-dark font-bold underline decoration-brand-red">publicitária formada pela Universidade de Ribeirão Preto (UNAERP)</span> e atuo como criadora de conteúdo, influenciadora digital e profissional de relações públicas.
+                        Tenho 23 anos, sou <span class="text-brand-dark font-bold underline decoration-brand-gold">publicitária formada pela Universidade de Ribeirão Preto (UNAERP)</span> e atuo como criadora de conteúdo, influenciadora digital e profissional de relações públicas.
                     </p>
                     <p>
-                        Meu conteúdo é voltado para <span class="bg-brand-red text-white px-2">lifestyle, experiências, rotina e entretenimento</span>, com foco em vídeos dinâmicos no Instagram e TikTok, sempre conectando marcas ao público de forma leve, natural e autêntica.
+                        Meu conteúdo é voltado para <span class="bg-brand-gold text-white px-2">lifestyle, experiências, rotina e entretenimento</span>, com foco em vídeos dinâmicos no Instagram e TikTok, sempre conectando marcas ao público de forma leve, natural e autêntica.
                     </p>
                     <p>
                         Busco estar presente nos principais eventos e experiências, criando conteúdos que vão além da divulgação, gerando identificação real com a audiência.
@@ -286,7 +273,7 @@
                 <div class="bg-white p-4 rounded-[40px] shadow-2xl rotate-3">
                     <img src="midia_kit_assets/page_02.jpg" alt="Bio Jéssica" class="rounded-[30px] w-full" onerror="this.src='https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=600&auto=format&fit=crop';">
                 </div>
-                <div class="absolute -bottom-5 -left-5 bg-brand-red text-white p-8 rounded-2xl shadow-xl -rotate-6">
+                <div class="absolute -bottom-5 -left-5 bg-brand-gold text-white p-8 rounded-2xl shadow-xl -rotate-6">
                     <p class="text-4xl font-black leading-none">23</p>
                     <p class="text-[10px] uppercase tracking-tighter font-bold opacity-80">Anos — Formada em Publi</p>
                 </div>
@@ -299,30 +286,30 @@
         <div class="max-w-[1400px] mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal">
                 <div>
-                    <span class="text-brand-red font-black uppercase text-4xl opacity-20">02</span>
-                    <h2 class="text-5xl md:text-6xl font-black uppercase leading-tight">Nichos <br><span class="text-brand-red italic">Abordados</span></h2>
+                    <span class="text-brand-gold font-black uppercase text-4xl opacity-20">02</span>
+                    <h2 class="text-5xl md:text-6xl font-black uppercase leading-tight">Nichos <br><span class="text-brand-gold italic">Abordados</span></h2>
                 </div>
                 <p class="max-w-md text-white/50 mb-4 font-medium uppercase text-xs tracking-[0.2em]">Vamos falar de quê?</p>
             </div>
 
             <div class="grid grid-cols-2 lg:grid-cols-5 gap-4">
-                <div class="bg-white/5 border border-white/10 p-8 rounded-3xl hover:bg-brand-red transition-all duration-500 group reveal-scale">
+                <div class="bg-white/5 border border-white/10 p-8 rounded-3xl hover:bg-brand-gold transition-all duration-500 group reveal-scale">
                     <p class="text-[10px] uppercase font-bold opacity-40 group-hover:text-white">Conteúdo</p>
                     <h3 class="text-lg font-bold mt-4 leading-tight">Rotina Real | Lifestyle</h3>
                 </div>
-                <div class="bg-white/5 border border-white/10 p-8 rounded-3xl hover:bg-brand-red transition-all duration-500 group reveal-scale delay-75">
+                <div class="bg-white/5 border border-white/10 p-8 rounded-3xl hover:bg-brand-gold transition-all duration-500 group reveal-scale delay-75">
                     <p class="text-[10px] uppercase font-bold opacity-40 group-hover:text-white">Análise</p>
                     <h3 class="text-lg font-bold mt-4 leading-tight">Reviews</h3>
                 </div>
-                <div class="bg-white/5 border border-white/10 p-8 rounded-3xl hover:bg-brand-red transition-all duration-500 group reveal-scale delay-150">
+                <div class="bg-white/5 border border-white/10 p-8 rounded-3xl hover:bg-brand-gold transition-all duration-500 group reveal-scale delay-150">
                     <p class="text-[10px] uppercase font-bold opacity-40 group-hover:text-white">Exploração</p>
                     <h3 class="text-lg font-bold mt-4 leading-tight">Turismo</h3>
                 </div>
-                <div class="bg-white/5 border border-white/10 p-8 rounded-3xl hover:bg-brand-red transition-all duration-500 group reveal-scale delay-200">
+                <div class="bg-white/5 border border-white/10 p-8 rounded-3xl hover:bg-brand-gold transition-all duration-500 group reveal-scale delay-200">
                     <p class="text-[10px] uppercase font-bold opacity-40 group-hover:text-white">Vibe</p>
                     <h3 class="text-lg font-bold mt-4 leading-tight">Eventos | Entretenimento</h3>
                 </div>
-                <div class="bg-white/5 border border-white/10 p-8 rounded-3xl hover:bg-brand-red transition-all duration-500 group reveal-scale delay-300">
+                <div class="bg-white/5 border border-white/10 p-8 rounded-3xl hover:bg-brand-gold transition-all duration-500 group reveal-scale delay-300">
                     <p class="text-[10px] uppercase font-bold opacity-40 group-hover:text-white">Estética</p>
                     <h3 class="text-lg font-bold mt-4 leading-tight">Beleza</h3>
                 </div>
@@ -338,7 +325,7 @@
 
         <div class="max-w-[1200px] mx-auto px-6 relative z-10">
             <div class="text-center mb-24 reveal">
-                <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter">Público & <span class="text-brand-red">Alcance</span></h2>
+                <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter">Público & <span class="text-brand-gold">Alcance</span></h2>
                 <p class="mt-4 text-brand-dark/50 uppercase tracking-[0.3em] font-bold">Dados atualizados em 07/04/2026</p>
             </div>
 
@@ -346,7 +333,7 @@
                 <!-- Gênero -->
                 <div class="reveal">
                     <h3 class="text-2xl font-black uppercase mb-12 flex items-center">
-                        <span class="w-8 h-[2px] bg-brand-red mr-4"></span> Gênero
+                        <span class="w-8 h-[2px] bg-brand-gold mr-4"></span> Gênero
                     </h3>
                     <div class="space-y-12">
                         <div>
@@ -355,7 +342,7 @@
                                 <span class="text-brand-red font-black text-2xl">78%</span>
                             </div>
                             <div class="h-4 bg-brand-light rounded-full overflow-hidden">
-                                <div class="bar-fill h-full bg-brand-red w-0 transition-all duration-1000 ease-out" data-width="78%"></div>
+                                <div class="bar-fill h-full bg-brand-gold w-0 transition-all duration-1000 ease-out" data-width="78%"></div>
                             </div>
                         </div>
                         <div>
@@ -373,7 +360,7 @@
                 <!-- Idade -->
                 <div class="reveal delay-100">
                     <h3 class="text-2xl font-black uppercase mb-12 flex items-center">
-                        <span class="w-8 h-[2px] bg-brand-red mr-4"></span> Faixa Etária
+                        <span class="w-8 h-[2px] bg-brand-gold mr-4"></span> Faixa Etária
                     </h3>
                     <div class="space-y-6">
                         <div class="flex items-center gap-4">
@@ -404,42 +391,42 @@
     <section class="py-32 bg-brand-light relative overflow-hidden">
         <div class="max-w-[1200px] mx-auto px-6">
             <h2 class="text-4xl md:text-6xl font-black uppercase text-brand-dark mb-16 reveal">
-                Diferenciais <br><span class="text-brand-red">Estratégicos</span>
+                Diferenciais <br><span class="text-brand-gold">Estratégicos</span>
             </h2>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 reveal">
                 <!-- 11 Pontos do PDF -->
-                <div class="p-6 bg-white rounded-2xl shadow-sm border-l-4 border-brand-red hover:shadow-md transition-shadow">
+                <div class="p-6 bg-white rounded-2xl shadow-sm border-l-4 border-brand-gold hover:shadow-md transition-shadow">
                     <p class="text-sm font-bold text-brand-dark">01. Publicidade como base (Formação UNAERP)</p>
                 </div>
-                <div class="p-6 bg-white rounded-2xl shadow-sm border-l-4 border-brand-red hover:shadow-md transition-shadow">
+                <div class="p-6 bg-white rounded-2xl shadow-sm border-l-4 border-brand-gold hover:shadow-md transition-shadow">
                     <p class="text-sm font-bold text-brand-dark">02. Credibilidade e confiança com a audiência</p>
                 </div>
-                <div class="p-6 bg-white rounded-2xl shadow-sm border-l-4 border-brand-red hover:shadow-md transition-shadow">
+                <div class="p-6 bg-white rounded-2xl shadow-sm border-l-4 border-brand-gold hover:shadow-md transition-shadow">
                     <p class="text-sm font-bold text-brand-dark">03. Criação de conteúdo em vídeo (IG & TikTok)</p>
                 </div>
-                <div class="p-6 bg-white rounded-2xl shadow-sm border-l-4 border-brand-red hover:shadow-md transition-shadow">
+                <div class="p-6 bg-white rounded-2xl shadow-sm border-l-4 border-brand-gold hover:shadow-md transition-shadow">
                     <p class="text-sm font-bold text-brand-dark">04. Produção de conteúdo de alta qualidade</p>
                 </div>
-                <div class="p-6 bg-white rounded-2xl shadow-sm border-l-4 border-brand-red hover:shadow-md transition-shadow">
+                <div class="p-6 bg-white rounded-2xl shadow-sm border-l-4 border-brand-gold hover:shadow-md transition-shadow">
                     <p class="text-sm font-bold text-brand-dark">05. Rotina real e lifestyle autêntico</p>
                 </div>
-                <div class="p-6 bg-white rounded-2xl shadow-sm border-l-4 border-brand-red hover:shadow-md transition-shadow">
+                <div class="p-6 bg-white rounded-2xl shadow-sm border-l-4 border-brand-gold hover:shadow-md transition-shadow">
                     <p class="text-sm font-bold text-brand-dark">06. Experiências gastronômicas e turismo</p>
                 </div>
-                <div class="p-6 bg-white rounded-2xl shadow-sm border-l-4 border-brand-red hover:shadow-md transition-shadow">
+                <div class="p-6 bg-white rounded-2xl shadow-sm border-l-4 border-brand-gold hover:shadow-md transition-shadow">
                     <p class="text-sm font-bold text-brand-dark">07. Cobertura de eventos nacionais</p>
                 </div>
-                <div class="p-6 bg-white rounded-2xl shadow-sm border-l-4 border-brand-red hover:shadow-md transition-shadow">
+                <div class="p-6 bg-white rounded-2xl shadow-sm border-l-4 border-brand-gold hover:shadow-md transition-shadow">
                     <p class="text-sm font-bold text-brand-dark">08. Reviews técnicos de produtos de beleza</p>
                 </div>
-                <div class="p-6 bg-white rounded-2xl shadow-sm border-l-4 border-brand-red hover:shadow-md transition-shadow">
+                <div class="p-6 bg-white rounded-2xl shadow-sm border-l-4 border-brand-gold hover:shadow-md transition-shadow">
                     <p class="text-sm font-bold text-brand-dark">09. Visão estratégica de Relações Públicas (RP)</p>
                 </div>
-                <div class="p-6 bg-white rounded-2xl shadow-sm border-l-4 border-brand-red hover:shadow-md transition-shadow">
+                <div class="p-6 bg-white rounded-2xl shadow-sm border-l-4 border-brand-gold hover:shadow-md transition-shadow">
                     <p class="text-sm font-bold text-brand-dark">10. Presença constante nos principais nichos</p>
                 </div>
-                <div class="p-6 bg-white rounded-2xl shadow-sm border-l-4 border-brand-red hover:shadow-md transition-shadow">
+                <div class="p-6 bg-white rounded-2xl shadow-sm border-l-4 border-brand-gold hover:shadow-md transition-shadow">
                     <p class="text-sm font-bold text-brand-dark">11. Foco em entretenimento e engajamento real</p>
                 </div>
             </div>
@@ -457,7 +444,7 @@
                     <img src="midia_kit_assets/page_02.jpg" class="w-full h-full object-cover">
                 </div>
                 <!-- Base Vermelha (Igual imagem 4) -->
-                <div class="w-72 h-[180px] bg-brand-red -mt-20 rounded-t-[50px] flex flex-col items-center justify-center text-white p-6 relative z-10 shadow-2xl">
+                <div class="w-72 h-[180px] bg-brand-gold -mt-20 rounded-t-[50px] flex flex-col items-center justify-center text-white p-6 relative z-10 shadow-2xl">
                     <p class="text-5xl font-black">2.5M</p>
                     <p class="text-[10px] uppercase font-bold tracking-widest opacity-60">Impressões</p>
                 </div>
@@ -480,8 +467,8 @@
 
 
     <section class="py-32 relative overflow-hidden bg-white">
-        <!-- Faixa vermelha diagonal de fundo -->
-        <div class="absolute top-1/2 left-0 w-full h-[400px] bg-brand-red -skew-y-3 -translate-y-1/2 opacity-90 z-0"></div>
+        <!-- Faixa dourada diagonal de fundo -->
+        <div class="absolute top-1/2 left-0 w-full h-[400px] bg-brand-gold -skew-y-3 -translate-y-1/2 opacity-90 z-0"></div>
 
         <div class="max-w-[1300px] mx-auto px-6 relative z-10">
             <h2 class="text-4xl md:text-7xl font-black uppercase text-brand-dark mb-20 text-center">
@@ -502,7 +489,7 @@
                 <div class="w-[300px] bg-white p-4 rounded-[40px] shadow-2xl rotate-[2deg] reveal delay-100 transition-transform hover:rotate-0">
                     <div class="relative">
                         <img src="midia_kit_assets/page_06.jpg" class="w-full aspect-[4/5] object-cover rounded-[30px] mb-4">
-                        <div class="btn-floating absolute -bottom-4 -right-4 bg-brand-red text-white">Ver Estudo</div>
+                        <div class="btn-floating absolute -bottom-4 -right-4 bg-brand-gold text-white">Ver Estudo</div>
                     </div>
                 </div>
 
@@ -516,7 +503,7 @@
     </section>
 
 
-    <section id="contato" class="py-32 bg-brand-red text-white text-center relative overflow-hidden">
+    <section id="contato" class="py-32 bg-brand-gold text-white text-center relative overflow-hidden">
         <div class="absolute top-0 left-0 w-full h-full opacity-10">
             <svg width="100%" height="100%"><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" stroke-width="1"/></pattern><rect width="100%" height="100%" fill="url(#grid)" /></svg>
         </div>
@@ -627,7 +614,7 @@
             renderer.setSize(ringsBox.clientWidth, ringsBox.clientHeight);
             ringsBox.appendChild(renderer.domElement);
             const scene = new THREE.Scene(), cam = new THREE.OrthographicCamera(-0.5, 0.5, 0.5, -0.5, 0.1, 10); cam.position.z = 1;
-            const uniforms = { uTime: { value: 0 }, uAttenuation: { value: 10 }, uResolution: { value: new THREE.Vector2(ringsBox.clientWidth, ringsBox.clientHeight) }, uColor: { value: new THREE.Color("#E60023") }, uColorTwo: { value: new THREE.Color("#000000") }, uLineThickness: { value: 2 }, uBaseRadius: { value: 0.35 }, uRadiusStep: { value: 0.1 }, uScaleRate: { value: 0.1 }, uRingCount: { value: 6 }, uOpacity: { value: 0.6 }, uNoiseAmount: { value: 0.1 }, uRotation: { value: 0 }, uRingGap: { value: 1.5 }, uFadeIn: { value: 0.7 }, uFadeOut: { value: 0.5 } };
+            const uniforms = { uTime: { value: 0 }, uAttenuation: { value: 10 }, uResolution: { value: new THREE.Vector2(ringsBox.clientWidth, ringsBox.clientHeight) }, uColor: { value: new THREE.Color("#D4AF37") }, uColorTwo: { value: new THREE.Color("#000000") }, uLineThickness: { value: 2 }, uBaseRadius: { value: 0.35 }, uRadiusStep: { value: 0.1 }, uScaleRate: { value: 0.1 }, uRingCount: { value: 6 }, uOpacity: { value: 0.6 }, uNoiseAmount: { value: 0.1 }, uRotation: { value: 0 }, uRingGap: { value: 1.5 }, uFadeIn: { value: 0.7 }, uFadeOut: { value: 0.5 } };
             scene.add(new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.ShaderMaterial({ vertexShader: ringsVertex, fragmentShader: ringsFragment, uniforms, transparent: true })));
             const animate = (t) => { requestAnimationFrame(animate); uniforms.uTime.value = t * 0.001; renderer.render(scene, cam); };
             animate();
