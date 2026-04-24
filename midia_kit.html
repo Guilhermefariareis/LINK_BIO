@@ -186,62 +186,54 @@
         <path id="sparkle-path" d="M12 0C12 6.627 17.373 12 24 12C17.373 12 12 17.373 12 24C12 17.373 6.627 12 0 12C6.627 12 12 6.627 12 0Z"/>
     </svg>
 
-    <!-- 1. HERO - ESTILO CAPSULE BUSINESS (REF. ANA MOSCONI) -->
-    <section id="hero" class="min-h-screen w-full relative flex items-center justify-center overflow-hidden py-10 bg-grain">
+    <!-- 1. HERO - ESTILO ANA MOSCONI PRO (MAX IMPACT) -->
+    <section id="hero" class="min-h-screen w-full relative flex items-center justify-center overflow-hidden bg-[#F2F2F2]">
         
-        <!-- Pílula Superior Direita (Dourado Luxo) -->
-        <div class="pill-shape w-[200px] md:w-[350px] h-[400px] md:h-[600px] bg-brand-gold -top-20 -right-20 md:-right-32 blur-sm opacity-90 reveal" style="transform: rotate(-10deg);"></div>
-        
-        <!-- Pílula Inferior Esquerda (Preto Rich) -->
-        <div class="pill-shape w-[150px] md:w-[280px] h-[300px] md:h-[500px] bg-brand-dark bottom-[-100px] left-[-50px] md:left-[5%] reveal-scale delay-300" style="transform: rotate(5deg);"></div>
-        
-        <!-- Pílula Pequena (Dourada Clara) -->
-        <div class="pill-shape w-[100px] h-[200px] bg-brand-gold opacity-20 top-[20%] left-[10%] reveal delay-500"></div>
+        <!-- TEXTURA DE FUNDO (GRAIN) -->
+        <div class="absolute inset-0 opacity-[0.04] pointer-events-none z-0" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cfilter id=\"noiseFilter\"%3E%3CfeTurbulence type=\"fractalNoise\" baseFrequency=\"0.65\" numOctaves=\"3\" stitchTiles=\"stitch\"/%3E%3C/filter%3E%3Crect width=\"100%25\" height=\"100%25\" filter=\"url(%23noiseFilter)\"/%3E%3C/svg%3E');"></div>
 
-        <div class="w-full max-w-[1500px] mx-auto px-6 grid grid-cols-1 md:grid-cols-12 items-center relative z-10">
+        <!-- PÍLULAS GIGANTES (GEOMETRIA DA REFERÊNCIA) -->
+        <!-- Pílula Vermelha/Dourada Superior Direita -->
+        <div class="pill-shape w-[250px] md:w-[450px] h-[500px] md:h-[800px] bg-brand-gold -top-20 -right-20 md:-right-40 rotate-[-15deg] reveal transition-transform duration-1000"></div>
+        
+        <!-- Pílula Preta Inferior Esquerda -->
+        <div class="pill-shape w-[200px] md:w-[400px] h-[400px] md:h-[700px] bg-brand-dark bottom-[-150px] left-[-100px] md:left-[-5%] rotate-[10deg] reveal-scale delay-300"></div>
+
+        <!-- NOME GIGANTE DE FUNDO (ESTILO EDITORIAL) -->
+        <div class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none overflow-hidden">
+            <div class="flex flex-col items-center md:items-start w-full max-w-[1400px] px-6">
+                <span class="text-4xl md:text-6xl font-light text-brand-gold tracking-tighter reveal mb-[-20px] md:mb-[-40px] opacity-80">JÉSSICA</span>
+                <span class="text-[100px] md:text-[220px] font-black text-brand-gold tracking-tighter leading-none reveal delay-200">VITÓRIA</span>
+            </div>
+        </div>
+
+        <!-- MODELO INTEGRADA (O CORAÇÃO DO DESIGN) -->
+        <div class="relative z-20 w-full max-w-[800px] h-screen flex items-end justify-center">
+            <!-- Pílula Central de Fundo da Modelo -->
+            <div class="absolute bottom-0 w-[80%] md:w-[60%] aspect-[3/4.5] bg-brand-gold rounded-full reveal-scale delay-500 opacity-100 translate-y-20"></div>
             
-            <!-- LATERAL ESQUERDA: NOME -->
-            <div class="md:col-span-4 flex flex-col items-center md:items-start order-2 md:order-1 mt-10 md:mt-0">
-                <div class="flex flex-col reveal">
-                    <span class="text-4xl md:text-5xl font-light text-brand-gold tracking-tight leading-none">JÉSSICA</span>
-                    <span class="text-6xl md:text-8xl font-black text-brand-gold tracking-tighter leading-[0.85] gs-split-text" data-delay="300">VITÓRIA</span>
-                </div>
-                <svg class="w-10 h-10 sparkle text-brand-dark mt-6 opacity-30 reveal delay-700"><use href="#sparkle-path"/></svg>
+            <!-- Foto da Modelo (Recortada via mix-blend ou fundo transparente) -->
+            <div class="relative z-30 w-full h-[95%] flex items-end justify-center overflow-hidden">
+                <img src="modelo_capa_v2.png" 
+                     alt="Jéssica Vitória" 
+                     class="h-full object-contain object-bottom scale-110 md:scale-125 transition-transform duration-1000 hover:scale-115"
+                     style="filter: drop-shadow(0 20px 50px rgba(0,0,0,0.2));">
             </div>
+        </div>
 
-            <!-- CENTRO: FOTO INTEGRADA -->
-            <div class="md:col-span-4 flex justify-center order-1 md:order-2">
-                <div class="relative w-full max-w-[500px] aspect-[3/4.5] reveal-scale">
-                    <!-- Pill de fundo da foto (Dourado) -->
-                    <div class="absolute inset-x-[-10%] bottom-[-15%] top-[20%] bg-brand-gold rounded-full opacity-100 z-0"></div>
-                    
-                    <!-- Foto Jéssica -->
-                    <div class="relative z-10 w-full h-full photo-mask overflow-hidden flex items-end">
-                        <img src="modelo_capa.png" 
-                             alt="Jéssica Vitória" 
-                             id="hero-photo"
-                             class="w-full h-[110%] object-cover object-top scale-100 transition-transform duration-700 hover:scale-105">
-                    </div>
-                </div>
+        <!-- INFO LADO DIREITO (MIDIAKIT 2026) -->
+        <div class="absolute right-10 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col items-end reveal delay-700">
+            <div class="flex items-center gap-4 mb-2">
+                <span class="text-xs font-bold tracking-[1em] text-brand-dark uppercase">Midiakit</span>
+                <div class="w-10 h-[1px] bg-brand-dark"></div>
             </div>
-
-            <!-- LATERAL DIREITA: INFO -->
-            <div class="md:col-span-4 flex flex-col items-center md:items-end order-3 md:order-3 mt-10 md:mt-0">
-                <div class="flex flex-col items-end reveal delay-500">
-                    <div class="flex items-center gap-4">
-                        <span class="text-sm md:text-xl font-bold tracking-[0.5em] text-brand-dark uppercase">Midiakit</span>
-                        <div class="w-12 h-[2px] bg-brand-gold"></div>
-                    </div>
-                    <span class="text-5xl md:text-7xl font-black text-brand-dark leading-none">20<span class="text-brand-gold">26</span></span>
-                </div>
-                <svg class="w-8 h-8 sparkle text-brand-gold mt-6 reveal delay-900"><use href="#sparkle-path"/></svg>
-            </div>
-
+            <span class="text-6xl font-black text-brand-dark">20<span class="text-brand-gold">26</span></span>
         </div>
 
         <!-- Scroll Indicator -->
-        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center reveal delay-1000">
-            <div class="w-[2px] h-10 bg-gradient-to-b from-brand-gold to-transparent"></div>
+        <div class="absolute bottom-10 left-10 z-40 flex items-center gap-4 reveal delay-1000">
+            <div class="w-12 h-[1px] bg-brand-gold"></div>
+            <span class="text-[10px] font-bold uppercase tracking-widest text-brand-dark/50">Scroll para explorar</span>
         </div>
 
     </section>
