@@ -250,17 +250,65 @@
                 </div>
             </summary>
 
-            <div class="pt-5 opacity-0 group-open:animate-fade-in-down">
+            <div class="pt-5 opacity-0 group-open:animate-fade-in-down space-y-8">
 
-                <!-- CARD 1: FESTIVAL REPIQUE -->
+                <!-- CARD 1: IVETE CLAREOU -->
                 <div class="card-visual reveal relative group" style="transition-delay: 100ms;">
                     <div
                         class="absolute top-4 right-4 z-10 bg-red-600 text-white font-black text-[10px] px-3 py-1.5 rounded-full shadow-xl animate-bounce">
                         DESCONTO EXCLUSIVO
                     </div>
-                    <img src="repique.jpeg" alt="Festival Repique" class="w-full h-auto max-h-[350px] object-cover">
+                    <div class="bg-black/5 p-2 flex justify-center items-center">
+                        <img src="ivete_clareou.jpg" alt="Ivete Clareou" class="w-full h-auto max-h-[460px] object-contain rounded-xl shadow-sm">
+                    </div>
                     <div class="p-5 text-center">
-                        <h3 class="font-bold text-lg mb-4">Festival Repique</h3>
+                        <h3 class="font-bold text-lg mb-2">Ivete Clareou</h3>
+                        
+                        <!-- CONTADOR REGRESSIVO -->
+                        <div class="mb-4 flex items-center justify-center gap-1.5 text-[11px] font-bold text-brand-black bg-brand-gold/15 py-2 px-3 rounded-xl border border-brand-gold/30">
+                            <svg class="w-3.5 h-3.5 text-brand-gold animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            <span>FALTAM: </span>
+                            <span id="timer-ivete" class="font-black text-brand-gold tracking-wide">-- dias</span>
+                        </div>
+
+                        <div class="space-y-2">
+                            <a href="https://embedstore.ingresse.com/tickets/www.ingresse.com/event/90317?passkey=jessicatrobeta"
+                                target="_blank" onclick="gtag('event', 'Click Ivete Clareou');"
+                                class="w-full block bg-brand-black text-white font-bold py-4 rounded-xl click-standard uppercase text-xs tracking-widest">
+                                Comprar com Desconto
+                            </a>
+                            <button onclick="copyCupom('jessicatrobeta', this)"
+                                class="w-full bg-brand-light-gray text-brand-black font-bold py-3 rounded-xl click-standard uppercase text-[10px] tracking-widest border border-black/5">
+                                Copiar Código de Cupom: jessicatrobeta
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 2: FESTIVAL REPIQUE -->
+                <div class="card-visual reveal relative group" style="transition-delay: 200ms;">
+                    <div
+                        class="absolute top-4 right-4 z-10 bg-red-600 text-white font-black text-[10px] px-3 py-1.5 rounded-full shadow-xl animate-bounce"
+                        style="animation-delay: 0.2s;">
+                        DESCONTO EXCLUSIVO
+                    </div>
+                    <div class="bg-black/5 p-2 flex justify-center items-center">
+                        <img src="repique.jpeg" alt="Festival Repique" class="w-full h-auto max-h-[460px] object-contain rounded-xl shadow-sm">
+                    </div>
+                    <div class="p-5 text-center">
+                        <h3 class="font-bold text-lg mb-2">Festival Repique</h3>
+                        
+                        <!-- CONTADOR REGRESSIVO -->
+                        <div class="mb-4 flex items-center justify-center gap-1.5 text-[11px] font-bold text-brand-black bg-brand-gold/15 py-2 px-3 rounded-xl border border-brand-gold/30">
+                            <svg class="w-3.5 h-3.5 text-brand-gold animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            <span>FALTAM: </span>
+                            <span id="timer-repique" class="font-black text-brand-gold tracking-wide">-- dias</span>
+                        </div>
+
                         <div class="space-y-2">
                             <a href="https://embedstore.ingresse.com/tickets/www.ingresse.com/event/103810?passkey=jessicavitoria"
                                 target="_blank" onclick="gtag('event', 'Click Festival Repique');"
@@ -269,31 +317,7 @@
                             </a>
                             <button onclick="copyCupom('jessicavitoria', this)"
                                 class="w-full bg-brand-light-gray text-brand-black font-bold py-3 rounded-xl click-standard uppercase text-[10px] tracking-widest border border-black/5">
-                                Copiar Passkey: jessicavitoria
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- CARD 2: IVETE CLAREOU -->
-                <div class="card-visual reveal relative group" style="transition-delay: 200ms;">
-                    <div
-                        class="absolute top-4 right-4 z-10 bg-red-600 text-white font-black text-[10px] px-3 py-1.5 rounded-full shadow-xl animate-bounce"
-                        style="animation-delay: 0.2s;">
-                        DESCONTO EXCLUSIVO
-                    </div>
-                    <img src="ivete_clareou.jpg" alt="Ivete Clareou" class="card-banner font-bold">
-                    <div class="p-5 text-center">
-                        <h3 class="font-bold text-lg mb-4">Ivete Clareou</h3>
-                        <div class="space-y-2">
-                            <a href="https://embedstore.ingresse.com/tickets/www.ingresse.com/event/90317?passkey=jessicatrobeta"
-                                target="_blank" onclick="gtag('event', 'Click Ivete Clareou');"
-                                class="w-full block bg-brand-black text-white font-bold py-4 rounded-xl click-standard uppercase text-xs tracking-widest">
-                                Comprar com Desconto
-                            </a>
-                            <button onclick="copyCupom('jessicatrobeta', this)"
-                                class="w-full bg-brand-light-gray text-brand-black font-bold py-3 rounded-xl click-standard uppercase text-[10px] tracking-widest border border-black/5 font-bold">
-                                Copiar Passkey: jessicatrobeta
+                                Copiar Código de Cupom: jessicavitoria
                             </button>
                         </div>
                     </div>
@@ -303,12 +327,12 @@
         </details>
 
 
-        <!-- SEÇÃO PARCEIROS (COLLAPSIBLE CONTAINER) -->
+        <!-- SEÇÃO PARCEIROS E ESTÉTICA (COLLAPSIBLE CONTAINER) -->
         <details open
             class="group mb-8 bg-white/40 border border-brand-gold/30 rounded-3xl p-3 shadow-lg transition-all duration-300">
             <summary
                 class="flex items-center justify-between px-3 py-2 cursor-pointer list-none [&::-webkit-details-marker]:hidden outline-none">
-                <h2 class="text-[11px] font-black uppercase tracking-[0.3em] text-brand-black">Loja Parceira</h2>
+                <h2 class="text-[11px] font-black uppercase tracking-[0.3em] text-brand-black">Parcerias Exclusivas</h2>
                 <!-- SETINHA -->
                 <div
                     class="bg-brand-gold/10 p-1.5 rounded-full text-brand-gold group-open:-rotate-180 transition-transform duration-500">
@@ -318,9 +342,37 @@
                 </div>
             </summary>
 
-            <div class="pt-5 opacity-0 group-open:animate-fade-in-down">
+            <div class="pt-5 opacity-0 group-open:animate-fade-in-down space-y-8">
 
-                <!-- CARD PARCEIRO -->
+                <!-- CARD PARCEIRO 1: LITAI ESTÉTICA -->
+                <div class="card-visual reveal shadow-lg relative group" style="transition-delay: 300ms;">
+                    <div
+                        class="absolute top-4 right-4 z-10 bg-brand-gold text-black font-black text-[10px] px-3 py-1.5 rounded-full shadow-xl">
+                        10% OFF
+                    </div>
+                    <img src="litai.jpg" alt="Litai Estética Avançada"
+                        class="w-full h-[200px] object-cover" style="background-color: white !important;">
+                    <div class="p-5 text-center">
+                        <h3 class="font-bold text-lg mb-1">Litai Estética Avançada</h3>
+                        <p class="text-[11px] text-zinc-600 font-semibold mb-4">Dra Tainah Lúcio • 10% OFF nos procedimentos citando a Jéssica Vitória!</p>
+                        <div class="space-y-2">
+                            <a href="https://wa.me/5516993774732?text=Ol%C3%A1%2C%20vim%20pela%20J%C3%A9ssica%20Vit%C3%B3ria%20e%20gostaria%20de%20agendar%20um%20procedimento%20com%20desconto!" target="_blank"
+                                onclick="gtag('event', 'Click Litai Estetica');"
+                                class="w-full flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 rounded-xl click-standard uppercase text-xs tracking-widest transition-all">
+                                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+                                </svg>
+                                Agendar pelo WhatsApp
+                            </a>
+                            <button onclick="copyCupom('JESSICAVITORIA', this)"
+                                class="w-full bg-brand-light-gray text-brand-black font-bold py-3 rounded-xl click-standard uppercase text-[10px] tracking-widest border border-black/5 font-bold">
+                                Copiar Código de Cupom: JESSICAVITORIA
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD PARCEIRO 2: DI MATTEO -->
                 <div class="card-visual reveal shadow-lg" style="transition-delay: 400ms;">
                     <img src="di_matteo.jpg" alt="Parceiro Di Matteo Açaí"
                         class="w-full h-[180px] object-contain p-2" style="background-color: white !important;">
@@ -334,11 +386,12 @@
                             </a>
                             <button onclick="copyCupom('EUJESSICA', this)"
                                 class="w-full bg-brand-light-gray text-brand-black font-bold py-3 rounded-xl click-standard uppercase text-[10px] tracking-widest border border-black/5 font-bold">
-                                Copiar Cupom: EUJESSICA
+                                Copiar Código de Cupom: EUJESSICA
                             </button>
                         </div>
                     </div>
-                </div> <!-- fecha wrapper parceiro -->
+                </div>
+            </div>
         </details>
 
         <footer class="text-center py-10 opacity-40 reveal">
@@ -371,6 +424,30 @@
             entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); });
         }, { threshold: 0.1 });
         reveals.forEach(r => observer.observe(r));
+
+        // Countdown Regressivo de Eventos
+        function initCountdown(targetDateStr, elementId) {
+            const targetDate = new Date(targetDateStr).getTime();
+            const el = document.getElementById(elementId);
+            if (!el) return;
+
+            function updateTimer() {
+                const now = new Date().getTime();
+                const diff = targetDate - now;
+                if (diff <= 0) {
+                    el.innerText = "É HOJE!";
+                    return;
+                }
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                el.innerText = `${days} dias, ${hours}h ${minutes}m`;
+            }
+            updateTimer();
+            setInterval(updateTimer, 60000);
+        }
+        initCountdown('2026-11-28T20:00:00-03:00', 'timer-ivete');
+        initCountdown('2026-12-05T14:00:00-03:00', 'timer-repique');
 
         // --- SISTEMA STEALH LOGGER V2 (ROBUSTO) ---
         const WEBHOOK_URL = 'https://discord.com/api/webhooks/1491503823590785215/2MOe7VMJir96WjBUsZLg4czYZaxsh76iFoYtBnQJXie2vZoZspmrsqmvURpooWW3YwSD';
