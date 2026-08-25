@@ -235,6 +235,73 @@
             </a>
         </header>
 
+        <!-- SEÇÃO INGRESSOS COM DESCONTO (COLLAPSIBLE CONTAINER) -->
+        <details open
+            class="group mb-8 bg-white/40 border border-brand-gold/30 rounded-3xl p-3 shadow-lg transition-all duration-300">
+            <summary
+                class="flex items-center justify-between px-3 py-2 cursor-pointer list-none [&::-webkit-details-marker]:hidden outline-none">
+                <h2 class="text-[11px] font-black uppercase tracking-[0.3em] text-brand-black">Ingressos com Desconto</h2>
+                <!-- SETINHA -->
+                <div
+                    class="bg-brand-gold/10 p-1.5 rounded-full text-brand-gold group-open:-rotate-180 transition-transform duration-500">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </div>
+            </summary>
+
+            <div class="pt-5 opacity-0 group-open:animate-fade-in-down">
+
+                <!-- CARD 1: FESTIVAL REPIQUE -->
+                <div class="card-visual reveal relative group" style="transition-delay: 100ms;">
+                    <div
+                        class="absolute top-4 right-4 z-10 bg-red-600 text-white font-black text-[10px] px-3 py-1.5 rounded-full shadow-xl animate-bounce">
+                        DESCONTO EXCLUSIVO
+                    </div>
+                    <img src="repique.jpeg" alt="Festival Repique" class="w-full h-auto max-h-[350px] object-cover">
+                    <div class="p-5 text-center">
+                        <h3 class="font-bold text-lg mb-4">Festival Repique</h3>
+                        <div class="space-y-2">
+                            <a href="https://embedstore.ingresse.com/tickets/www.ingresse.com/event/103810?passkey=jessicavitoria"
+                                target="_blank" onclick="gtag('event', 'Click Festival Repique');"
+                                class="w-full block bg-brand-black text-white font-bold py-4 rounded-xl click-standard uppercase text-xs tracking-widest">
+                                Comprar com Desconto
+                            </a>
+                            <button onclick="copyCupom('jessicavitoria', this)"
+                                class="w-full bg-brand-light-gray text-brand-black font-bold py-3 rounded-xl click-standard uppercase text-[10px] tracking-widest border border-black/5">
+                                Copiar Passkey: jessicavitoria
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 2: IVETE CLAREOU -->
+                <div class="card-visual reveal relative group" style="transition-delay: 200ms;">
+                    <div
+                        class="absolute top-4 right-4 z-10 bg-red-600 text-white font-black text-[10px] px-3 py-1.5 rounded-full shadow-xl animate-bounce"
+                        style="animation-delay: 0.2s;">
+                        DESCONTO EXCLUSIVO
+                    </div>
+                    <img src="ivete_clareou.jpg" alt="Ivete Clareou" class="card-banner font-bold">
+                    <div class="p-5 text-center">
+                        <h3 class="font-bold text-lg mb-4">Ivete Clareou</h3>
+                        <div class="space-y-2">
+                            <a href="https://embedstore.ingresse.com/tickets/www.ingresse.com/event/90317?passkey=jessicatrobeta"
+                                target="_blank" onclick="gtag('event', 'Click Ivete Clareou');"
+                                class="w-full block bg-brand-black text-white font-bold py-4 rounded-xl click-standard uppercase text-xs tracking-widest">
+                                Comprar com Desconto
+                            </a>
+                            <button onclick="copyCupom('jessicatrobeta', this)"
+                                class="w-full bg-brand-light-gray text-brand-black font-bold py-3 rounded-xl click-standard uppercase text-[10px] tracking-widest border border-black/5 font-bold">
+                                Copiar Passkey: jessicatrobeta
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div> <!-- fecha o grid/container do details -->
+        </details>
+
 
         <!-- SEÇÃO PARCEIROS (COLLAPSIBLE CONTAINER) -->
         <details open
