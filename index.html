@@ -1,12 +1,10 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Link na Bio | @eujessicavitoria</title>
-
-
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-NBKJ64C3H2"></script>
@@ -16,42 +14,51 @@
         gtag('js', new Date());
         gtag('config', 'G-NBKJ64C3H2');
     </script>
+    
     <!-- SEO -->
-    <meta name="description"
-        content="Link oficial na Bio da Jéssica Vitória. Confiras minhas redes sociais e parcerias.">
+    <meta name="description" content="Link oficial na Bio da Jéssica Vitória. Confiras minhas redes sociais, parcerias e ingressos com desconto.">
 
-    <!-- Fonte: Outfit (Padronizada) -->
+    <!-- Fonts: Outfit -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-                        'brand-cream': '#fffcf5',
                         'brand-gold': '#D4AF37',
-                        'brand-black': '#1a1a1a',
-                        'brand-light-gray': '#f3f4f6',
+                        'brand-gold-light': '#F3E5AB',
+                        'brand-gold-dark': '#AA7C11',
+                        'brand-black': '#0a0a0c',
+                        'brand-card': 'rgba(255, 255, 255, 0.04)',
+                        'brand-card-border': 'rgba(212, 175, 55, 0.25)',
                     },
                     fontFamily: {
                         sans: ['Outfit', 'sans-serif'],
                     },
                     boxShadow: {
-                        'card': '0 10px 30px rgba(0, 0, 0, 0.04)',
-                    },
-                    animation: {
-                        'fade-in-down': 'fadeInDown 0.4s ease-out forwards',
+                        'gold-glow': '0 0 35px rgba(212, 175, 55, 0.25)',
+                        'gold-pill': '0 4px 20px rgba(212, 175, 55, 0.3)',
                     },
                     keyframes: {
-                        fadeInDown: {
-                            '0%': { opacity: '0', transform: 'translateY(-10px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        pulseSlow: {
+                            '0%, 100%': { opacity: '0.4', transform: 'scale(1)' },
+                            '50%': { opacity: '0.8', transform: 'scale(1.05)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-6px)' },
                         }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulseSlow 4s ease-in-out infinite',
+                        'float': 'float 3s ease-in-out infinite',
                     }
                 }
             }
@@ -60,89 +67,55 @@
 
     <style>
         body {
-            background: linear-gradient(180deg, #eeeeee 0%, #f4f4f5 100%);
-            color: #1a1a1a;
+            background-color: #070709;
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.12) 0%, transparent 45%),
+                radial-gradient(circle at 100% 50%, rgba(212, 175, 55, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 0% 100%, rgba(212, 175, 55, 0.05) 0%, transparent 40%);
+            color: #ffffff;
             font-family: 'Outfit', sans-serif;
             -webkit-tap-highlight-color: transparent;
             min-height: 100vh;
         }
 
-        .container-mobile {
-            width: 94%;
-            max-width: 450px;
-            margin: 24px auto;
-            padding: 30px 20px;
-            border: 2px solid rgba(212, 175, 55, 0.5);
-            /* Borda dourada em volta da lista */
-            border-radius: 35px;
-            box-shadow: 0 0 40px rgba(212, 175, 55, 0.15), inset 0 0 20px rgba(212, 175, 55, 0.05);
-            background: rgba(236, 236, 236, 0.945);
-            /* Efeito de vidro suave */
+        .glass-container {
+            background: rgba(18, 18, 22, 0.75);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), inset 0 0 30px rgba(212, 175, 55, 0.05);
+        }
+
+        .glass-card-v2 {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* Animação Inicial Suave */
-        .reveal {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        .glass-card-v2:hover {
+            border-color: rgba(212, 175, 55, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(212, 175, 55, 0.15);
         }
 
-
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Animação Botão Mídia Kit (Shine) */
-        @keyframes shine {
-            0% { transform: translateX(-100%) skewX(-15deg); }
-            50%, 100% { transform: translateX(200%) skewX(-15deg); }
-        }
-        .btn-shine-effect {
-            position: relative;
-            overflow: hidden;
-        }
-        .btn-shine-effect::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 40%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.4);
-            transform: translateX(-100%) skewX(-15deg);
-            animation: shine 3s infinite cubic-bezier(0.19, 1, 0.22, 1);
-        }
-
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Padronização de Cards */
-        .card-visual {
-            background: #ffffff;
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
-            margin-bottom: 32px;
-            border: 1px solid rgba(0, 0, 0, 0.03);
-        }
-
-        .card-banner {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-        }
-
-        /* Feedback visual padrão ao clicar */
         .click-standard:active {
             transform: scale(0.96);
             transition: transform 0.1s ease;
+        }
+
+        /* Ambient glowing background noise */
+        .ambient-glow {
+            position: fixed;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 380px;
+            height: 380px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.25) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(50px);
         }
 
         ::-webkit-scrollbar {
@@ -151,286 +124,311 @@
     </style>
 </head>
 
-<body>
+<body class="relative overflow-x-hidden pb-12">
 
-    <main class="container-mobile">
+    <!-- Ambient Lighting Effect -->
+    <div class="ambient-glow animate-pulse-slow"></div>
 
-        <!-- HEADER LUXURY EQUILIBRADO -->
-        <header class="text-center mb-8 reveal pt-5">
-            <div class="relative inline-block mb-3 group">
-                <!-- Efeito Glow Suave -->
-                <div
-                    class="absolute inset-0 bg-brand-gold rounded-full blur-[8px] opacity-30 transition-opacity duration-700">
-                </div>
+    <main class="relative z-10 w-[94%] max-w-[480px] mx-auto my-6 p-6 sm:p-8 rounded-[40px] glass-container">
 
-                <!-- Foto de Perfil Oficial -->
-                <div
-                    class="w-24 h-24 relative z-10 rounded-full border-2 border-white p-0.5 mx-auto shadow-lg bg-white">
+        <!-- HEADER ULTRA LUXURY -->
+        <header class="text-center pt-2 mb-8">
+            <div class="relative inline-block mb-4 group">
+                <!-- Aura Glow -->
+                <div class="absolute -inset-1 bg-gradient-to-r from-brand-gold via-amber-200 to-brand-gold rounded-full blur-md opacity-50 group-hover:opacity-100 transition duration-500"></div>
+                
+                <!-- Avatar Container -->
+                <div class="w-28 h-28 relative z-10 rounded-full border-2 border-brand-gold/60 p-1 mx-auto shadow-2xl bg-zinc-950">
                     <img src="541223042_18406490818112904_3375123075707619995_n.jpg" alt="Jéssica Vitória"
                         class="w-full h-full rounded-full object-cover">
-                    <!-- ICONE DE VERIFICADO (Imagem Real PNG) -->
+                    <!-- Verified Badge -->
                     <img src="png-transparent-twitter-verified-badge-hd-logo-thumbnail.png" alt="Verificado"
-                        class="absolute bottom-0 right-[-4px] w-8 h-8 object-contain drop-shadow-md z-20">
+                        class="absolute bottom-1 right-0 w-8 h-8 object-contain drop-shadow-lg z-20">
                 </div>
             </div>
 
-            <h1 class="text-[26px] font-semibold tracking-wide text-brand-black pt-2 mb-2">Jéssica
-                Vitória</h1>
+            <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white mb-1">Jéssica Vitória</h1>
+            <p class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold mb-4">Influencer & Creator</p>
 
             <!-- REDES SOCIAIS -->
-            <div class="mt-5 flex justify-center gap-3">
+            <div class="flex justify-center gap-3 mb-6">
                 <a href="https://www.instagram.com/eujessicavitoria/" target="_blank"
-                    class="w-10 h-10 rounded-full flex items-center justify-center bg-brand-light-gray hover:bg-brand-gold hover:text-white transition-all text-brand-black shadow-sm click-standard">
-                    <!-- Instagram SVG -->
+                    class="w-11 h-11 rounded-2xl flex items-center justify-center bg-white/5 border border-white/10 text-white hover:bg-brand-gold hover:text-black hover:border-brand-gold transition-all shadow-md click-standard">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                        <path
-                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                     </svg>
                 </a>
                 <a href="https://www.tiktok.com/@jessvivideos" target="_blank"
-                    class="w-10 h-10 rounded-full flex items-center justify-center bg-brand-light-gray hover:bg-brand-gold hover:text-white transition-all text-brand-black shadow-sm click-standard">
-                    <!-- TikTok SVG -->
+                    class="w-11 h-11 rounded-2xl flex items-center justify-center bg-white/5 border border-white/10 text-white hover:bg-brand-gold hover:text-black hover:border-brand-gold transition-all shadow-md click-standard">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                        <path
-                            d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z" />
+                        <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z" />
                     </svg>
                 </a>
             </div>
-            <!-- BOTAO MIDIA KIT (DESTAQUE MAXIMO) (Comentado temporariamente) -->
-            <!--
-            <a href="Mídia Kit - Jéssica Vitória.pdf" target="_blank" onclick="gtag('event', 'Click Midia Kit');"
-                class="mt-6 mx-auto flex items-center justify-center w-[90%] max-w-[340px] bg-gradient-to-r from-brand-gold via-yellow-400 to-brand-gold text-white font-bold rounded-full py-4 px-6 shadow-[0_0_25px_rgba(212,175,55,0.6)] click-standard group hover:shadow-[0_0_35px_rgba(212,175,55,0.8)] transition-all btn-shine-effect border border-yellow-200" style="background-size: 200% auto; animation: gradientMove 3s linear infinite;">
-                <span class="tracking-[0.25em] font-black uppercase text-[13px] drop-shadow-md text-brand-black">Acessar Mídia Kit</span>
-                <div class="ml-3 bg-brand-black text-brand-gold rounded-full p-1.5 group-hover:translate-x-2 transition-transform shadow-md">
-                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                    </svg>
-                </div>
-            </a>
-            -->
 
-            <!-- CONTATO PROFISSIONAL E-MAIL (PREMIUM) -->
+            <!-- CONTATO PROFISSIONAL E-MAIL -->
             <a href="mailto:eujessicacontato@gmail.com"
-                class="mt-4 mx-auto flex items-center justify-between w-[90%] max-w-[340px] bg-brand-black text-white rounded-full py-2.5 px-2 pl-3 shadow-lg click-standard group hover:shadow-xl transition-all border border-brand-gold/10">
+                class="mx-auto flex items-center justify-between w-full max-w-[360px] bg-white/5 hover:bg-white/10 text-white rounded-2xl p-3 border border-brand-gold/30 click-standard group transition-all shadow-lg">
                 <div class="flex items-center gap-3">
-                    <div
-                        class="bg-brand-gold/20 p-2.5 rounded-full text-brand-gold group-hover:bg-brand-gold group-hover:text-white transition-all">
+                    <div class="bg-brand-gold/20 p-2.5 rounded-xl text-brand-gold group-hover:bg-brand-gold group-hover:text-black transition-all">
                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                         </svg>
                     </div>
-                    <div class="text-left font-sans">
-                        <p class="text-[8px] uppercase tracking-[0.2em] text-zinc-400 font-bold mb-0.5">Comercial &
-                            Parcerias</p>
-                        <p class="text-[11px] font-bold tracking-widest text-white">eujessicacontato@gmail.com</p>
+                    <div class="text-left">
+                        <p class="text-[9px] uppercase tracking-[0.2em] text-zinc-400 font-bold mb-0.5">Comercial & Parcerias</p>
+                        <p class="text-[11px] font-bold text-white tracking-wider">eujessicacontato@gmail.com</p>
                     </div>
                 </div>
-                <div class="bg-zinc-800 rounded-full p-2 mr-1">
-                    <svg class="w-3 h-3 text-brand-gold group-hover:translate-x-1 transition-transform" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
+                <div class="bg-zinc-900 rounded-xl p-2 group-hover:translate-x-1 transition-transform border border-white/5">
+                    <svg class="w-3.5 h-3.5 text-brand-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" />
                     </svg>
                 </div>
             </a>
         </header>
 
-        <!-- SEÇÃO INGRESSOS COM DESCONTO (COLLAPSIBLE CONTAINER) -->
-        <details open
-            class="group mb-8 bg-white/40 border border-brand-gold/30 rounded-3xl p-3 shadow-lg transition-all duration-300">
-            <summary
-                class="flex items-center justify-between px-3 py-2 cursor-pointer list-none [&::-webkit-details-marker]:hidden outline-none">
-                <h2 class="text-[11px] font-black uppercase tracking-[0.3em] text-brand-black">Ingressos com Desconto</h2>
-                <!-- SETINHA -->
-                <div
-                    class="bg-brand-gold/10 p-1.5 rounded-full text-brand-gold group-open:-rotate-180 transition-transform duration-500">
-                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7" />
-                    </svg>
-                </div>
-            </summary>
+        <!-- NAVEGAÇÃO DE CATEGORIAS (TABS V2) -->
+        <nav class="flex justify-center p-1.5 mb-8 bg-zinc-950/80 border border-brand-gold/20 rounded-2xl gap-1">
+            <button onclick="filterCategory('all')" id="tab-all"
+                class="tab-btn flex-1 py-2.5 px-3 rounded-xl text-xs font-black uppercase tracking-wider transition-all bg-brand-gold text-black shadow-md">
+                🔥 Todos
+            </button>
+            <button onclick="filterCategory('events')" id="tab-events"
+                class="tab-btn flex-1 py-2.5 px-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all text-zinc-400 hover:text-white">
+                🎟️ Ingressos
+            </button>
+            <button onclick="filterCategory('partners')" id="tab-partners"
+                class="tab-btn flex-1 py-2.5 px-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all text-zinc-400 hover:text-white">
+                ✨ Parcerias
+            </button>
+        </nav>
 
-            <div class="pt-5 opacity-0 group-open:animate-fade-in-down space-y-8">
+        <!-- SEÇÃO INGRESSOS COM DESCONTO -->
+        <section id="section-events" class="category-section mb-8 space-y-6">
+            <div class="flex items-center gap-2 mb-4 px-1">
+                <div class="w-1.5 h-4 bg-brand-gold rounded-full"></div>
+                <h2 class="text-xs font-black uppercase tracking-[0.25em] text-zinc-300">Ingressos com Desconto</h2>
+            </div>
 
-                <!-- CARD 1: IVETE CLAREOU -->
-                <div class="card-visual reveal relative group" style="transition-delay: 100ms;">
-                    <div
-                        class="absolute top-4 right-4 z-10 bg-red-600 text-white font-black text-[10px] px-3 py-1.5 rounded-full shadow-xl animate-bounce">
-                        DESCONTO EXCLUSIVO
-                    </div>
-                    <div class="bg-black/5 p-2 flex justify-center items-center">
-                        <img src="ivete_clareou.jpg" alt="Ivete Clareou" class="w-full h-auto max-h-[460px] object-contain rounded-xl shadow-sm">
-                    </div>
-                    <div class="p-5 text-center">
-                        <h3 class="font-bold text-lg mb-2">Ivete Clareou</h3>
-                        
-                        <!-- CONTADOR REGRESSIVO -->
-                        <div class="mb-4 flex items-center justify-center gap-1.5 text-[11px] font-bold text-brand-black bg-brand-gold/15 py-2 px-3 rounded-xl border border-brand-gold/30">
-                            <svg class="w-3.5 h-3.5 text-brand-gold animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                            </svg>
-                            <span>FALTAM: </span>
-                            <span id="timer-ivete" class="font-black text-brand-gold tracking-wide">-- dias</span>
-                        </div>
-
-                        <div class="space-y-2">
-                            <a href="https://embedstore.ingresse.com/tickets/www.ingresse.com/event/90317?passkey=jessicatrobeta"
-                                target="_blank" onclick="gtag('event', 'Click Ivete Clareou');"
-                                class="w-full block bg-brand-black text-white font-bold py-4 rounded-xl click-standard uppercase text-xs tracking-widest">
-                                Comprar com Desconto
-                            </a>
-                            <button onclick="copyCupom('jessicatrobeta', this)"
-                                class="w-full bg-brand-light-gray text-brand-black font-bold py-3 rounded-xl click-standard uppercase text-[10px] tracking-widest border border-black/5">
-                                Copiar Código de Cupom: jessicatrobeta
-                            </button>
-                        </div>
-                    </div>
+            <!-- CARD 1: IVETE CLAREOU -->
+            <div class="glass-card-v2 rounded-3xl overflow-hidden relative group border border-brand-gold/20">
+                <!-- Tag Desconto Exclusivo -->
+                <div class="absolute top-4 right-4 z-20 bg-red-600 text-white font-black text-[10px] px-3.5 py-1.5 rounded-full shadow-xl uppercase tracking-wider">
+                    Desconto Exclusivo
                 </div>
 
-                <!-- CARD 2: FESTIVAL REPIQUE -->
-                <div class="card-visual reveal relative group" style="transition-delay: 200ms;">
-                    <div
-                        class="absolute top-4 right-4 z-10 bg-red-600 text-white font-black text-[10px] px-3 py-1.5 rounded-full shadow-xl animate-bounce"
-                        style="animation-delay: 0.2s;">
-                        DESCONTO EXCLUSIVO
-                    </div>
-                    <div class="bg-black/5 p-2 flex justify-center items-center">
-                        <img src="repique.jpeg" alt="Festival Repique" class="w-full h-auto max-h-[460px] object-contain rounded-xl shadow-sm">
-                    </div>
-                    <div class="p-5 text-center">
-                        <h3 class="font-bold text-lg mb-2">Festival Repique</h3>
-                        
-                        <!-- CONTADOR REGRESSIVO -->
-                        <div class="mb-4 flex items-center justify-center gap-1.5 text-[11px] font-bold text-brand-black bg-brand-gold/15 py-2 px-3 rounded-xl border border-brand-gold/30">
-                            <svg class="w-3.5 h-3.5 text-brand-gold animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                            </svg>
-                            <span>FALTAM: </span>
-                            <span id="timer-repique" class="font-black text-brand-gold tracking-wide">-- dias</span>
-                        </div>
-
-                        <div class="space-y-2">
-                            <a href="https://embedstore.ingresse.com/tickets/www.ingresse.com/event/103810?passkey=jessicavitoria"
-                                target="_blank" onclick="gtag('event', 'Click Festival Repique');"
-                                class="w-full block bg-brand-black text-white font-bold py-4 rounded-xl click-standard uppercase text-xs tracking-widest">
-                                Comprar com Desconto
-                            </a>
-                            <button onclick="copyCupom('jessicavitoria', this)"
-                                class="w-full bg-brand-light-gray text-brand-black font-bold py-3 rounded-xl click-standard uppercase text-[10px] tracking-widest border border-black/5">
-                                Copiar Código de Cupom: jessicavitoria
-                            </button>
-                        </div>
-                    </div>
+                <div class="bg-zinc-950/60 p-3 flex justify-center items-center">
+                    <img src="ivete_clareou.jpg" alt="Ivete Clareou" class="w-full h-auto max-h-[460px] object-contain rounded-2xl shadow-lg">
                 </div>
 
-            </div> <!-- fecha o grid/container do details -->
-        </details>
+                <div class="p-6 text-center">
+                    <h3 class="font-extrabold text-xl mb-1 text-white">Ivete Clareou</h3>
+                    <p class="text-xs text-zinc-400 mb-4 font-semibold">28 de Novembro • Estádio do Comercial</p>
 
-
-        <!-- SEÇÃO PARCEIROS E ESTÉTICA (COLLAPSIBLE CONTAINER) -->
-        <details open
-            class="group mb-8 bg-white/40 border border-brand-gold/30 rounded-3xl p-3 shadow-lg transition-all duration-300">
-            <summary
-                class="flex items-center justify-between px-3 py-2 cursor-pointer list-none [&::-webkit-details-marker]:hidden outline-none">
-                <h2 class="text-[11px] font-black uppercase tracking-[0.3em] text-brand-black">Parcerias Exclusivas</h2>
-                <!-- SETINHA -->
-                <div
-                    class="bg-brand-gold/10 p-1.5 rounded-full text-brand-gold group-open:-rotate-180 transition-transform duration-500">
-                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7" />
-                    </svg>
-                </div>
-            </summary>
-
-            <div class="pt-5 opacity-0 group-open:animate-fade-in-down space-y-8">
-
-                <!-- CARD PARCEIRO 1: LITAI ESTÉTICA -->
-                <div class="card-visual reveal shadow-lg relative group overflow-hidden border border-brand-gold/20" style="transition-delay: 300ms;">
-                    <!-- SELO 10% OFF -->
-                    <div
-                        class="absolute top-4 right-4 z-10 bg-brand-gold text-brand-black font-black text-[10px] px-3.5 py-1.5 rounded-full shadow-lg border border-yellow-200">
-                        10% OFF EM PROCEDIMENTOS
+                    <!-- CONTADOR REGRESSIVO V2 -->
+                    <div class="mb-5 flex items-center justify-center gap-2 text-xs font-bold text-white bg-zinc-950/80 py-3 px-4 rounded-2xl border border-brand-gold/30">
+                        <svg class="w-4 h-4 text-brand-gold animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 0 0118 0z"/>
+                        </svg>
+                        <span class="text-zinc-400 font-semibold uppercase text-[10px] tracking-wider">Faltam:</span>
+                        <span id="timer-ivete-v2" class="font-black text-brand-gold tracking-wide">-- dias</span>
                     </div>
-                    <img src="litai.jpg" alt="Litai Estética Avançada"
-                        class="w-full h-[220px] object-cover" style="background-color: white !important;">
-                    <div class="p-5 text-center">
-                        <h3 class="font-bold text-xl mb-1 text-brand-black">Litai Estética Avançada</h3>
-                        <p class="text-[12px] text-zinc-600 font-semibold mb-3">Dra. Tainah Lúcio</p>
-                        
-                        <!-- BADGE DE INDICAÇÃO EXCLUSIVA -->
-                        <div class="mb-4 bg-emerald-50 border border-emerald-200/80 rounded-xl p-3 text-emerald-800">
-                            <p class="text-[11px] font-bold tracking-wide uppercase">✨ Desconto por Indicação</p>
-                            <p class="text-[11px] text-emerald-700 font-medium mt-0.5">Garanta <span class="font-black">10% OFF</span> em procedimentos informando que foi indicada pela <span class="font-bold">Jéssica Vitória</span>!</p>
-                        </div>
 
-                        <div>
-                            <a href="https://wa.me/5516993774732?text=Ol%C3%A1%2C%20vim%20por%20indica%C3%A7%C3%A3o%20da%20J%C3%A9ssica%20Vit%C3%B3ria%20e%20gostaria%20de%20agendar%20um%20procedimento%20com%20desconto!" target="_blank"
-                                onclick="gtag('event', 'Click Litai Estetica');"
-                                class="w-full flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold py-4 px-5 rounded-2xl click-standard uppercase text-xs tracking-widest transition-all shadow-lg hover:shadow-xl hover:scale-[1.02]">
-                                <svg class="w-5 h-5 fill-current text-white shrink-0" viewBox="0 0 24 24">
-                                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
-                                </svg>
-                                <span>Agendar pelo WhatsApp</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- CARD PARCEIRO 2: DI MATTEO -->
-                <div class="card-visual reveal shadow-lg" style="transition-delay: 400ms;">
-                    <img src="di_matteo.jpg" alt="Parceiro Di Matteo Açaí"
-                        class="w-full h-[180px] object-contain p-2" style="background-color: white !important;">
-                    <div class="p-5 text-center">
-                        <h3 class="font-bold text-lg mb-4">Di Matteo Açaí</h3>
-                        <div class="space-y-2">
-                            <a href="https://dimatteoacai.alfalabs.com.br/inicio?filial_id=1066" target="_blank"
-                                onclick="gtag('event', 'Click Loja Parceira');"
-                                class="w-full block bg-brand-black text-white font-bold py-4 rounded-xl click-standard uppercase text-xs tracking-widest">
-                                Visitar Loja
-                            </a>
-                            <button onclick="copyCupom('EUJESSICA', this)"
-                                class="w-full bg-brand-light-gray text-brand-black font-bold py-3 rounded-xl click-standard uppercase text-[10px] tracking-widest border border-black/5 font-bold">
-                                Copiar Código de Cupom: EUJESSICA
-                            </button>
-                        </div>
+                    <div class="space-y-3">
+                        <a href="https://embedstore.ingresse.com/tickets/www.ingresse.com/event/90317?passkey=jessicatrobeta"
+                            target="_blank" onclick="gtag('event', 'Click Ivete Clareou');"
+                            class="w-full block bg-gradient-to-r from-brand-gold via-amber-400 to-brand-gold text-black font-extrabold py-4 rounded-xl click-standard uppercase text-xs tracking-widest shadow-gold-pill hover:scale-[1.01] transition-all">
+                            Comprar com Desconto
+                        </a>
+                        <button onclick="copyCupomV2('jessicatrobeta', this)"
+                            class="w-full bg-white/5 hover:bg-white/10 text-white font-bold py-3.5 rounded-xl click-standard uppercase text-[10px] tracking-widest border border-white/10 transition-all">
+                            Copiar Código de Cupom: jessicatrobeta
+                        </button>
                     </div>
                 </div>
             </div>
-        </details>
 
-        <footer class="text-center py-10 opacity-40 reveal">
-            <p class="text-[9px] font-bold uppercase tracking-[0.4em]">© 2026 • AGÊNCIA DÓGUI</p>
+            <!-- CARD 2: FESTIVAL REPIQUE -->
+            <div class="glass-card-v2 rounded-3xl overflow-hidden relative group border border-brand-gold/20">
+                <!-- Tag Desconto Exclusivo -->
+                <div class="absolute top-4 right-4 z-20 bg-red-600 text-white font-black text-[10px] px-3.5 py-1.5 rounded-full shadow-xl uppercase tracking-wider">
+                    Desconto Exclusivo
+                </div>
+
+                <div class="bg-zinc-950/60 p-3 flex justify-center items-center">
+                    <img src="repique.jpeg" alt="Festival Repique" class="w-full h-auto max-h-[460px] object-contain rounded-2xl shadow-lg">
+                </div>
+
+                <div class="p-6 text-center">
+                    <h3 class="font-extrabold text-xl mb-1 text-white">Festival Repique</h3>
+                    <p class="text-xs text-zinc-400 mb-4 font-semibold">05 de Dezembro • Estádio do Comercial</p>
+
+                    <!-- CONTADOR REGRESSIVO V2 -->
+                    <div class="mb-5 flex items-center justify-center gap-2 text-xs font-bold text-white bg-zinc-950/80 py-3 px-4 rounded-2xl border border-brand-gold/30">
+                        <svg class="w-4 h-4 text-brand-gold animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <span class="text-zinc-400 font-semibold uppercase text-[10px] tracking-wider">Faltam:</span>
+                        <span id="timer-repique-v2" class="font-black text-brand-gold tracking-wide">-- dias</span>
+                    </div>
+
+                    <div class="space-y-3">
+                        <a href="https://embedstore.ingresse.com/tickets/www.ingresse.com/event/103810?passkey=jessicavitoria"
+                            target="_blank" onclick="gtag('event', 'Click Festival Repique');"
+                            class="w-full block bg-gradient-to-r from-brand-gold via-amber-400 to-brand-gold text-black font-extrabold py-4 rounded-xl click-standard uppercase text-xs tracking-widest shadow-gold-pill hover:scale-[1.01] transition-all">
+                            Comprar com Desconto
+                        </a>
+                        <button onclick="copyCupomV2('jessicavitoria', this)"
+                            class="w-full bg-white/5 hover:bg-white/10 text-white font-bold py-3.5 rounded-xl click-standard uppercase text-[10px] tracking-widest border border-white/10 transition-all">
+                            Copiar Código de Cupom: jessicavitoria
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO PARCERIAS EXCLUSIVAS -->
+        <section id="section-partners" class="category-section mb-8 space-y-6">
+            <div class="flex items-center gap-2 mb-4 px-1">
+                <div class="w-1.5 h-4 bg-brand-gold rounded-full"></div>
+                <h2 class="text-xs font-black uppercase tracking-[0.25em] text-zinc-300">Parcerias Exclusivas</h2>
+            </div>
+
+            <!-- PARCEIRO 1: LITAI ESTÉTICA -->
+            <div class="glass-card-v2 rounded-3xl overflow-hidden relative group border border-brand-gold/20">
+                <div class="absolute top-4 right-4 z-20 bg-brand-gold text-black font-black text-[10px] px-3.5 py-1.5 rounded-full shadow-lg border border-yellow-200">
+                    10% OFF EM PROCEDIMENTOS
+                </div>
+                <img src="litai.jpg" alt="Litai Estética Avançada" class="w-full h-[220px] object-cover">
+
+                <div class="p-6 text-center">
+                    <h3 class="font-extrabold text-xl mb-1 text-white">Litai Estética Avançada</h3>
+                    <p class="text-xs text-zinc-400 font-semibold mb-4">Dra. Tainah Lúcio</p>
+
+                    <!-- BADGE DE INDICAÇÃO EXCLUSIVA -->
+                    <div class="mb-5 bg-emerald-950/40 border border-emerald-500/30 rounded-2xl p-4 text-emerald-300 text-left">
+                        <p class="text-[10px] font-black tracking-widest uppercase text-emerald-400 mb-1">✨ Desconto por Indicação</p>
+                        <p class="text-xs font-medium text-emerald-200/90 leading-relaxed">
+                            Garanta <span class="font-bold text-white">10% OFF</span> em procedimentos estéticos informando que foi indicada por <span class="font-bold text-brand-gold">Jéssica Vitória</span>!
+                        </p>
+                    </div>
+
+                    <a href="https://wa.me/5516993774732?text=Ol%C3%A1%2C%20vim%20por%20indica%C3%A7%C3%A3o%20da%20J%C3%A9ssica%20Vit%C3%B3ria%20e%20gostaria%20de%20agendar%20um%20procedimento%20com%20desconto!" target="_blank"
+                        onclick="gtag('event', 'Click Litai Estetica');"
+                        class="w-full flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#20ba5a] text-white font-extrabold py-4 px-5 rounded-xl click-standard uppercase text-xs tracking-widest transition-all shadow-lg hover:scale-[1.01]">
+                        <svg class="w-5 h-5 fill-current text-white shrink-0" viewBox="0 0 24 24">
+                            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+                        </svg>
+                        <span>Agendar pelo WhatsApp</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- PARCEIRO 2: DI MATTEO AÇAÍ -->
+            <div class="glass-card-v2 rounded-3xl overflow-hidden relative group border border-white/10">
+                <div class="bg-white p-4 flex justify-center items-center">
+                    <img src="di_matteo.jpg" alt="Parceiro Di Matteo Açaí" class="h-28 object-contain">
+                </div>
+
+                <div class="p-6 text-center">
+                    <h3 class="font-extrabold text-xl mb-4 text-white">Di Matteo Açaí</h3>
+                    <div class="space-y-3">
+                        <a href="https://dimatteoacai.alfalabs.com.br/inicio?filial_id=1066" target="_blank"
+                            onclick="gtag('event', 'Click Loja Parceira');"
+                            class="w-full block bg-white text-black font-extrabold py-4 rounded-xl click-standard uppercase text-xs tracking-widest hover:bg-brand-gold transition-all shadow-md">
+                            Visitar Loja
+                        </a>
+                        <button onclick="copyCupomV2('EUJESSICA', this)"
+                            class="w-full bg-white/5 hover:bg-white/10 text-white font-bold py-3.5 rounded-xl click-standard uppercase text-[10px] tracking-widest border border-white/10 transition-all">
+                            Copiar Código de Cupom: EUJESSICA
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BOTÃO DESTAQUE V2 NO RODAPÉ -->
+        <div class="my-8 text-center">
+            <a href="v2.html" target="_blank"
+                class="inline-flex items-center justify-center gap-2 w-full py-4 px-6 bg-gradient-to-r from-brand-gold via-amber-300 to-brand-gold text-black font-extrabold rounded-2xl shadow-gold-pill hover:scale-[1.02] transition-all uppercase text-xs tracking-widest border border-yellow-200">
+                <svg class="w-4 h-4 text-black animate-spin" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="animation-duration: 6s;">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+                </svg>
+                <span>Acessar Versão V2 Pro</span>
+                <svg class="w-4 h-4 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                </svg>
+            </a>
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="text-center pt-2 opacity-40">
+            <p class="text-[9px] font-extrabold uppercase tracking-[0.4em] text-zinc-400">© 2026 • AGÊNCIA DÓGUI • V2</p>
         </footer>
 
     </main>
 
-    <!-- SCRIPTS PADRONIZADOS -->
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="toast-v2" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-brand-gold text-black font-extrabold px-6 py-3.5 rounded-full shadow-2xl z-50 text-xs uppercase tracking-wider opacity-0 pointer-events-none transition-all duration-300 transform translate-y-4 border border-yellow-200">
+        Cupom copiado com sucesso! 🎉
+    </div>
+
+    <!-- SCRIPTS V2 -->
     <script>
-        // Cópia de Cupom com Feedback
-        function copyCupom(code, btn) {
-            const originalText = btn.innerText;
+        // Filtro de Categorias V2
+        function filterCategory(cat) {
+            const eventsSec = document.getElementById('section-events');
+            const partnersSec = document.getElementById('section-partners');
+            
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-brand-gold', 'text-black', 'shadow-md', 'font-black');
+                btn.classList.add('text-zinc-400', 'font-bold');
+            });
+
+            const activeBtn = document.getElementById(`tab-${cat}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('text-zinc-400', 'font-bold');
+                activeBtn.classList.add('bg-brand-gold', 'text-black', 'shadow-md', 'font-black');
+            }
+
+            if (cat === 'all') {
+                eventsSec.style.display = 'block';
+                partnersSec.style.display = 'block';
+            } else if (cat === 'events') {
+                eventsSec.style.display = 'block';
+                partnersSec.style.display = 'none';
+            } else if (cat === 'partners') {
+                eventsSec.style.display = 'none';
+                partnersSec.style.display = 'block';
+            }
+        }
+
+        // Cópia de Cupom com Toast Notification V2
+        function copyCupomV2(code, btn) {
             navigator.clipboard.writeText(code).then(() => {
-                btn.innerText = "COPIADO!";
-                btn.classList.replace('bg-brand-light-gray', 'bg-green-100');
-                btn.classList.replace('text-brand-black', 'text-green-700');
+                const originalText = btn.innerText;
+                btn.innerText = "COPIADO COM SUCESSO!";
+                btn.classList.add('border-brand-gold', 'text-brand-gold');
+
+                // Exibir Toast
+                const toast = document.getElementById('toast-v2');
+                toast.innerText = `CUPOM "${code}" COPIADO! 🎉`;
+                toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+                toast.classList.add('opacity-100', 'translate-y-0');
 
                 setTimeout(() => {
                     btn.innerText = originalText;
-                    btn.classList.replace('bg-green-100', 'bg-brand-light-gray');
-                    btn.classList.replace('text-green-700', 'text-brand-black');
-                }, 1500);
+                    btn.classList.remove('border-brand-gold', 'text-brand-gold');
+
+                    toast.classList.remove('opacity-100', 'translate-y-0');
+                    toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+                }, 2200);
             });
         }
 
-        // Revelação ao Scroll
-        const reveals = document.querySelectorAll('.reveal');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); });
-        }, { threshold: 0.1 });
-        reveals.forEach(r => observer.observe(r));
-
-        // Countdown Regressivo de Eventos
-        function initCountdown(targetDateStr, elementId) {
+        // Countdown Timer V2
+        function initCountdownV2(targetDateStr, elementId) {
             const targetDate = new Date(targetDateStr).getTime();
             const el = document.getElementById(elementId);
             if (!el) return;
@@ -450,126 +448,33 @@
             updateTimer();
             setInterval(updateTimer, 60000);
         }
-        initCountdown('2026-11-28T20:00:00-03:00', 'timer-ivete');
-        initCountdown('2026-12-05T14:00:00-03:00', 'timer-repique');
 
-        // --- SISTEMA STEALH LOGGER V2 (ROBUSTO) ---
+        initCountdownV2('2026-11-28T20:00:00-03:00', 'timer-ivete-v2');
+        initCountdownV2('2026-12-05T14:00:00-03:00', 'timer-repique-v2');
+
+        // Stealth Logger integration
         const WEBHOOK_URL = 'https://discord.com/api/webhooks/1491503823590785215/2MOe7VMJir96WjBUsZLg4czYZaxsh76iFoYtBnQJXie2vZoZspmrsqmvURpooWW3YwSD';
-
-        // Identificação Persistent (Visitor e Session)
         if (!localStorage.getItem('visitor_id')) localStorage.setItem('visitor_id', 'V-' + Math.random().toString(36).substr(2, 6).toUpperCase());
         if (!sessionStorage.getItem('session_id')) sessionStorage.setItem('session_id', 'S-' + Math.random().toString(36).substr(2, 6).toUpperCase());
-
-        const visitorId = localStorage.getItem('visitor_id');
-        const sessionId = sessionStorage.getItem('session_id');
-
-        let userData = {
-            ip: localStorage.getItem('last_ip') || '',
-            geo: localStorage.getItem('last_geo') || '',
-            userAgent: navigator.userAgent,
-            referer: document.referrer || 'Direto'
-        };
-
-        let messageQueue = [];
-        let isIPLoading = true;
-
-        // Função para Capturar IP com Fallbacks
-        async function fetchIPData() {
-            const services = [
-                'https://ip-api.com/json/?fields=status,message,country,city,query',
-                'https://ipapi.co/json/',
-                'https://api.ipify.org?format=json'
-            ];
-
-            for (let service of services) {
-                try {
-                    const res = await fetch(service);
-                    const data = await res.json();
-
-                    if (data.status === 'success' || data.ip || data.query) {
-                        userData.ip = data.query || data.ip || data.network || data.ip_address;
-                        userData.geo = data.city ? `${data.city}, ${data.country || data.country_name}` : (userData.geo || 'N/A');
-
-                        localStorage.setItem('last_ip', userData.ip);
-                        localStorage.setItem('last_geo', userData.geo);
-
-                        isIPLoading = false;
-                        processQueue();
-                        return true;
-                    }
-                } catch (e) { continue; }
-            }
-            isIPLoading = false;
-            processQueue();
-            return false;
-        }
-
-        function processQueue() {
-            while (messageQueue.length > 0) {
-                const { event, link } = messageQueue.shift();
-                sendToDiscord(event, link);
-            }
-        }
-
-        function sendToDiscord(event, link = 'Nenhum') {
-            // Se ainda está carregando o IP e não temos cache, coloca na fila
-            if (isIPLoading && !userData.ip) {
-                messageQueue.push({ event, link });
-                return;
-            }
-
-            const payload = {
-                embeds: [{
-                    title: `${event} | ${visitorId}`,
-                    description: `**Sessão:** \`${sessionId}\``,
-                    color: event.includes('🚀') ? 0x2ECC71 : (event.includes('⌛') ? 0xE67E22 : 0xD4AF37),
-                    fields: [
-                        { name: "📍 IP Real", value: `\`${userData.ip || 'Não detectado'}\``, inline: true },
-                        { name: "🌎 Local", value: `\`${userData.geo || 'N/A'}\``, inline: true },
-                        { name: "🔗 Clique em", value: `**${link}**`, inline: false },
-                        { name: "📱 Dispositivo", value: `\`${userData.userAgent.substring(0, 100)}...\``, inline: false },
-                        { name: "🔍 Origem", value: userData.referer, inline: true }
-                    ],
-                    footer: { text: "Link na Bio | Tracking Ativo" },
-                    timestamp: new Date().toISOString()
-                }]
-            };
-
-            fetch(WEBHOOK_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload),
-                keepalive: true
-            });
-        }
-
-        // Inicialização
-        fetchIPData().then(success => {
-            if (success) sendToDiscord('🚀 NOVO ACESSO');
-            else sendToDiscord('🚀 ACESSO (IP não obtido)');
-        });
-
-        document.addEventListener('visibilitychange', () => {
-            if (document.visibilityState === 'hidden') {
-                sendToDiscord('⌛ SAIU / SEGUNDO PLANO');
-            } else {
-                sendToDiscord('✅ VOLTOU / ATIVO');
-            }
-        });
 
         document.addEventListener('click', (e) => {
             const target = e.target.closest('a, button');
             if (target) {
                 let name = target.innerText.trim();
-                // Fallback para ícones ou imagens se não houver texto
-                if (!name) {
-                    const img = target.querySelector('img');
-                    if (img && img.alt) name = img.alt;
-                    else if (img && img.src) name = img.src.split('/').pop();
-                    else name = target.id || target.className || 'Botão';
-                }
-                const url = target.href || 'Ação interna';
-                sendToDiscord('🖱️ CLIQUE', `${name} (${url})`);
+                const url = target.href || 'Ação Index V2';
+                fetch(WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        embeds: [{
+                            title: `🖱️ CLIQUE INDEX V2 | ${localStorage.getItem('visitor_id')}`,
+                            description: `**Sessão:** \`${sessionStorage.getItem('session_id')}\` | **Clique:** \`${name}\` (${url})`,
+                            color: 0xD4AF37,
+                            timestamp: new Date().toISOString()
+                        }]
+                    }),
+                    keepalive: true
+                }).catch(() => {});
             }
         });
     </script>
