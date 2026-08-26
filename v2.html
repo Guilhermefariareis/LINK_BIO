@@ -65,6 +65,25 @@
         }
     </script>
 
+    <script>
+        function applyInitialTheme() {
+            const saved = localStorage.getItem('user-theme-pref') || 'auto';
+            let effective = saved;
+            if (saved === 'auto') {
+                const hour = new Date().getHours();
+                effective = (hour >= 6 && hour < 18) ? 'light' : 'dark';
+            }
+            if (effective === 'light') {
+                document.documentElement.classList.remove('dark');
+                document.documentElement.classList.add('light');
+            } else {
+                document.documentElement.classList.remove('light');
+                document.documentElement.classList.add('dark');
+            }
+        }
+        applyInitialTheme();
+    </script>
+
     <style>
         body {
             background-color: #070709;
@@ -76,6 +95,16 @@
             font-family: 'Outfit', sans-serif;
             -webkit-tap-highlight-color: transparent;
             min-height: 100vh;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        html.light body {
+            background-color: #f3f4f6;
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.25) 0%, transparent 50%),
+                radial-gradient(circle at 100% 50%, rgba(212, 175, 55, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 0% 100%, rgba(212, 175, 55, 0.12) 0%, transparent 40%);
+            color: #111827;
         }
 
         .glass-container {
@@ -84,6 +113,13 @@
             -webkit-backdrop-filter: blur(25px);
             border: 1px solid rgba(212, 175, 55, 0.25);
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), inset 0 0 30px rgba(212, 175, 55, 0.05);
+            transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        html.light .glass-container {
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.07), inset 0 0 30px rgba(212, 175, 55, 0.1);
         }
 
         .glass-card-v2 {
@@ -93,10 +129,35 @@
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .glass-card-v2:hover {
-            border-color: rgba(212, 175, 55, 0.4);
+        html.light .glass-card-v2 {
+            background: rgba(255, 255, 255, 0.88);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+        }
+
+        html.light .glass-card-v2:hover {
+            border-color: rgba(212, 175, 55, 0.6);
             transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(212, 175, 55, 0.15);
+            box-shadow: 0 12px 35px rgba(212, 175, 55, 0.2);
+        }
+
+        /* Estilos do Tema Claro para elementos de texto e containers */
+        html.light .theme-text-title {
+            color: #0f172a !important;
+        }
+        html.light .theme-text-sub {
+            color: #475569 !important;
+        }
+        html.light .theme-box-bg {
+            background-color: rgba(241, 245, 249, 0.95) !important;
+            border-color: rgba(212, 175, 55, 0.4) !important;
+        }
+        html.light .theme-nav-bg {
+            background-color: rgba(241, 245, 249, 0.9) !important;
+            border-color: rgba(212, 175, 55, 0.3) !important;
+        }
+        html.light .theme-avatar-bg {
+            background-color: #ffffff !important;
         }
 
         .click-standard:active {
@@ -126,19 +187,47 @@
 
 <body class="relative overflow-x-hidden pb-12">
 
-    <!-- Ambient Lighting Effect -->
     <div class="ambient-glow animate-pulse-slow"></div>
 
     <main class="relative z-10 w-[94%] max-w-[480px] mx-auto my-6 p-6 sm:p-8 rounded-[40px] glass-container">
 
         <!-- HEADER ULTRA LUXURY -->
         <header class="text-center pt-2 mb-8">
+            <!-- CONTROLE DE TEMA (CLARO / AUTO / ESCURO) -->
+            <div class="flex justify-center mb-6">
+                <div class="inline-flex p-1 bg-zinc-950/80 theme-nav-bg border border-brand-gold/30 rounded-full text-[11px] font-bold shadow-lg gap-1">
+                    <button onclick="setTheme('light')" id="theme-btn-light" title="Modo Claro (Branco)"
+                        class="px-3 py-1.5 rounded-full flex items-center gap-1.5 transition-all text-zinc-400 font-bold hover:text-brand-gold">
+                        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <circle cx="12" cy="12" r="4" stroke-width="2"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2v2m0 16v2m10-10h-2M4 12H2m16.95-6.95l-1.414 1.414M6.464 17.536l-1.414 1.414m14.142 0l-1.414-1.414M6.464 6.464L5.05 5.05"/>
+                        </svg>
+                        <span>Claro</span>
+                    </button>
+                    <button onclick="setTheme('auto')" id="theme-btn-auto" title="Automático (Horário / iPhone)"
+                        class="px-3 py-1.5 rounded-full flex items-center gap-1.5 transition-all text-zinc-400 font-bold hover:text-brand-gold">
+                        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <circle cx="12" cy="12" r="9" stroke-width="2"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 7v5l3 3"/>
+                        </svg>
+                        <span>Auto</span>
+                    </button>
+                    <button onclick="setTheme('dark')" id="theme-btn-dark" title="Modo Escuro (Preto)"
+                        class="px-3 py-1.5 rounded-full flex items-center gap-1.5 transition-all text-zinc-400 font-bold hover:text-brand-gold">
+                        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                        </svg>
+                        <span>Escuro</span>
+                    </button>
+                </div>
+            </div>
+
             <div class="relative inline-block mb-4 group">
                 <!-- Aura Glow -->
                 <div class="absolute -inset-1 bg-gradient-to-r from-brand-gold via-amber-200 to-brand-gold rounded-full blur-md opacity-50 group-hover:opacity-100 transition duration-500"></div>
                 
                 <!-- Avatar Container -->
-                <div class="w-28 h-28 relative z-10 rounded-full border-2 border-brand-gold/60 p-1 mx-auto shadow-2xl bg-zinc-950">
+                <div class="w-28 h-28 relative z-10 rounded-full border-2 border-brand-gold/60 p-1 mx-auto shadow-2xl bg-zinc-950 theme-avatar-bg">
                     <img src="541223042_18406490818112904_3375123075707619995_n.jpg" alt="Jéssica Vitória"
                         class="w-full h-full rounded-full object-cover">
                     <!-- Verified Badge -->
@@ -147,19 +236,19 @@
                 </div>
             </div>
 
-            <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white mb-1">Jéssica Vitória</h1>
+            <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white theme-text-title mb-1">Jéssica Vitória</h1>
             <p class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold mb-4">Influencer & Creator</p>
 
             <!-- REDES SOCIAIS -->
             <div class="flex justify-center gap-3 mb-6">
                 <a href="https://www.instagram.com/eujessicavitoria/" target="_blank"
-                    class="w-11 h-11 rounded-2xl flex items-center justify-center bg-white/5 border border-white/10 text-white hover:bg-brand-gold hover:text-black hover:border-brand-gold transition-all shadow-md click-standard">
+                    class="w-11 h-11 rounded-2xl flex items-center justify-center bg-white/5 border border-white/10 text-white theme-text-title hover:bg-brand-gold hover:text-black hover:border-brand-gold transition-all shadow-md click-standard">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                     </svg>
                 </a>
                 <a href="https://www.tiktok.com/@jessvivideos" target="_blank"
-                    class="w-11 h-11 rounded-2xl flex items-center justify-center bg-white/5 border border-white/10 text-white hover:bg-brand-gold hover:text-black hover:border-brand-gold transition-all shadow-md click-standard">
+                    class="w-11 h-11 rounded-2xl flex items-center justify-center bg-white/5 border border-white/10 text-white theme-text-title hover:bg-brand-gold hover:text-black hover:border-brand-gold transition-all shadow-md click-standard">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z" />
                     </svg>
@@ -168,7 +257,7 @@
 
             <!-- CONTATO PROFISSIONAL E-MAIL -->
             <a href="mailto:eujessicacontato@gmail.com"
-                class="mx-auto flex items-center justify-between w-full max-w-[360px] bg-white/5 hover:bg-white/10 text-white rounded-2xl p-3 border border-brand-gold/30 click-standard group transition-all shadow-lg">
+                class="mx-auto flex items-center justify-between w-full max-w-[360px] bg-white/5 hover:bg-white/10 text-white theme-box-bg rounded-2xl p-3 border border-brand-gold/30 click-standard group transition-all shadow-lg">
                 <div class="flex items-center gap-3">
                     <div class="bg-brand-gold/20 p-2.5 rounded-xl text-brand-gold group-hover:bg-brand-gold group-hover:text-black transition-all">
                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -176,11 +265,11 @@
                         </svg>
                     </div>
                     <div class="text-left">
-                        <p class="text-[9px] uppercase tracking-[0.2em] text-zinc-400 font-bold mb-0.5">Comercial & Parcerias</p>
-                        <p class="text-[11px] font-bold text-white tracking-wider">eujessicacontato@gmail.com</p>
+                        <p class="text-[9px] uppercase tracking-[0.2em] text-zinc-400 theme-text-sub font-bold mb-0.5">Comercial & Parcerias</p>
+                        <p class="text-[11px] font-bold text-white theme-text-title tracking-wider">eujessicacontato@gmail.com</p>
                     </div>
                 </div>
-                <div class="bg-zinc-900 rounded-xl p-2 group-hover:translate-x-1 transition-transform border border-white/5">
+                <div class="bg-zinc-900 theme-box-bg rounded-xl p-2 group-hover:translate-x-1 transition-transform border border-white/5">
                     <svg class="w-3.5 h-3.5 text-brand-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" />
                     </svg>
@@ -189,17 +278,17 @@
         </header>
 
         <!-- NAVEGAÇÃO DE CATEGORIAS (TABS V2) -->
-        <nav class="flex justify-center p-1.5 mb-8 bg-zinc-950/80 border border-brand-gold/20 rounded-2xl gap-1">
+        <nav class="flex justify-center p-1.5 mb-8 bg-zinc-950/80 theme-nav-bg border border-brand-gold/20 rounded-2xl gap-1">
             <button onclick="filterCategory('all')" id="tab-all"
                 class="tab-btn flex-1 py-2.5 px-3 rounded-xl text-xs font-black uppercase tracking-wider transition-all bg-brand-gold text-black shadow-md">
                 🔥 Todos
             </button>
             <button onclick="filterCategory('events')" id="tab-events"
-                class="tab-btn flex-1 py-2.5 px-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all text-zinc-400 hover:text-white">
+                class="tab-btn flex-1 py-2.5 px-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all text-zinc-400 theme-text-sub hover:text-white">
                 🎟️ Ingressos
             </button>
             <button onclick="filterCategory('partners')" id="tab-partners"
-                class="tab-btn flex-1 py-2.5 px-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all text-zinc-400 hover:text-white">
+                class="tab-btn flex-1 py-2.5 px-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all text-zinc-400 theme-text-sub hover:text-white">
                 ✨ Parcerias
             </button>
         </nav>
@@ -208,7 +297,7 @@
         <section id="section-events" class="category-section mb-8 space-y-6">
             <div class="flex items-center gap-2 mb-4 px-1">
                 <div class="w-1.5 h-4 bg-brand-gold rounded-full"></div>
-                <h2 class="text-xs font-black uppercase tracking-[0.25em] text-zinc-300">Ingressos com Desconto</h2>
+                <h2 class="text-xs font-black uppercase tracking-[0.25em] text-zinc-300 theme-text-title">Ingressos com Desconto</h2>
             </div>
 
             <!-- CARD 1: IVETE CLAREOU -->
@@ -218,20 +307,21 @@
                     Desconto Exclusivo
                 </div>
 
-                <div class="bg-zinc-950/60 p-3 flex justify-center items-center">
+                <div class="bg-zinc-950/60 theme-box-bg p-3 flex justify-center items-center">
                     <img src="ivete_clareou.jpg" alt="Ivete Clareou" class="w-full h-auto max-h-[460px] object-contain rounded-2xl shadow-lg">
                 </div>
 
                 <div class="p-6 text-center">
-                    <h3 class="font-extrabold text-xl mb-1 text-white">Ivete Clareou</h3>
-                    <p class="text-xs text-zinc-400 mb-4 font-semibold">28 de Novembro • Estádio do Comercial</p>
+                    <h3 class="font-extrabold text-xl mb-1 text-white theme-text-title">Ivete Clareou</h3>
+                    <p class="text-xs text-zinc-400 theme-text-sub mb-4 font-semibold">28 de Novembro • Estádio do Comercial</p>
 
                     <!-- CONTADOR REGRESSIVO V2 -->
-                    <div class="mb-5 flex items-center justify-center gap-2 text-xs font-bold text-white bg-zinc-950/80 py-3 px-4 rounded-2xl border border-brand-gold/30">
-                        <svg class="w-4 h-4 text-brand-gold animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 0 0118 0z"/>
+                    <div class="mb-5 flex items-center justify-center gap-2 text-xs font-bold text-white theme-box-bg bg-zinc-950/80 py-3 px-4 rounded-2xl border border-brand-gold/30">
+                        <svg class="w-4 h-4 text-brand-gold animate-pulse shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <circle cx="12" cy="12" r="9" stroke-width="2"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 7v5l3 3"/>
                         </svg>
-                        <span class="text-zinc-400 font-semibold uppercase text-[10px] tracking-wider">Faltam:</span>
+                        <span class="text-zinc-400 theme-text-sub font-semibold uppercase text-[10px] tracking-wider">Faltam:</span>
                         <span id="timer-ivete-v2" class="font-black text-brand-gold tracking-wide">-- dias</span>
                     </div>
 
@@ -242,7 +332,7 @@
                             Comprar com Desconto
                         </a>
                         <button onclick="copyCupomV2('jessicatrobeta', this)"
-                            class="w-full bg-white/5 hover:bg-white/10 text-white font-bold py-3.5 rounded-xl click-standard uppercase text-[10px] tracking-widest border border-white/10 transition-all">
+                            class="w-full bg-white/5 hover:bg-white/10 text-white theme-text-title font-bold py-3.5 rounded-xl click-standard uppercase text-[10px] tracking-widest border border-white/10 transition-all">
                             Copiar Código de Cupom: jessicatrobeta
                         </button>
                     </div>
@@ -256,20 +346,21 @@
                     Desconto Exclusivo
                 </div>
 
-                <div class="bg-zinc-950/60 p-3 flex justify-center items-center">
+                <div class="bg-zinc-950/60 theme-box-bg p-3 flex justify-center items-center">
                     <img src="repique.jpeg" alt="Festival Repique" class="w-full h-auto max-h-[460px] object-contain rounded-2xl shadow-lg">
                 </div>
 
                 <div class="p-6 text-center">
-                    <h3 class="font-extrabold text-xl mb-1 text-white">Festival Repique</h3>
-                    <p class="text-xs text-zinc-400 mb-4 font-semibold">05 de Dezembro • Estádio do Comercial</p>
+                    <h3 class="font-extrabold text-xl mb-1 text-white theme-text-title">Festival Repique</h3>
+                    <p class="text-xs text-zinc-400 theme-text-sub mb-4 font-semibold">05 de Dezembro • Estádio do Comercial</p>
 
                     <!-- CONTADOR REGRESSIVO V2 -->
-                    <div class="mb-5 flex items-center justify-center gap-2 text-xs font-bold text-white bg-zinc-950/80 py-3 px-4 rounded-2xl border border-brand-gold/30">
-                        <svg class="w-4 h-4 text-brand-gold animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    <div class="mb-5 flex items-center justify-center gap-2 text-xs font-bold text-white theme-box-bg bg-zinc-950/80 py-3 px-4 rounded-2xl border border-brand-gold/30">
+                        <svg class="w-4 h-4 text-brand-gold animate-pulse shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <circle cx="12" cy="12" r="9" stroke-width="2"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 7v5l3 3"/>
                         </svg>
-                        <span class="text-zinc-400 font-semibold uppercase text-[10px] tracking-wider">Faltam:</span>
+                        <span class="text-zinc-400 theme-text-sub font-semibold uppercase text-[10px] tracking-wider">Faltam:</span>
                         <span id="timer-repique-v2" class="font-black text-brand-gold tracking-wide">-- dias</span>
                     </div>
 
@@ -362,6 +453,56 @@
 
     <!-- SCRIPTS V2 -->
     <script>
+        // Gerenciador de Tema (Claro / Escuro / Automático)
+        let currentThemePref = localStorage.getItem('user-theme-pref') || 'auto';
+
+        function updateThemeUI(pref) {
+            ['light', 'dark', 'auto'].forEach(mode => {
+                const btn = document.getElementById(`theme-btn-${mode}`);
+                if (btn) {
+                    if (mode === pref) {
+                        btn.className = 'px-3 py-1.5 rounded-full flex items-center gap-1.5 transition-all bg-brand-gold text-black font-extrabold shadow-md scale-105';
+                    } else {
+                        btn.className = 'px-3 py-1.5 rounded-full flex items-center gap-1.5 transition-all text-zinc-400 font-bold hover:text-brand-gold';
+                    }
+                }
+            });
+        }
+
+        function applyTheme(pref) {
+            currentThemePref = pref;
+            let effective = pref;
+            if (pref === 'auto') {
+                const hour = new Date().getHours();
+                // De manhã (06:00 às 18:00) = Claro | De noite (18:00 às 06:00) = Escuro
+                effective = (hour >= 6 && hour < 18) ? 'light' : 'dark';
+            }
+
+            if (effective === 'light') {
+                document.documentElement.classList.remove('dark');
+                document.documentElement.classList.add('light');
+            } else {
+                document.documentElement.classList.remove('light');
+                document.documentElement.classList.add('dark');
+            }
+            updateThemeUI(pref);
+        }
+
+        function setTheme(pref) {
+            localStorage.setItem('user-theme-pref', pref);
+            applyTheme(pref);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            applyTheme(currentThemePref);
+        });
+
+        setInterval(() => {
+            if (currentThemePref === 'auto') {
+                applyTheme('auto');
+            }
+        }, 60000);
+
         // Filtro de Categorias V2
         function filterCategory(cat) {
             const eventsSec = document.getElementById('section-events');
